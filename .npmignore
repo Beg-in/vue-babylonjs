@@ -1,0 +1,8 @@
+.npmignore
+.gitignore
+.eslintrc.js
+circle.yml
+yarn.lock
+package-lock.json
+test
+coverage
