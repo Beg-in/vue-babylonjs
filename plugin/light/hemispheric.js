@@ -1,11 +1,7 @@
-let { HemisphericLight } = require('babylonjs');
-
 module.exports = {
   mixins: [require('./directional')],
 
-  methods: {
-    init() {
-      this.setNode(new HemisphericLight(this.id, this.directionVector3, this.scene));
-    },
+  onScene({ name, scene, classes: { HemisphericLight }}) {
+    return new HemisphericLight(name, this.directionVector3, scene);
   },
 };

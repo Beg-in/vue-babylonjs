@@ -1,4 +1,3 @@
-let { DirectionalLight } = require('babylonjs');
 let { vec3, toVec3 } = require('../util');
 
 module.exports = {
@@ -16,13 +15,17 @@ module.exports = {
 
   watch: {
     directionVector3() {
-      this.node.direction.copyFrom(this.directionVector3);
+      this.setDirection();
     },
   },
 
   methods: {
-    init() {
-      this.setNode(new DirectionalLight(this.id, this.directionVector3, this.scene));
-    },
+    setDirection() {
+      this.$entity.direction.copyFrom(this.directionVector3);
+    }
+  },
+
+  onScene({ name, scene, classes: { DirectionalLight } }) {
+    return new DirectionalLight(name, this.directionVector3, scene);
   },
 };
