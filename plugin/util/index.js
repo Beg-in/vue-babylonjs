@@ -1,7 +1,7 @@
 let { Vector3, Color3 } = require('babylonjs');
 let { crypto } = window;
 
-let isFloat = value => Number.isFinite(n) && !Number.isNaN(n);
+let isFloat = value => Number.isFinite(value) && !Number.isNaN(value);
 let isBetween0and1 = value => value <= 1 && value >= 0;
 let isHexColor = value => /^#?([\da-fA-F]{3}){1,2}$/.test(value);
 
@@ -18,7 +18,7 @@ module.exports = {
 
   vec3: {
     validator: value => value != null && (
-        (Array.isArray(value) && Array.every(isFloat))
+        (Array.isArray(value) && value.every(isFloat))
         || value instanceof Vector3
         || (isFloat(value.x) && isFloat(value.y) && isFloat(value.z))
     ),
@@ -27,7 +27,7 @@ module.exports = {
 
   color3: {
     validator: value => value != null
-      && ((Array.isArray(value) && Array.every(isFloat) && Array.every(isBetween0and1))
+      && ((Array.isArray(value) && value.every(isFloat) && value.every(isBetween0and1))
         || value instanceof Color3
         || (typeof value === 'string' && isHexColor(value))
         || (isFloat(value.r) && isBetween0and1(value.r)

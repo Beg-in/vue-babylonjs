@@ -1,90 +1,160 @@
-let { TransformNode } = require('babylonjs');
+let classes = require('babylonjs');
 let { id, vec3, toVec3 } = require('../util');
 
-module.exports = {
-  render(createElement) {
-    return createElement(this.$slots.default);
-  },
+let { TransformNode, Vector3 } = classes;
+let { validator } = vec3;
 
+module.exports = {
   inject: {
-    Parent: {
-      from: 'Entity',
-      default: null,
+    _$_parentReady: {
+      from: 'EntityReady',
+      default: Promise.resolve(null),
     },
-    Scene: 'Scene',
+    _$_sceneReady: 'SceneReady',
   },
 
   provide() {
     return {
-      Entity: this.node,
+      EntityReady: this._$_entityReady,
     };
   },
 
   props: {
-    id: {
+    name: {
       type: String,
       default: () => id(),
     },
     position: vec3,
     rotation: vec3,
-    scaling: vec3,
+    scaling: {
+      validator,
+      default: () => Vector3.One(),
+    },
   },
 
   computed: {
-    positionVector3() {
+    _$_positionVector3() {
       return toVec3(this.position);
     },
 
-    rotationVector3() {
+    _$_rotationVector3() {
       return toVec3(this.rotation);
     },
 
-    scalingVector3() {
+    _$_scalingVector3() {
       return toVec3(this.scaling);
     },
   },
 
   watch: {
-    positionVector3() {
-      this.node.position.copyFrom(this.positionVector3);
+    _$_positionVector3() {
+      this._$_setPosition();
     },
 
-    rotationVector3() {
-      this.node.rotation.copyFrom(this.rotationVector3);
+    _$_rotationVector3() {
+      this._$_setRotation();
     },
 
-    scalingVector3() {
-      this.node.scaling.copyFrom(this.scalingVector3);
+    _$_scalingVector3() {
+      this._$_setScaling();
     },
   },
 
   methods: {
-    setNode(node = new TransformNode(this.id, this.Scene)) {
-      this.node = node;
+    _$_setPosition() {
+      if (this.$entity && this.$entity.position) {
+        this.$entity.position.copyFrom(this._$_positionVector3);
+      }
+    },
+
+    _$_setRotation() {
+      if (this.$entity && this.$entity.rotation) {
+        this.$entity.rotation.copyFrom(this._$_rotationVector3);
+      }
+    },
+
+    _$_setScaling() {
+      if (this.$entity && this.$entity.scaling) {
+        this.$entity.scaling.copyFrom(this._$_scalingVector3);
+      }
     },
   },
 
-  mounted() {
-    if (this.init) {
-      this.init();
-    }
-    if (!this.node) {
-      this.setNode();
-    }
-    if (this.Parent) {
-      this.node.setParent(this.Parent);
-    }
-    this.node.onDispose(() => {
-      if (!this.destroyed) {
-        this.$destroy()
-      }
+  beforeCreate() {
+    this._$_entityReady = new Promise(resolve => {
+      this._$_resolveEntity = resolve;
     });
   },
 
-  beforeDestroy() {
-    this.destroyed = true;
-    if (this.node) {
-      this.node.dispose();
+  async created() {
+    let args = {
+      classes,
+      position: this._$_positionVector3,
+      rotation: this._$_rotationVector3,
+      scaling: this._$_scalingVector3,
+      name: this.name,
+    };
+    if (this.$options.beforeScene) { // Lifecycle Hook
+      await this.$options.beforeScene.call(this, Object.assign({
+        sceneReady: this._$_sceneReady,
+        parentReady: this._$_parentReady,
+      }, args));
     }
+    this._$_scene = await this._$_sceneReady;
+    args.scene = this._$_scene;
+    if (this.$options.onScene) { // Lifecycle Hook
+      this.$entity = await this.$options.onScene.call(this, Object.assign({
+        parentReady: this._$_parentReady,
+      }, args));
+    }
+    this._$_parent = await this._$_parentReady;
+    args.parent = this._$_parent;
+    if (this.$options.onParent) { // Lifecycle Hook
+      await this.$options.onParent.call(this, args);
+    }
+    if (!this.$entity) {
+      this.$entity = new TransformNode(this.name, this._$_scene);
+    }
+    this._$_setPosition();
+    this._$_setRotation();
+    this._$_setScaling();
+    if (!this.$entity.parent) {
+      this.$entity.parent = this._$_parent;
+    }
+    this._$_resolveEntity(this.$entity);
+    args.entity = this.$entity;
+    if (this.$options.onEntity) { // Lifecycle Hook
+      await this.$options.onEntity.call(this, args);
+    }
+    if (this.$options.beforeRender) { // Render Loop Hook
+      this._$_beforeRender = this.$options.beforeRender.bind(this);
+      this._$_scene.registerBeforeRender(this._$_beforeRender);
+    }
+    if (this.$options.afterRender) { // Render Loop Hook
+      this._$_afterRender = this.$options.afterRender.bind(this);
+      this._$_scene.registerAfterRender(this._$_afterRender);
+    }
+    this.$entity.onDispose = () => {
+      if (!this._$_destroyed) {
+        this.$destroy()
+      }
+    };
+  },
+
+  beforeDestroy() {
+    this._$_destroyed = true;
+    if (this.$options.beforeRender) {
+      this._$_scene.unregisterBeforeRender(this._$_beforeRender);
+    }
+    if (this.$options.afterRender) {
+      this._$_scene.unregisterAfterRender(this._$_afterRender);
+    }
+    if (this.$entity && this.$entity.dispose) {
+      this.$entity.dispose();
+    }
+  },
+
+  render(createElement) {
+    return createElement('div', this.$slots.default);
   },
 };

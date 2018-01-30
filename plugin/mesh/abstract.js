@@ -5,6 +5,6 @@ module.exports = {
     options: {
       type: Object,
       default: () => ({}),
-    }
+    },
   },
 };

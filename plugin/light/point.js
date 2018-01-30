@@ -1,11 +1,7 @@
-let { PointLight } = require('babylonjs');
-
 module.exports = {
   mixins: [require('./abstract')],
 
-  methods: {
-    init() {
-      this.setNode(new PointLight(this.id, this.positionVector3, this.scene));
-    },
+  onScene({ name, position, scene, classes: { PointLight } }) {
+    return new PointLight(name, position, scene);
   },
 };
