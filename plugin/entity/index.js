@@ -2,28 +2,21 @@ let { TransformNode } = require('babylonjs');
 let { id, vec3, toVec3 } = require('../util');
 
 module.exports = {
-  name: 'vue-babylonjs-entity',
+  render(createElement) {
+    return createElement(this.$slots.default);
+  },
 
-  inject: [
-    'parentNode',
-    'scene',
-  ],
+  inject: {
+    Parent: {
+      from: 'Entity',
+      default: null,
+    },
+    Scene: 'Scene',
+  },
 
   provide() {
     return {
-      parentNode: this.node,
-
-      get position() {
-        return this.positionVector3;
-      },
-
-      get rotation() {
-        return this.rotationVector3;
-      },
-
-      get scaling() {
-        return this.scalingVector3;
-      },
+      Entity: this.node,
     };
   },
 
@@ -66,20 +59,20 @@ module.exports = {
   },
 
   methods: {
-    setNode(node = new TransformNode(this.id, this.scene)) {
+    setNode(node = new TransformNode(this.id, this.Scene)) {
       this.node = node;
     },
   },
 
-  created() {
+  mounted() {
     if (this.init) {
       this.init();
     }
     if (!this.node) {
       this.setNode();
     }
-    if (this.parentNode) {
-      this.node.setParent(this.parentNode);
+    if (this.Parent) {
+      this.node.setParent(this.Parent);
     }
     this.node.onDispose(() => {
       if (!this.destroyed) {

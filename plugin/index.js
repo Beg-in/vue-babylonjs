@@ -5,15 +5,16 @@
 //   Object.assign(module.exports, Vuex.createNamespacedHelpers(namespace), { store });
 // }, {
 module.exports = {
-  components: Object.assign({
-    entity: require('./entity'),
-  }, require('./mesh')),
-
   install(Vue) {
     // if (!module.exports.store) {
     //   console.error('Error loading vue-babylonjs: Must be installed to Vuex first');
     //   return;
     // }
-    Vue.component('scene', require('./scene'));
+    Object.entries(Object.assign({
+      Scene: require('./scene'),
+      Entity: require('./entity'),
+    }, require('./mesh'), require('./light'))).forEach(([name, component]) => {
+      Vue.component(name, component);
+    });
   },
 };

@@ -1,22 +1,21 @@
-let { components } = require('../');
 let BABYLONJS = require('babylonjs');
 
-module.exports = {
-  components,
+let { Engine, Scene } = BABYLONJS;
 
+module.exports = {
   render(createElement) {
     return createElement('canvas', {
       ref: 'scene',
       style: { height: '100%', width: '100%' },
-    });
+    }, this.$slots.default);
   },
 
   provide() {
     return {
       BABYLONJS,
-      engine: this.engine,
-      scene: this.scene,
-      vrHelper: this.vrHelper,
+      Engine: this.engine,
+      Scene: this.scene,
+      VrHelper: this.vrHelper,
     };
   },
 
