@@ -1,0 +1,26 @@
+{
+  "name": "example",
+  "main": "src/index.js",
+  "version": "0.0.1",
+  "engines": {
+    "node": ">=8.9"
+  },
+  "license": "UNLICENSED",
+  "private": true,
+  "scripts": {
+    "b": "CONTEXT=$(pwd) npm explore begin-build -- npm run",
+    "start": "npm run b start:client"
+  },
+  "devDependencies": {
+    "begin-build": "^0.8.1",
+    "glsl-blend": "1.0.3",
+    "glsl-easings": "1.0.0",
+    "glsl-fractal-brownian-noise": "1.1.0",
+    "glsl-hsl2rgb": "1.1.0",
+    "glsl-noise": "0.0.0",
+    "node-forge": "0.7.1",
+    "vue-babylonjs": "^0.1.0"
+  },
+  "// HACK: postcss-loader must have config": "",
+  "postcss": {}
+}
