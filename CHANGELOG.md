@@ -1,9 +1,20 @@
+<a name="0.5.0"></a>
+# [0.5.0](https://github.com/Beg-in/3d/compare/0.4.0...0.5.0) (2018-01-31)
+
+
+### Features
+
+* **animations:** add animations ([1f3482d](https://github.com/Beg-in/3d/commit/1f3482d))
+
+
+
 <a name="0.4.0"></a>
 # [0.4.0](https://github.com/Beg-in/3d/compare/0.3.0...0.4.0) (2018-01-30)
 
 
 ### Features
 
+* **entity:** add entity lifecycle hooks ([4705ea4](https://github.com/Beg-in/3d/commit/4705ea4))
 * **entity:** add entity lifecycle hooks ([1072f52](https://github.com/Beg-in/3d/commit/1072f52))
 
 

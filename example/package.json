@@ -19,7 +19,7 @@
     "glsl-hsl2rgb": "1.1.0",
     "glsl-noise": "0.0.0",
     "node-forge": "0.7.1",
-    "vue-babylonjs": "0.3.0"
+    "vue-babylonjs": "^0.4.0"
   },
   "// HACK: postcss-loader must have config": "",
   "postcss": {}

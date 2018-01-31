@@ -61,4 +61,13 @@ module.exports = {
     let { r, g, b } = value;
     return new Color3(r, g, b);
   },
+
+  capitalize([first, ...rest]) {
+    return first.toUpperCase() + rest.join('');
+  },
+
+  isPercent(value) {
+    value = Number.parseFloat(value);
+    return !isNaN(value) && value >= 0 && value <= 100;
+  },
 };
