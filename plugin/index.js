@@ -10,10 +10,15 @@ module.exports = {
     //   console.error('Error loading vue-babylonjs: Must be installed to Vuex first');
     //   return;
     // }
-    Object.entries(Object.assign({
-      Scene: require('./scene'),
-      Entity: require('./entity'),
-    }, require('./mesh'), require('./light'))).forEach(([name, component]) => {
+    Object.entries(Object.assign(
+      {
+        Scene: require('./scene'),
+        Entity: require('./entity'),
+      },
+      require('./mesh'),
+      require('./light'),
+      require('./animation')
+    )).forEach(([name, component]) => {
       Vue.component(name, component);
     });
   },
