@@ -172,11 +172,11 @@ module.exports = {
       delete this.uniformStore[variable];
     },
 
-    setVertexComponent(value) {
+    setVertex({ name, content }) {
       this.vertexComponent = value;
     },
 
-    setFragmentComponent(value) {
+    setFragment(value) {
       this.fragmentComponent = value;
     },
   },
