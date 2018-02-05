@@ -5,9 +5,8 @@ const NAME = 'vue-babylonjs';
 Effect.ShadersStore[`${NAME}VertexShader`] = `
 attribute vec3 position;
 attribute vec2 uv;
-
 uniform mat4 worldViewProjection;
-
+uniform float time;
 varying vec2 vUv;
 
 void main() {

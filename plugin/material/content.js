@@ -52,6 +52,7 @@ module.exports = {
 
   mounted() {
     this.text = this.$refs.content.textContent;
+    this.setStore();
   },
 
   render(createElement) {

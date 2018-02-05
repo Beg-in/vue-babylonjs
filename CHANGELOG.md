@@ -1,10 +1,14 @@
-<a name="0.5.0"></a>
-# [0.5.0](https://github.com/Beg-in/3d/compare/0.4.0...0.5.0) (2018-01-31)
+<a name="0.6.0"></a>
+# [0.6.0](https://github.com/Beg-in/3d/compare/0.4.0...0.6.0) (2018-02-05)
 
 
 ### Features
 
+* **animations:** add animations ([cb8297b](https://github.com/Beg-in/3d/commit/cb8297b))
 * **animations:** add animations ([1f3482d](https://github.com/Beg-in/3d/commit/1f3482d))
+* **material:** add shader uniform and attribute components ([4c17b62](https://github.com/Beg-in/3d/commit/4c17b62))
+* **material:** add shaders ([c7bd5cb](https://github.com/Beg-in/3d/commit/c7bd5cb))
+* **material:** add vertex and fragment components ([93d2959](https://github.com/Beg-in/3d/commit/93d2959))
 
 
 

@@ -88,10 +88,10 @@ module.exports = {
   },
 
   beforeDestroy() {
-    if (this.$options.beforeRender) {
+    if (this._$_beforeRender) {
       this.$scene.unregisterBeforeRender(this._$_beforeRender);
     }
-    if (this.$options.afterRender) {
+    if (this._$_afterRender) {
       this.$scene.unregisterAfterRender(this._$_afterRender);
     }
   },
