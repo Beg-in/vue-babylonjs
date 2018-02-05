@@ -73,7 +73,7 @@ module.exports = {
 
   _$_onTransform() {
     if (!this.$entity) {
-      this.$entity = new TransformNode(this.name, this._$_scene);
+      this.$entity = new TransformNode(this.name, this.$scene);
     }
     this._$_setPosition();
     this._$_setRotation();

@@ -5,4 +5,18 @@ Vue.use(require('vue-babylonjs'));
 
 module.exports = build({
   components: { app: require('./app/vue.pug') },
+  router: {
+    routes: [{
+      name: 'animation',
+      path: '/animation',
+      component: require('./animation/vue.pug'),
+    }, {
+      name: 'shader',
+      path: '/shader',
+      component: require('./shader/vue.pug'),
+    }, {
+      path: '*',
+      redirect: '/animation',
+    }],
+  },
 });

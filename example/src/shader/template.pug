@@ -1,0 +1,35 @@
+Scene
+  Entity(:position="[0, 2, 5]")
+    Animation(property="rotation.x" :duration="5" :end="Math.PI * 2")
+    Animation(property="rotation.y" :duration="5" :end="Math.PI * 2")
+    Box
+      Shader(name="boxshader")
+        Uniform(variable="color" color="#FFF")
+
+        Vertex.
+          precision highp float;
+
+          attribute vec3 position;
+
+          uniform mat4 worldViewProjection;
+          uniform vec3 color;
+          uniform float time;
+
+          varying vec3 direction;
+
+          void main() {
+            gl_Position = worldViewProjection * vec4(position, 1.0);
+            direction = position;
+          }
+
+        Fragment.
+          precision highp float;
+
+          uniform vec3 color;
+          uniform float time;
+
+          varying vec3 direction;
+
+          void main() {
+            gl_FragColor = vec4(sin(time / 1000.0) * (direction * color), 1.0);
+          }

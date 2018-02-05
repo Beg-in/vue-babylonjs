@@ -1,10 +1,13 @@
-let Vue = require('vue');
-let { capitalize } = require('../util');
+let { Effect, ShaderMaterial } = require('babylonjs');
+let { id } = require('../util');
+let defaultShader = require('./defaults');
 
+const VERTEX = 'VertexShader';
+const FRAGMENT = 'FragmentShader';
 const ATTRIBUTES = [
   "position",
   "normal",
-  "uv"
+  "uv",
 ];
 const UNIFORMS = [
   "world",
@@ -13,7 +16,6 @@ const UNIFORMS = [
   "view",
   "projection",
   "time",
-  "direction",
 ];
 
 module.exports = {
@@ -21,7 +23,6 @@ module.exports = {
 
   data() {
     return {
-      bus: new Vue({}),
       uniformStore: {},
       attributeStore: {},
       vertexComponent: null,
@@ -31,11 +32,16 @@ module.exports = {
 
   provide() {
     return {
-      ShaderBus: this.bus,
+      ShaderName: this.name,
     };
   },
 
   props: {
+    name: {
+      type: String,
+      default: null,
+    },
+
     vertex: { // vertex name in shader store
       type: String,
       default: null,
@@ -78,14 +84,6 @@ module.exports = {
   },
 
   computed: {
-    attributes() {
-      return ATTRIBUTES.concat(Object.keys(this.attributeStore));
-    },
-
-    uniforms() {
-      return UNIFORMS.concat(Object.keys(this.uniformStore));
-    },
-
     options() {
       if (this.src) {
         return this.src;
@@ -104,9 +102,10 @@ module.exports = {
       } else if (this.vertexElement) {
         options.vertexElement = this.vertexElement;
       } else if (this.vertexShader) {
-        // TODO: raw shader code
+        this.storeShader(VERTEX, this.uid, this.vertexShader);
+        options.vertex = this.uid;
       } else {
-        // TODO: default shader
+        options.vertex = defaultShader;
       }
       if (this.fragmentComponent) {
         options.fragment = this.fragmentComponent;
@@ -115,94 +114,103 @@ module.exports = {
       } else if (this.fragmentElement) {
         options.fragmentElement = this.fragmentElement;
       } else if (this.fragmentShader) {
-        // TODO: raw shader code
+        this.storeShader(FRAGMENT, this.uid, this.fragmentShader);
+        options.fragment = this.uid;
       } else {
-        // TODO: default shader
+        options.fragment = defaultShader;
       }
       return options;
+    },
+
+    attributes() {
+      return ATTRIBUTES.concat(Object.keys(this.attributeStore));
+    },
+
+    uniforms() {
+      return UNIFORMS.concat(Object.keys(this.uniformStore));
+    },
+
+    variables() {
+      return {
+        attributes: this.attributes,
+        uniforms: this.uniforms,
+      };
     },
   },
 
   methods: {
-    createMaterial() {
+    async createMaterial() {
       if (this.$entity) {
         delete this.$entity.onDispose;
         this.$entity.dispose();
       }
-      this.$entity = new ShaderMaterial(name, scene, this.options, {
-        attributes: this.attributes,
-        uniforms: this.uniforms,
-      });
+      this.$entity = new ShaderMaterial(name, this.$scene, this.options, this.variables);
       this.$entity.onDispose = () => {
         if (!this._$_destroyed) {
           this.$destroy();
         }
       };
-      this._$_parent.material = this.$entity;
-      this.bus.$emit('create');
+      let parent = await this._$_parentReady;
+      parent.material = this.$entity;
+      this.$event.$emit('create', this.$entity);
     },
 
     setValue(store, variable, value) {
-      this.$entity[`set${capitalize(store[variable])}`](value);
+      this.$entity[`set${store[variable]}`](variable, value);
+    },
+
+    storeShader(type, name, value) {
+      Effect.ShadersStore[name + type] = value;
+    },
+
+    getStore(kind) {
+      if (this.kind === 'attribute') {
+        return this.attributeStore;
+      }
+      return this.uniformStore;
     },
   },
 
   events: {
-    registerAttribute({ variable, type }) {
-      this.attributeStore[variable] = type;
+    registerVariable({ kind, variable, type, value }) {
+      this.getStore(kind)[variable] = type;
     },
 
-    setAttribute({ variable, value }) {
-      this.setValue(this.attributeStore, variable, value);
+    setVariable({ kind, variable, value }) {
+      this.setValue(this.getStore(kind), variable, value);
     },
 
-    disposeAttribute(variable) {
-      delete this.customAttributes[variable];
+    disposeVariable({ kind, variable }) {
+      delete this.getStore(kind)[variable];
     },
 
-    registerUniform({ variable, type }) {
-      this.uniformStore[variable] = type;
+    setVertex({ name, value }) {
+      this.vertexComponent = name;
+      this.storeShader(VERTEX, name, value);
     },
 
-    setUniform({ variable, value }) {
-      this.setValue(this.uniformStore, variable, value);
-    },
-
-    disposeUniform(variable) {
-      delete this.uniformStore[variable];
-    },
-
-    setVertex({ name, content }) {
-      this.vertexComponent = value;
-    },
-
-    setFragment(value) {
-      this.fragmentComponent = value;
+    setFragment({ name, value }) {
+      this.fragmentComponent = name;
+      this.storeShader(FRAGMENT, name, value);
     },
   },
 
   watch: {
-    attributes() {
-      this.setMaterial();
-    },
-
-    uniforms() {
-      this.setMaterial();
-    },
-
     options() {
-      this.setMaterial();
+      this.createMaterial();
     },
   },
 
-  created() {
-    Object.entries(this.$options.events).forEach(([name, fn]) => {
-      this.bus.$on(name, fn.bind(this));
-    });
+  beforeCreate() {
+    this.uid = id();
   },
 
   onParent() {
-    this.setMaterial();
+    this.createMaterial();
+  },
+
+  beforeRender() {
+    this.$entity.setFloat('time', performance.now());
   },
 
   beforeDestroy() {

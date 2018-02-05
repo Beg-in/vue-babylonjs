@@ -1,8 +1,1 @@
-Scene
-  HemisphericLight(diffuse="#0000FF")
-  Entity(:position="[0, 2, 15]")
-    Animation(property="rotation.x" :duration="5" :end="Math.PI * 2")
-    Animation(property="rotation.y" :duration="5" :end="Math.PI * 2")
-    Animation(property="rotation.z" :duration="5" :end="Math.PI * 2")
-    PointLight(diffuse="#FF0000")
-    Box(v-for="position in boxes" :position="position")
+router-view

@@ -30,10 +30,11 @@
     "babel-preset-env": "^1.6.1",
     "babylonjs": "^3.2.0-alpha4",
     "glslify-loader": "1.0.2",
+    "node-forge": "0.7.1",
     "raw-loader": "0.5.1"
   },
   "devDependencies": {
-    "begin-project": "0.2.1"
+    "begin-project": "0.3.0"
   },
   "babel": {
     "presets": [

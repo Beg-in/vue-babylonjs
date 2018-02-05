@@ -1,9 +1,16 @@
 module.exports = {
+  mixins: [require('../entity/abstract')],
+
   inject: {
-    bus: 'ShaderBus',
     ShaderName: {
       default: null,
-    }
+    },
+  },
+
+  data() {
+    return {
+      text: null,
+    };
   },
 
   props: {
@@ -14,7 +21,7 @@ module.exports = {
       },
     },
 
-    value: {
+    content: {
       type: String,
       default: null,
     },
@@ -25,17 +32,14 @@ module.exports = {
       return this.name || this.ShaderName;
     },
 
-    content() {
-      if (this.value) {
-        return this.value;
-      }
-      return this.$el.text;
+    value() {
+      return this.content || this.text;
     },
 
     shader() {
       return {
         name: this.uid,
-        value: this.content,
+        value: this.value,
       };
     },
   },
@@ -44,5 +48,15 @@ module.exports = {
     shader() {
       this.setStore();
     },
+  },
+
+  mounted() {
+    this.text = this.$refs.content.textContent;
+  },
+
+  render(createElement) {
+    return createElement('div', {
+      ref: 'content',
+    }, this.$slots.default);
   },
 };

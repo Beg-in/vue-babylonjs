@@ -17,7 +17,8 @@ module.exports = {
       },
       require('./mesh'),
       require('./light'),
-      require('./animation')
+      require('./animation'),
+      require('./material')
     )).forEach(([name, component]) => {
       Vue.component(name, component);
     });
