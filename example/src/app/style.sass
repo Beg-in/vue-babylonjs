@@ -1,0 +1,82 @@
+$main-color: #673AB7
+$text-color: #FFFFFF
+$animation-speed: 0.4s
+
+main,
+nav,
+.content,
+.bar
+  height: 100%
+  width: 100%
+  color: $text-color
+  display: flex
+  flex-wrap: wrap
+
+header
+  height: 40px
+  position: fixed
+  top: 0
+  z-index: 4
+  width: 100%
+
+  .content
+    &.v-enter-active,
+    &.v-leave-active
+      transition: transform $animation-speed
+    &.v-enter-active,
+    &.v-leave
+      transform: translateY(0)
+    &.v-enter,
+    &.v-leave-active
+      transform: translateY(-100%)
+
+  .bar,
+  nav
+    justify-content: flex-end
+
+  .bar
+    background-color: $main-color
+    .hamburger
+      padding: 7px 10px
+      height: 30px
+      width: 30px
+      div
+        width: 30px
+        height: 5px
+        margin-bottom: 5px
+        background: $text-color
+
+  nav
+    height: auto
+    margin: 15px
+    position: relative
+    &:before
+      content: ""
+      position: absolute
+      border-style: solid
+      display: block
+      width: 0
+      top: -15px
+      right: 10px
+      bottom: auto
+      left: auto
+      border-width: 0 15px 15px
+      border-color: $main-color transparent
+    ul
+      padding: 0
+      margin: 0
+      border-radius: 5px;
+      background: $main-color
+      list-style: none
+      overflow: hidden
+      li
+        display: flex
+        a
+          padding: 10px 15px
+        &:hover
+          background: lighten($main-color, 10%)
+        &.router-link-active
+          background: darken($main-color, 10%)
+    a
+      text-decoration: none
+      color: $text-color

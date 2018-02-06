@@ -16,7 +16,7 @@ module.exports = build({
       component: require('./shader/vue.pug'),
     }, {
       path: '*',
-      redirect: '/animation',
+      redirect: 'animation',
     }],
   },
 });

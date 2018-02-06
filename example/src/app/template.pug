@@ -1,1 +1,17 @@
-router-view
+main
+  header(@mouseover="header = true"
+        @mouseleave="header = false")
+    transition
+      .content(v-show="header || menu")
+        .bar
+          .hamburger(@click.prevent="menu = !menu")
+            div
+            div
+            div
+        nav(v-show="menu")
+          ul(@click="menu = false")
+            router-link(tag="li" to="animation")
+              a Animations
+            router-link(tag="li" to="shader")
+              a Shaders
+  router-view
