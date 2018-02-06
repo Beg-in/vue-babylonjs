@@ -14,12 +14,6 @@
   },
   "devDependencies": {
     "begin-build": "^0.8.1",
-    "glsl-blend": "1.0.3",
-    "glsl-easings": "1.0.0",
-    "glsl-fractal-brownian-noise": "1.1.0",
-    "glsl-hsl2rgb": "1.1.0",
-    "glsl-noise": "0.0.0",
-    "node-forge": "0.7.1",
     "vue-babylonjs": "^0.5.0"
   },
   "// HACK: postcss-loader must have config": "",

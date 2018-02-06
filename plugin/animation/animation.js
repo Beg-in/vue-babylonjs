@@ -1,4 +1,6 @@
-let { capitalize } = require('../util');
+let classes = require('babylonjs');
+let { capitalize, isFloat } = require('../util');
+
 const TYPES = [
   'float',
   'vector2',
@@ -33,12 +35,14 @@ const EASING_MODES = [
   'inout',
 ];
 
+let { EasingFunction, Animation } = classes;
+
 module.exports = {
   mixins: [require('../entity/abstract')],
 
-  provide() {
+  data() {
     return {
-      AnimationKeys: this.keys,
+      keys: {},
     };
   },
 
@@ -103,6 +107,11 @@ module.exports = {
     blending: {
       type: Boolean,
       default: false,
+    },
+
+    blendingSpeed: {
+      type: Number,
+      default: null,
     },
 
     easing: {
@@ -171,54 +180,11 @@ module.exports = {
     },
   },
 
-  methods: {
-    reset() {
-      this.$entity.stop();
-    },
-
-    enableBlending(speed) {
-      this.$entity.enableBlending(speed);
-    },
-
-    disableBlending() {
-      this.$entity.disableBlending();
-    },
-
-    goToFrame(frame) {
-      this.$entity.goToFrame(frame);
-    },
-
-    pause() {
-      this.$entity.pause();
-    },
-
-    restart() {
-      this.$entity.restart();
-    },
-
-    stop() {
-      this.$entity.stop();
-    },
-
-    isStopped() {
-      return this.$entity.isStopped();
-    },
-  },
-
-  beforeCreate() {
-    this.$_TYPES = TYPES;
-    this.$_MODES = MODES;
-    this.$_EASINGS = EASINGS;
-    this.$_EASING_MODES = EASING_MODES;
-    this.keys = [];
-  },
-
-  onScene({ name, classes }) {
-    let { Animation } = classes;
-    let type = Animation[`ANIMATIONTYPE_${this.type.toUpperCase()}`];
-    let mode = Animation[`ANIMATIONLOOPMODE_${this.mode.toUpperCase()}`];
-    let animation = new Animation(name, this.property, this.fps, type, mode);
-    if (this.easing) {
+  computed: {
+    easingFunction() {
+      if (!this.easing) {
+        return null;
+      }
       let easing = classes[`${capitalize(this.easing)}Ease`];
       let easingFunction;
       switch (this.easing) {
@@ -244,30 +210,30 @@ module.exports = {
           easingFunction = easing();
       }
       easingFunction.setEasingMode(
-        classes.EasingFunction[`EASINGMODE_EASE${this.easingMode.toUpperCase()}`]
+        EasingFunction[`EASINGMODE_EASE${this.easingMode.toUpperCase()}`]
       );
-      animation.setEasingFunction(easingFunction);
-    }
-    return animation;
-  },
+      return easingFunction;
+    },
 
-  onParent({ parent, entity, scene, name }) {
-    let to = this.duration ? this.duration * this.fps : this.to;
-    let keys = [];
-    if (this.keys.length < 1) {
-      keys.push({
-        frame: this.from,
-        value: this.start,
-      });
-      keys.push({
-        frame: to,
-        value: this.end,
-      });
-    } else {
-      this.keys.forEach(key => {
+    finish() {
+      return this.duration ? this.duration * this.fps : this.to;
+    },
+
+    frames() {
+      let keys = Object.values(this.keys);
+      if (keys.length < 1) {
+        return [{
+          frame: this.from,
+          value: this.start,
+        }, {
+          frame: this.finish,
+          value: this.end,
+        }];
+      }
+      return keys.map(key => {
         let frame = Number.parseFloat(key.frame);
-        if (!isFloat(key.value)) {
-          frame = Math.floor((frame / 100) * to);
+        if (!isFloat(key.frame)) {
+          frame = Math.floor((frame / 100) * this.finish);
         }
         let out = {
           frame,
@@ -279,11 +245,136 @@ module.exports = {
         if (key.inTangent) {
           out.inTangent = key.inTangent;
         }
-        keys.push(out);
+        return out;
       });
-    }
-    entity.setKeys(keys);
+    },
+
+    animationType() {
+      return Animation[`ANIMATIONTYPE_${this.type.toUpperCase()}`];
+    },
+
+    animationLoopMode() {
+      return Animation[`ANIMATIONLOOPMODE_${this.mode.toUpperCase()}`];
+    },
+  },
+
+  methods: {
+    enableBlending(speed) {
+      this.$entity.enableBlending(speed);
+    },
+
+    disableBlending() {
+      this.$entity.disableBlending();
+    },
+
+    setEasingFunction() {
+      this.$entity.setEasingFunction(this.easingFunction);
+    },
+
+    setFrames() {
+      if (this.$entity) {
+        this.$entity.setKeys(this.frames);
+      }
+    },
+  },
+
+  watch: {
+    fps() {
+      this.$entity.framePerSecond = this.fps;
+    },
+
+    property() {
+      this.$entity.targetProperty = this.property;
+    },
+
+    animationType() {
+      this.dataType = this.animationType;
+    },
+
+    animationLoopMode() {
+      this.loopMode = this.animationLoopMode;
+    },
+
+    frames() {
+      this.setFrames();
+    },
+
+    easingFunction() {
+      this.setEasingFunction();
+    },
+
+    speedRatio() {
+      this.$entity.speedRatio = this.speedRatio;
+    },
+
+    loop() {
+      this.$entity.loopAnimation = this.loop;
+    },
+
+    blending() {
+      if (this.blending) {
+        this.enableBlending(this.blendingSpeed);
+      } else {
+        this.disableBlending();
+      }
+    },
+  },
+
+  events: {
+    setKey({ name, key }) {
+      this.$set(this.keys, name, key);
+    },
+
+    removeKey(name) {
+      this.$delete(this.keys, name);
+    },
+
+    reset() {
+      this.$entity.stop();
+    },
+
+    enableBlending(speed) {
+      this.enableBlending(speed);
+    },
+
+    disableBlending() {
+      this.disableBlending();
+    },
+
+    goToFrame(frame) {
+      this.$entity.goToFrame(frame);
+    },
+
+    pause() {
+      this.$entity.pause();
+    },
+
+    restart() {
+      this.$entity.restart();
+    },
+
+    stop() {
+      this.$entity.stop();
+    },
+  },
+
+  beforeCreate() {
+    this.$_TYPES = TYPES;
+    this.$_MODES = MODES;
+    this.$_EASINGS = EASINGS;
+    this.$_EASING_MODES = EASING_MODES;
+  },
+
+  onScene({ name, classes: { Animation } }) {
+    return new Animation(name, this.property, this.fps, this.animationType, this.animationLoopMode);
+  },
+
+  onParent({ parent, entity, scene, name }) {
+    this.setEasingFunction();
+    this.setFrames();
     parent.animations.push(entity);
-    scene.beginAnimation(parent, this.from, to, this.loop, this.speedRatio, null, this.animatable);
+    scene.beginAnimation(parent, this.from, this.finish, this.loop, this.speedRatio, () => {
+      this.$event.$emit('end');
+    }, this.animatable);
   },
 };
