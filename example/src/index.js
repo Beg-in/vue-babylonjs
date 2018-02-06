@@ -5,6 +5,7 @@ Vue.use(require('vue-babylonjs'));
 
 module.exports = build({
   components: { app: require('./app/vue.pug') },
+  base: '/vue-babylonjs/',
   router: {
     routes: [{
       name: 'animation',
