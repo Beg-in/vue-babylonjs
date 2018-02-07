@@ -1,4 +1,5 @@
 let util = require('../util');
+
 module.exports = {
   mixins: [require('../entity/abstract')],
 
@@ -47,7 +48,7 @@ module.exports = {
     details() {
       let type;
       let value;
-      if (this.float) {
+      if (this.float !== null) {
         value = this.float;
         type = 'Float';
         if (util.isFloatArray(this.float)) {
