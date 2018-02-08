@@ -16,6 +16,10 @@ module.exports = build({
       path: '/shader',
       component: require('./shader/vue.pug'),
     }, {
+      name: 'properties',
+      path: '/properties',
+      component: require('./properties/vue.pug'),
+    }, {
       path: '*',
       redirect: 'animation',
     }],

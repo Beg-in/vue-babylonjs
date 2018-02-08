@@ -7,6 +7,7 @@ let isFloatArray = value => Array.isArray(value) && value.every(isFloat);
 let isBetween0and1 = value => isFloat(value) && value <= 1 && value >= 0;
 let isHexColor3 = value => /^#?([\da-f]{3}){1,2}$/i.test(value);
 let isHexColor4 = value => /^#?([\da-f]{4}){1,2}$/i.test(value);
+
 let vecValidator = (value, type = Vector2) => {
   if (value === null) {
     return false;
@@ -28,6 +29,29 @@ let vecValidator = (value, type = Vector2) => {
   }
   return isFloat(value.w);
 };
+
+let toVec = (value, Type, transform) => {
+  if (value instanceof Type) {
+    return value;
+  }
+  if (Array.isArray(value)) {
+    return Type.FromArray(value);
+  }
+  return new Type(...transform(value));
+};
+
+let toVec2 = value => {
+  return toVec(value, Vector2, ({x, y}) => [x, y]);
+};
+
+let toVec3 = value => {
+  return toVec(value, Vector3, ({ x, y, z }) => [x, y, z]);
+};
+
+let toVec4 = value => {
+  return toVec(value, Vector4, ({ w, x, y, z }) => [w, x, y, z]);
+};
+
 let colorValidator = (value, type = Color3) => {
   if (value === null) {
     return false;
@@ -49,15 +73,7 @@ let colorValidator = (value, type = Color3) => {
   }
   return isBetween0and1(value.a);
 };
-let toVec = (value, Type, transform) => {
-  if (value instanceof Type) {
-    return value;
-  }
-  if (Array.isArray(value)) {
-    return Type.FromArray(value);
-  }
-  return new Type(...transform(value));
-};
+
 let toColor = (value, Type, transform) => {
   if (value instanceof Type) {
     return value;
@@ -75,6 +91,21 @@ let toColor = (value, Type, transform) => {
   return new Type(...transform(value));
 };
 
+let toColor3 = value => {
+  return toColor(value, Color3, ({ r, g, b }) => [r, g, b]);
+};
+
+let toColor4 = value => {
+  return toColor(value, Color4, ({ r, g, b, a }) => [r, g, b, a]);
+};
+
+let toMatrix = value => {
+  if (value instanceof Matrix) {
+    return value;
+  }
+  return Matrix.FromArray(value);
+};
+
 module.exports = {
   isFloat,
   isFloatArray,
@@ -87,62 +118,75 @@ module.exports = {
     return btoa(String.fromCharCode(...buf));
   },
 
+  $vector(value) {
+    if (vecValidator(value, Vector4)) {
+      return toVec4(value);
+    } else if (vecValidator(value, Vector3)) {
+      return toVec3(value);
+    }
+    return toVec2(value);
+  },
+
   vec2: {
     validator: vecValidator,
-    default: () => Vector2.Zero(),
+    default() {
+      return Vector2.Zero();
+    },
   },
+  toVec2,
 
   vec3: {
-    validator: value => vecValidator(value, Vector3),
-    default: () => Vector3.Zero(),
+    validator(value) {
+      return vecValidator(value, Vector3);
+    },
+    default() {
+      return Vector3.Zero();
+    },
   },
+  toVec3,
 
   vec4: {
-    validator: value => vecValidator(value, Vector4),
-    default: () => Vector4.Zero(),
+    validator(value) {
+      return vecValidator(value, Vector4);
+    },
+    default() {
+      return Vector4.Zero();
+    },
+  },
+  toVec4,
+
+  $color(value) {
+    if (colorValidator(value, Color4)) {
+      return toColor4(value);
+    }
+    return toColor3(value);
   },
 
   color3: {
     validator: colorValidator,
-    default: () => Color3.White(),
+    default() {
+      return Color3.White();
+    }
   },
+  toColor3,
 
   color4: {
-    validator: value => colorValidator(value, Color4),
-    default: () => Color3.White().toColor4(),
+    validator(value) {
+      return colorValidator(value, Color4);
+    },
+    default() {
+      return Color3.White().toColor4();
+    },
   },
+  toColor4,
 
   matrix: {
     validator: value => value !== null && (isFloatArray(value) || value instanceof Matrix),
     default: () => Matrix.Zero(),
   },
+  toMatrix,
 
-  toVec2(value) {
-    return toVec(value, Vector2, ({x, y}) => [x, y]);
-  },
-
-  toVec3(value) {
-    return toVec(value, Vector3, ({ x, y, z }) => [x, y, z]);
-  },
-
-  toVec4(value) {
-    return toVec(value, Vector4, ({ w, x, y, z }) => [w, x, y, z]);
-  },
-
-  toColor3(value) {
-    return toColor(value, Color3, ({ r, g, b }) => [r, g, b]);
-  },
-
-  toColor4(value) {
-    return toColor(value, Color4, ({ r, g, b, a }) => [r, g, b, a]);
-  },
-
-  toMatrix(value) {
-    if (value instanceof Matrix) {
-      return value;
-    }
-    return Matrix.FromArray(value);
-  },
+  $matrix: toMatrix,
 
   capitalize([first, ...rest]) {
     return first.toUpperCase() + rest.join('');

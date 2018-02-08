@@ -18,9 +18,9 @@ module.exports = {
       this.engine = new Engine(this.$refs.scene, true);
       this.scene = new Scene(this.engine);
       // https://developer.mozilla.org/en-US/docs/Web/API/Element/requestFullScreen
-      this.vrHelper = this.scene.createDefaultVRExperience({
-        createFallbackVRDeviceOrientationFreeCamera: false,
-      });
+      // this.vrHelper = this.scene.createDefaultVRExperience({
+      //   createFallbackVRDeviceOrientationFreeCamera: false,
+      // });
       this.resolveScene(this.scene);
       this.resolveEngine(this.engine);
       this.engine.runRenderLoop(() => this.scene.render());

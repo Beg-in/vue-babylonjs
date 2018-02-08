@@ -27,8 +27,32 @@ module.exports = {
   props: {
     name: {
       type: String,
-      default: () => id(),
+      default() {
+        return id();
+      },
     },
+
+    properties: {
+      type: Object,
+      default: null,
+    },
+  },
+
+  methods: {
+    _$_applyProperties() {
+      if (this.$entity && this.properties) {
+        Object.assign(this.$entity, this.properties);
+      }
+    },
+  },
+
+  watch: {
+    properties: {
+      handler() {
+        this._$_applyProperties();
+      },
+      deep: true,
+    }
   },
 
   beforeCreate() {
@@ -85,6 +109,7 @@ module.exports = {
       this._$_afterRender = this.$options.afterRender.bind(this);
       this.$scene.registerAfterRender(this._$_afterRender);
     }
+    this._$_applyProperties();
   },
 
   beforeDestroy() {
