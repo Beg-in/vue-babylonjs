@@ -1,7 +1,7 @@
 {
   "name": "vue-babylonjs",
-  "main": "plugin/index.js",
-  "version": "0.7.0",
+  "main": "index.js",
+  "version": "0.7.1",
   "engines": {
     "node": ">=8.9"
   },
@@ -21,34 +21,22 @@
   ],
   "license": "MIT",
   "scripts": {
-    "b": "CONTEXT=$(pwd) npm explore begin-project -- npm run"
+    "b": "CONTEXT=$(pwd) npm explore begin-build -- npm run",
+    "start": "npm run b start:client"
   },
   "peerDependencies": {
-    "vue": "^2.5.13"
+    "vue": "^2.2.0"
   },
   "dependencies": {
     "babel-preset-env": "^1.6.1",
-    "babylonjs": "^3.2.0-alpha4",
-    "glslify-loader": "1.0.2",
-    "node-forge": "0.7.1",
-    "raw-loader": "0.5.1"
+    "babylonjs": "^3.2.0-alpha4"
   },
   "devDependencies": {
-    "begin-project": "0.3.0"
+    "begin-build": "0.12.0",
+    "begin-project": "0.3.0",
+    "glslify-loader": "1.0.2",
+    "raw-loader": "0.5.1"
   },
-  "babel": {
-    "presets": [
-      [
-        "env",
-        {
-          "targets": {
-            "browsers": [
-              "last 2 versions"
-            ]
-          },
-          "useBuiltIns": true
-        }
-      ]
-    ]
-  }
+  "// HACK: postcss-loader must have config": "",
+  "postcss": {}
 }

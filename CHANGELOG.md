@@ -1,3 +1,8 @@
+<a name="0.7.1"></a>
+## [0.7.1](https://github.com/Beg-in/3d/compare/0.7.0...0.7.1) (2018-02-24)
+
+
+
 <a name="0.7.0"></a>
 # [0.7.0](https://github.com/Beg-in/3d/compare/0.6.0...0.7.0) (2018-02-08)
 
@@ -5,7 +10,7 @@
 ### Features
 
 * **camera:** add camera component ([6829d85](https://github.com/Beg-in/3d/commit/6829d85))
-* **entity:** add propreties system ([1bbc07c](https://github.com/Beg-in/3d/commit/1bbc07c))
+* **entity:** add propreties system ([10124f1](https://github.com/Beg-in/3d/commit/10124f1))
 
 
 
