@@ -1,0 +1,21 @@
+{
+  "name": "example",
+  "main": "src/index.js",
+  "version": "0.0.1",
+  "engines": {
+    "node": ">=8.9"
+  },
+  "license": "UNLICENSED",
+  "private": true,
+  "scripts": {
+    "b": "CONTEXT=$(pwd) npm explore begin-build -- npm run",
+    "start": "npm run b start:client",
+    "build": "npm run b build:prd && rm -r ../docs && mv dist ../docs"
+  },
+  "devDependencies": {
+    "begin-build": "^0.8.1",
+    "vue-babylonjs": "^0.5.0"
+  },
+  "// HACK: postcss-loader must have config": "",
+  "postcss": {}
+}

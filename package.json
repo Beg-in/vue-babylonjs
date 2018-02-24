@@ -22,7 +22,8 @@
   "license": "MIT",
   "scripts": {
     "b": "CONTEXT=$(pwd) npm explore begin-build -- npm run",
-    "start": "npm run b start:client"
+    "start": "npm run b start:client",
+    "build": "npm run b build:prd && rm -r docs && mv dist docs"
   },
   "peerDependencies": {
     "vue": "^2.2.0"
