@@ -1,1 +1,1 @@
-module.exports = require('./src/entity');
+module.exports = require('./lib/entity');

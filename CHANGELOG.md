@@ -1,3 +1,13 @@
+<a name="0.8.0"></a>
+# [0.8.0](https://github.com/Beg-in/3d/compare/0.7.1...0.8.0) (2018-03-22)
+
+
+### Features
+
+* **material:** add material with pbr support ([84edf3a](https://github.com/Beg-in/3d/commit/84edf3a))
+
+
+
 <a name="0.7.1"></a>
 ## [0.7.1](https://github.com/Beg-in/3d/compare/0.7.0...0.7.1) (2018-02-24)
 

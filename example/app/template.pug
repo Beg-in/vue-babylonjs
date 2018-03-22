@@ -4,6 +4,7 @@ main
     transition
       .content(v-show="header || menu")
         .bar
+          router-link.home(to="home") Vue-BabylonJS
           .hamburger(@click.prevent="menu = !menu")
             div
             div
@@ -12,6 +13,8 @@ main
           ul(@click="menu = false")
             router-link(tag="li" to="animation")
               a Animations
+            router-link(tag="li" to="material")
+              a Materials
             router-link(tag="li" to="shader")
               a Shaders
             router-link(tag="li" to="properties")

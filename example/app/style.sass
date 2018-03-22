@@ -1,6 +1,4 @@
-$main-color: #673AB7
-$text-color: #FFFFFF
-$animation-speed: 0.4s
+@import ../variables
 
 main,
 nav,
@@ -8,9 +6,13 @@ nav,
 .bar
   height: 100%
   width: 100%
-  color: $text-color
+  color: $dark-color
   display: flex
   flex-wrap: wrap
+
+a
+  text-decoration: none
+  color: $light-color
 
 header
   height: 40px
@@ -18,6 +20,7 @@ header
   top: 0
   z-index: 4
   width: 100%
+  color: $light-color
 
   .content
     &.v-enter-active,
@@ -44,7 +47,7 @@ header
         width: 30px
         height: 5px
         margin-bottom: 5px
-        background: $text-color
+        background: $light-color
 
   nav
     height: auto
@@ -77,6 +80,3 @@ header
           background: lighten($main-color, 10%)
         &.router-link-active
           background: darken($main-color, 10%)
-    a
-      text-decoration: none
-      color: $text-color

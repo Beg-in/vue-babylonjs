@@ -14,9 +14,17 @@ module.exports = build({
 
 register([
   {
+    name: 'home',
+    path: '/home',
+    component: require('./home/vue.pug'),
+  }, {
     name: 'animation',
     path: '/animation',
     component: require('./animation/vue.pug'),
+  }, {
+    name: 'material',
+    path: '/material',
+    component: require('./material/vue.pug'),
   }, {
     name: 'shader',
     path: '/shader',
@@ -27,6 +35,6 @@ register([
     component: require('./properties/vue.pug'),
   }, {
     path: '*',
-    redirect: 'animation',
+    redirect: '/home',
   },
 ]);

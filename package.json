@@ -1,7 +1,7 @@
 {
   "name": "vue-babylonjs",
   "main": "index.js",
-  "version": "0.7.1",
+  "version": "0.8.0",
   "engines": {
     "node": ">=8.9"
   },
@@ -30,12 +30,13 @@
   },
   "dependencies": {
     "babel-preset-env": "^1.6.1",
-    "babylonjs": "^3.2.0-alpha4"
+    "babylonjs": "^3.2.0-beta.1"
   },
   "devDependencies": {
-    "begin-build": "0.12.0",
-    "begin-project": "0.3.0",
+    "begin-build": "0.14.0",
+    "begin-project": "0.3.1",
     "glslify-loader": "1.0.2",
+    "jstransformer-markdown-it": "2.0.0",
     "raw-loader": "0.5.1"
   },
   "// HACK: postcss-loader must have config": "",
