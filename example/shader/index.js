@@ -2,6 +2,7 @@ let { Effect } = require('../../classes');
 
 const VERTEX = require('./vertex.glsl');
 const FRAGMENT = require('./fragment.glsl');
+
 const NAME = 'demo';
 
 Effect.ShadersStore[`${NAME}VertexShader`] = VERTEX;

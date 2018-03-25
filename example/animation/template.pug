@@ -8,4 +8,4 @@ Scene
     Animation(property="rotation.y" :duration="5" :end="Math.PI * 2")
     Animation(property="rotation.z" :duration="5" :end="Math.PI * 2")
     PointLight(diffuse="#FF0000")
-    Box(v-for="position in boxes" :position="position")
+    Box(v-for="(position, key) in boxes" :key="key" :position="position")

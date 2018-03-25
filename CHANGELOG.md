@@ -1,10 +1,20 @@
+<a name="0.9.0"></a>
+# [0.9.0](https://github.com/Beg-in/3d/compare/0.8.0...0.9.0) (2018-03-25)
+
+
+### Features
+
+* **physics:** add physics impostor support ([2996265](https://github.com/Beg-in/3d/commit/2996265))
+
+
+
 <a name="0.8.0"></a>
 # [0.8.0](https://github.com/Beg-in/3d/compare/0.7.1...0.8.0) (2018-03-22)
 
 
 ### Features
 
-* **material:** add material with pbr support ([84edf3a](https://github.com/Beg-in/3d/commit/84edf3a))
+* **material:** add material with pbr support ([9261b6c](https://github.com/Beg-in/3d/commit/9261b6c))
 
 
 
