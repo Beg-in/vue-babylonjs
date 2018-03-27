@@ -1,3 +1,7 @@
+// mixin markdown
+  include:markdown-it(plugins=['markdown-it-highlightjs'])
+// +markdown
+  include ../../README.md
+
 article
-  include:markdown-it ../../README.md
-  include:markdown-it ../../CONTRIBUTING.md
+  include:markdown-it(plugins=['markdown-it-highlightjs']) ../../lib/scene/docs.md
