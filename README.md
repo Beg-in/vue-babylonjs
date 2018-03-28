@@ -22,6 +22,9 @@ Scene
     Box(v-for="position in boxes" :position="position")
 ```
 
+## API Documentation
+See the [documentation website](https://beg-in.github.io/vue-babylonjs/) (work in progress)
+
 ## Getting Started
 
 ### Installation
@@ -75,3 +78,6 @@ We use BabylonJS because it is the most efficient, most feature-rich, and most m
 
 The underlying engine is easily accessible to give pros the tools to tweak every aspect of BabylonJS. The organizational structure of the library is a Component-Entity-System and the Entity component contains many powerful features such a matrix transformation to allow for interaction with the Scene graph like a group of HTML divs. Powerful tools are available such as an integrated reactive property system that enables modifying 3D objects within templates and a Shader component that makes adding WebGL shaders easy.
 
+## Contributing
+
+See `CONTRIBUTING.md`

@@ -15,7 +15,6 @@
 
 Always use `v-bind:property` or the shorthand `:property` on attributes to components that expect non-string values!
 
-<a name="types"></a>
 #### Vector
 
 Vectors can be any of the following:
