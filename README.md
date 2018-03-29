@@ -72,6 +72,8 @@ Scene
 Vue-BabylonJS is a 3D graphics component plugin for [Vue.js](https://vuejs.org/) powered by [BabylonJS](https://www.babylonjs.com/).
 Vue-BabylonJS draws inspiration from A-Frame, but can be more performant with the exclusion of DOM manipulation and has closer ties to JavaScript through property binding syntax in Vue. Compared to ReactVR which uses A-Frame, Vue-BabylonJS has the potential for higher performance, more organized and decoupled components, and a higher-quality rendering engine. 
 
+[See the discussion on the HTML 5 Game Dev Forums](http://www.html5gamedevs.com/topic/35379-vue-integration-like-a-frame/?tab=comments#comment-204093)
+
 ### Rationale
 
 We use BabylonJS because it is the most efficient, most feature-rich, and most modern WebGL graphics library available. The addition of Vue makes the engine reactive and development becomes easier to reason about and organize. Out-of-the-box mobile support and sensible defaults make getting started a breeze.
