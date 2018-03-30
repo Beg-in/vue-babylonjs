@@ -14,14 +14,16 @@ See [the BabylonJS api documentation on the Animation class](http://doc.babylonj
 #### Usage
 
 ```html
-<Entity>
-  <Animation v-model="myModel"
-             property="position.x"
-             :start="1"
-             :end="10"
-             :duration="5">
-  </Animation>
-</Entity>
+<Scene>
+  <Entity>
+    <Animation v-model="myModel"
+               property="position.x"
+               :start="1"
+               :end="10"
+               :duration="5">
+    </Animation>
+  </Entity>
+</Scene>
 ```
 
 #### Props
@@ -65,13 +67,15 @@ This component represents a keyframe for an Animation component
 #### Usage
 
 ```html
-<Entity>
-  <Animation property="position.x" :duration="3">
-    <Key frame="0%" :value="1"></Key>
-    <Key frame="20%" :value="5"></Key>
-    <Key frame="100%" :value="10"></Key>
-  </Animation>
-</Entity>
+<Scene>
+  <Entity>
+    <Animation property="position.x" :duration="3">
+      <Key frame="0%" :value="1"></Key>
+      <Key frame="20%" :value="5"></Key>
+      <Key frame="100%" :value="10"></Key>
+    </Animation>
+  </Entity>
+<Scene>
 ```
 
 #### Props

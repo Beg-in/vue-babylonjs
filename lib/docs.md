@@ -1,8 +1,11 @@
 ## Important things to know
 
+ - **All components of this library must be a descendant of the Scene component**
+ - Many components expect to be a child of specific components defined by this plugin, check the API documentation of the component to see what its requirements are
+
 ### Types for props (attributes)
 
-**Vue bindings are important when using this library**
+**Vue bindings are important when using this plugin**
 
 Always use `v-bind:property` or the shorthand `:property` on attributes to components that expect non-string values!
 
