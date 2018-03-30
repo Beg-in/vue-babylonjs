@@ -18,6 +18,10 @@ register([
     path: '/home',
     component: require('./home/vue.pug'),
   }, {
+    name: 'logo',
+    path: '/logo',
+    component: require('./logo/vue.pug'),
+  }, {
     name: 'scene',
     path: '/scene',
     component: require('./scene/vue.pug'),
