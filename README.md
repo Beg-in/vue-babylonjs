@@ -66,6 +66,9 @@ Scene
   <Box :position="[0, 0, 5]">
 </Scene>
 ```
+## Updates
+
+[Subscribe to the mailing list issue to keep up with important updates](https://github.com/Beg-in/vue-babylonjs/issues/1)
 
 ## About
 
