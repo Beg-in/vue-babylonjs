@@ -50,8 +50,6 @@ In your template (Pug):
 
 ```pug
 Scene
-  Camera
-  HemisphericLight
   Box(:position="[0, 0, 5]")
 ```
 
@@ -61,9 +59,7 @@ Scene
 
 ```html
 <Scene>
-  <Camera>
-  <HemisphericLight>
-  <Box :position="[0, 0, 5]">
+  <Box :position="[0, 0, 5]"></Box>
 </Scene>
 ```
 ## Updates
