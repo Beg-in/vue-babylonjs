@@ -28,8 +28,18 @@ See [the BabylonJS api documentation on the Animation class](http://doc.babylonj
 
 #### Props
 
- - `type` (`"float"`|`"vector2"`|`"vector3"`|`"size"`|`"quaternion"`|`"matrix"`|`"color3"`) - The type of property to animate
- - `mode` (`"cycle"`|`"relative"`|`"constant"`) - The loop mode of the animation
+ - `type` (String) - The type of property to animate, see below for valid values:
+    - `"float"`
+    - `"vector2"`
+    - `"vector3"`
+    - `"size"`
+    - `"quaternion"`
+    - `"matrix"`
+    - `"color3"`
+ - `mode` (String) - The loop mode of the animation, see below for valid values:
+    - `"cycle"`
+    - `"relative"`
+    - `"constant"`
  - `property` (String) - Path to the property to animate with dots (`.`)
  - `fps` (Number) - the frames-per-second of the animation (default 60)
  - `from` (Number) - Frame number to begin animating on
@@ -42,8 +52,23 @@ See [the BabylonJS api documentation on the Animation class](http://doc.babylonj
  - `animatable` (Object) - A specific animation object from BabylonJS
  - `blending` (Boolean) - enable interpolation FROM the current object's state (default false)
  - `blendingSpeed` (Number) - speed of blending interpolation
- - `easing` (`"circle"`|`"back"`|`"bounce"`|`"cubic"`|`"elastic"`|`"exponential"`|`"power"`|`"quadratic"`|`"quartic"`|`"quintic"`|`"sine"`|`"bezierCurve"`) -
- - `easingMode` (`"in"`|`"out"`|`"inout"`) -
+ - `easing` (String) - easing function name, see below for valid values:
+    - `"circle"`
+    - `"back"`
+    - `"bounce"`
+    - `"cubic"`
+    - `"elastic"`
+    - `"exponential"`
+    - `"power"`
+    - `"quadratic"`
+    - `"quartic"`
+    - `"quintic"`
+    - `"sine"`
+    - `"bezierCurve"`
+ - `easingMode` (String) - mode of the easing function, see below for valid values:
+    - `"in"`
+    - `"out"`
+    - `"inout"`
  - `amplitude` (Number) - For the `"back"` easing function
  - `bounces` (Number) - For the `"bounce"` easing function
  - `bounciness` (Number) - For the `"bounce"` easing function

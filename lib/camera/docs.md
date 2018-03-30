@@ -19,7 +19,15 @@ The [BabylonJS guide to cameras](http://doc.babylonjs.com/babylon101/cameras) ca
 
 #### Props
 
- - `type` (`"universal"`|`"free"`|`"follow"`|`"arcRotate"`|`"arcFollow"`|`"deviceOrientation"`|`"touch"`|`"gamepad"`) - The type of camera to use
+ - `type` (String) - The type of camera to use, see below for valid values:
+    - `"universal"`
+    - `"free"`
+    - `"follow"`
+    - `"arcRotate"`
+    - `"arcFollow"`
+    - `"deviceOrientation"`
+    - `"touch"`
+    - `"gamepad"`
  - `position` (Vector3) - Starting position for the camera
  - `target` (Vector3) - Targets the camera to a particular position
  - `alpha` (Number) - alpha (radians) the longitudinal rotation for `"arcRotate"` and `"arcFollow"` type cameras

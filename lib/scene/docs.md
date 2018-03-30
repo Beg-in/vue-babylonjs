@@ -32,7 +32,11 @@ html, body {
 #### Props
 
  - `ambient` (Color) - Ambient lighting color for the scene
- - `fog` (`"none"`|`"exp"`|`"exp2"`|`"linear"`) - The type of fog to use
+ - `fog` (String) - The type of fog to use, see below for valid values:
+    - `"none"`
+    - `"exp"`
+    - `"exp2"`
+    - `"linear"`
  - `fogStart` (Number) - Starting distance for fog
  - `fogEnd` (Number) - Ending distance for fog
  - `fogDensity` (Number) - Density of fog for in `"exp"` or `"exp2"` modes
@@ -41,5 +45,7 @@ html, body {
  - `debug` (Boolean) - Enable debug mode - default `false`
  - `environment` (IEnvironmentHelperOptions) - Options for the default environment: [See the interface documentation](http://doc.babylonjs.com/classes/interfaces/babylon.ienvironmenthelperoptions)
  - `main` (Color) - Primary color of all the available elements when using the default environment
- - `physics` (`"cannon"`|`"oimo"`) - Optionally change the physics engine to use
+ - `physics` (String) - Optionally change the physics engine to use, see below for valid values:
+    - `"cannon"`
+    - `"oimo"`
  - `gravity` (Vector3) - Set the direction of gravity when using the physics engine

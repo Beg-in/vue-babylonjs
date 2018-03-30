@@ -11,6 +11,8 @@ main
             div
         nav(v-show="menu")
           ul(@click="menu = false")
+            router-link(tag="li" to="scene")
+              a Scene
             router-link(tag="li" to="animation")
               a Animations
             router-link(tag="li" to="material")

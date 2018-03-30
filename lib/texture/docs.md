@@ -19,7 +19,7 @@ A texture to use on a Material component
 
 #### Props
 
- - `type` (String) - type name with "Texture" automatically added, see valid values below:
+ - `type` (String) - type name with "Texture" automatically added, see below for valid values:
     - `"diffuse"` when in PBRMaterial mode, automatically renamed to `albedoTexture`
     - `"ambient"`
     - `"opacity"`

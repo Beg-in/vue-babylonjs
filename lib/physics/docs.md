@@ -23,7 +23,14 @@ The BabylonJS [guide to using a physics engine](http://doc.babylonjs.com/how_to/
 
 #### Props
 
-  - `type` (`"box"`|`"cylinder"`|`"heightmap"`|`"mesh"`|`"particle"`|`"plane"`|`"sphere"`) - The kind of physics impostor
+  - `type` (String) - The kind of physics impostor, see below for valid values:
+    - `"box"`
+    - `"cylinder"`
+    - `"heightmap"`
+    - `"mesh"`
+    - `"particle"`
+    - `"plane"`
+    - `"sphere"`
   - `mass` (Number) - The object's mass in kg
   - `friction` (Number) - The impostor's friction when colliding against other impostors
   - `restitution` (Number) - The amount of force the body will "give back" when colliding
