@@ -4,7 +4,7 @@
     "client": {
       "entry": "./example/index.js",
       "title": "Vue-BabylonJS Example site",
-      "color": "#673AB7",
+      "color": "#42b883",
       "cdn": "https://beg-in.github.io/vue-babylonjs/",
       "root": "https://beg-in.github.io/vue-babylonjs/"
     }

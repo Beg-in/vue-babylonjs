@@ -7,3 +7,7 @@ package-lock.json
 test
 coverage
 example
+docs
+properties.json
+CONTRIBUTING.md
+webpack.config.js
