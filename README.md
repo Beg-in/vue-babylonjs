@@ -1,4 +1,4 @@
-![Animated 3D Vue Logo](https://thumbs.gfycat.com/PinkPiercingBull-size_restricted.gif)
+[![Animated 3D Vue Logo](https://thumbs.gfycat.com/PinkPiercingBull-size_restricted.gif)](https://beg-in.github.io/vue-babylonjs/)
 # Vue-BabylonJS
 
 Create high quality 3D graphics in the web as easily as writing HTML and CSS.
@@ -24,7 +24,7 @@ Scene
 ```
 
 ## API Documentation
-See the [documentation website](https://beg-in.github.io/vue-babylonjs/) (work in progress)
+[See the documentation website (work in progress)](https://beg-in.github.io/vue-babylonjs/)
 
 ## Getting Started
 
