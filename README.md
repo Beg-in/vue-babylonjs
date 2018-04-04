@@ -9,6 +9,25 @@ Quickly make a 3D animation:
 
 It's this easy:
 
+```html
+<Scene>
+    <Camera></Camera>
+    <HemisphericLight diffuse="#0000FF"></HemisphericLight>
+    <Entity :position="[0, 0, 5]">
+        <Animation property="rotation.x" :duration="5">
+            <Key frame="0%" :value="0"></Key>
+            <Key frame="100%" :value="Math.PI * 2"></Key>
+        </Animation>
+        <Animation property="rotation.y" :duration="5" :end="Math.PI * 2"></Animation>
+        <Animation property="rotation.z" :duration="5" :end="Math.PI * 2"></Animation>
+        <PointLight diffuse="#FF0000"></PointLight>
+        <Box v-for="position in boxes" :position="position"></Box>
+    </Entity>
+</Scene>
+```
+
+It's even easier if you use [Pug (Jade)](https://pugjs.org) for templating:
+
 ```pug
 Scene
   Camera
@@ -30,11 +49,12 @@ Scene
 
 ### Installation
 
+Get it off of [NPM](https://www.npmjs.com/package/vue-babylonjs):
 ```shell
 $ npm install vue-babylonjs
 ```
 
-**or**:
+**or** (using [yarn](https://yarnpkg.com/en/)):
 
 ```shell
 $ yarn add vue-babylonjs
@@ -47,22 +67,21 @@ let Vue = require('vue');
 Vue.use(require('vue-babylonjs'));
 ```
 
-In your template (Pug):
-
-```pug
-Scene
-  Box(:position="[0, 0, 5]")
-```
-
-**or**:
-
-(HTML)
+In your template:
 
 ```html
 <Scene>
   <Box :position="[0, 0, 5]"></Box>
 </Scene>
 ```
+
+**or** (Pug):
+
+```pug
+Scene
+  Box(:position="[0, 0, 5]")
+```
+
 ## Updates
 
 [Subscribe to the mailing list issue to keep up with important updates](https://github.com/Beg-in/vue-babylonjs/issues/1)
