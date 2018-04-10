@@ -1,0 +1,20 @@
+Scene
+  Camera(type="arcRotate" :radius="10" :target="[0, 0, 0]" :beta="Math.PI / 4")
+  HemisphericLight
+    property(name="intensity" :float="2")
+  Ground(:options="{ width: 10, height: 10 }")
+    Physics(type="box")
+  Entity(:position="[0, 2, 0]")
+  Box(:position="[0, 1, 0]")
+    Material(diffuse="#F00")
+    Physics(type="box" :mass="1")
+  Box(v-for="i in [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]" :position="[0.3 - i % 2, 2 * i, 0]" :scaling="[1, 1, 0.3]")
+    Material(:alpha="0")
+    Physics(type="box" :mass="1")
+    Entity(:scaling="[1, 1, 1 / 0.3]")
+      VueLogo
+
+  // TODO: (Broken) enable entity physics
+  // Entity(:position="[-2, 1, -2]")
+    Physics(type="box" :mass="1")
+    VueLogo

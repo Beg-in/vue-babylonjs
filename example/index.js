@@ -42,6 +42,10 @@ register([
     path: '/properties',
     component: require('./properties/vue.pug'),
   }, {
+    name: 'physics',
+    path: '/physics',
+    component: require('./physics/vue.pug'),
+  }, {
     path: '*',
     redirect: '/home',
   },
