@@ -47,6 +47,8 @@ Scene
 
 ## Getting Started
 
+[See the complete starter example on Glitch](https://glitch.com/edit/#!/vue-babylonjs-starter)
+
 ### Installation
 
 Get it off of [NPM](https://www.npmjs.com/package/vue-babylonjs):
