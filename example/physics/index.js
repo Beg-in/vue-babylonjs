@@ -1,3 +1,3 @@
 module.exports = {
-  components: { VueLogo: require('./logo/vue.pug') },
+  components: { LogoSide: require('../logo/side/vue.pug') },
 };
