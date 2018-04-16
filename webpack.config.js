@@ -2,6 +2,7 @@
 
 let prism = require('prismjs');
 let loadLanguages = require('prismjs/components/index.js');
+
 loadLanguages(['pug']);
 
 module.exports = ({ config, pug }) => {
@@ -13,7 +14,10 @@ module.exports = ({ config, pug }) => {
 
   pug.options.filters = {
     hl(text, { lang = 'markup' } = {}) {
-      prism.highlight(text, prism.languages[lang], lang);
+      if (text[0] === '\n') {
+        text = text.substring(1);
+      }
+      return `<code lang="${lang}">${prism.highlight(text, prism.languages[lang], lang)}</code>`;
     },
   };
 

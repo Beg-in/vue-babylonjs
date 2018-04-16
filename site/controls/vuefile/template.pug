@@ -1,0 +1,16 @@
+code
+  code(v-show="pug")
+    :hl <template lang="pug">
+  code(v-show="!pug")
+    :hl <template>
+  code(v-show="pug")
+    slot(name="vuepug")
+  code(v-show="!pug")
+    slot(name="vuehtml")
+  :hl </template>
+  code(v-if="$slots.script")
+    :hl <script>
+  code(v-if="$slots.vuescript")
+    slot(name="vuescript")
+  code(v-if="$slots.vuescript")
+    :hl </script>

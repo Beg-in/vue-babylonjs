@@ -7,6 +7,7 @@ let app = require('./app/vue.pug');
 // debugger;
 
 let router = create({
+  mode: 'hash',
   base: '/vue-babylonjs/',
 });
 

@@ -2,8 +2,8 @@
   "domain": "beg-in.github.io",
   "base": {
     "client": {
-      "entry": "./example/index.js",
-      "title": "Vue-BabylonJS Example site",
+      "entry": "./site/index.js",
+      "title": "Vue-BabylonJS Documentation site",
       "color": "#42b883",
       "cdn": "https://beg-in.github.io/vue-babylonjs/",
       "root": "https://beg-in.github.io/vue-babylonjs/"

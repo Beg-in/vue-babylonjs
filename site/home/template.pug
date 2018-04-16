@@ -5,16 +5,16 @@ article
   .logo.shadow-dark
     Controls(:inline="true" route="/logo")
       Logo
-      // h5(slot="filename") logo.vue
+      h5(slot="filename") logo.vue
       pre(slot="pug")
         include:hl(lang="pug") ../logo/template
       pre(slot="html")
-        include:pug(pretty=true):hl ../logo/template
-      // h5(slot="filename2") side.vue
-      // pre(slot="pug2")
-        include:highlight ../logo/side/template
-      // pre(slot="html2")
-        include:pug(pretty=true):highlight ../logo/side/template
+        include:hl:pug(pretty=true) ../logo/template
+      h5(slot="filename2") side.vue
+      pre(slot="pug2")
+        include:hl(lang="pug") ../logo/side/template
+      pre(slot="html2")
+        include:hl:pug(pretty=true) ../logo/side/template
 
   h2 Getting Started and Installation
   external(href="https://github.com/Beg-in/vue-babylonjs") See README
