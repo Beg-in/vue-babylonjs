@@ -4,11 +4,10 @@ Scene
     property(name="intensity" :float="2")
   Ground(:options="{ width: 10, height: 10 }")
     Physics
-  Box(v-for="(_, i) in Array(81).fill()"
+  Entity(v-for="(_, i) in Array(81).fill()"
       :key="i"
       :position="[(i % 3) - 1, 2 + Math.floor(i / 9), (Math.floor(i / 3) % 3) - 1]"
       :scaling="[1, 1, 0.3]")
-    Material(:alpha="0")
     Physics(:mass="1")
     Entity(:scaling="[1, 1, 1 / 0.3]")
       LogoSide

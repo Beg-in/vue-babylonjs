@@ -1,0 +1,30 @@
+.height-100
+  .frow
+    .col-xs-1-1
+      .controls-container
+        button.toggle-code(@click="isCodeVisible = !isCodeVisible" type="button") {{ `${isCodeVisible ? 'Hide' : 'Show' } Code` }}
+        router-link(:to="route")
+          button.full-screen(v-show="inline" type="button") Full Screen
+        slot
+    .col-xs-1-1(v-show="isCodeVisible")
+      .code-controls
+        .frow.justify-start
+          button.code-html-button(@click="isPug = false" type="button" :disabled="!isPug") HTML
+          button.code-pug-button(@click="isPug = true" type="button" :disabled="isPug") Pug
+      .code-container
+        slot(name="filename")
+        VueFile(:pug="isPug")
+          template(slot="vuepug")
+            slot(name="pug")
+          template(slot="vuehtml")
+            slot(name="html")
+          template(v-if="$slots.script" slot="vuescript")
+            slot(name="script")
+        slot(name="filename2")
+        VueFile(v-if="$slots.pug2" :pug="isPug")
+          template(slot="vuepug")
+            slot(name="pug2")
+          template(slot="vuehtml")
+            slot(name="html2")
+          template(v-if="$slots.script2" slot="vuescript")
+            slot(name="script2")

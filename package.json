@@ -33,11 +33,14 @@
     "babylonjs": "3.2.0-beta.1"
   },
   "devDependencies": {
-    "begin-build": "0.14.0",
+    "begin-build": "beg-in/build#vue-loader-15",
     "begin-project": "0.3.1",
+    "frow": "^3.0.3",
     "glslify-loader": "1.0.2",
     "jstransformer-markdown-it": "2.0.0",
-    "markdown-it-highlightjs": "3.0.0",
+    "jstransformer-pug": "^0.3.0",
+    "markdown-it-prism": "^1.1.2",
+    "prismjs": "^1.14.0",
     "raw-loader": "0.5.1"
   },
   "// HACK: postcss-loader must have config": "",
