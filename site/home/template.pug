@@ -3,113 +3,59 @@ article
   h1 Vue-BabylonJS
 
   .logo.shadow-dark
-    Controls(:inline="true" route="/logo")
+    Controls(:inline="true" route="/home/fullscreen")
       Logo
       h5(slot="filename") logo.vue
       pre(slot="pug")
-        include:hl(lang="pug") ../logo/template
+        include:hl(lang="pug") ./example/template
       pre(slot="html")
-        include:hl:pug(pretty=true) ../logo/template
+        include:hl:pug(pretty=true) ./example/template
       h5(slot="filename2") side.vue
       pre(slot="pug2")
-        include:hl(lang="pug") ../logo/side/template
+        include:hl(lang="pug") ./example/side/template
       pre(slot="html2")
-        include:hl:pug(pretty=true) ../logo/side/template
+        include:hl:pug(pretty=true) ./example/side/template
 
   h2 Getting Started and Installation
   external(href="https://github.com/Beg-in/vue-babylonjs") See README
 
-  h2 Table of Contents
-  h3 Important Things to Know
-  p
-    ul
-      li
-        a(href="#docs") Types for props (attributes)
-      li
-        a(href="#docs") Retrieving BabylonJS Objects
-  h3 API Documentation
-  p
-    ul
-      li
-        a(href="#animation") Animation
-      li
-        a(href="#camera") Camera
-      li
-        a(href="#entity") Entity
-      li
-        a(href="#light") Light
-      li
-        a(href="#material") Material
-      li
-        a(href="#mesh") Mesh
-      li
-        a(href="#physics") Physics
-      li
-        a(href="#scene") Scene
-      li
-        a(href="#shader") Shader
-      li
-        a(href="#texture") Texture
-      li
-        a(href="#util") Types
+  // h2 Table of Contents
+  // h3 Important Things to Know
+  // p
+  //   ul
+  //     li
+  //       a(href="#docs") Types for props (attributes)
+  //     li
+  //       a(href="#docs") Retrieving BabylonJS Objects
+  // h3 API Documentation
+  // p
+  //   ul
+  //     li
+  //       a(href="#animation") Animation
+  //     li
+  //       a(href="#camera") Camera
+  //     li
+  //       a(href="#entity") Entity
+  //     li
+  //       a(href="#light") Light
+  //     li
+  //       a(href="#material") Material
+  //     li
+  //       a(href="#mesh") Mesh
+  //     li
+  //       a(href="#physics") Physics
+  //     li
+  //       a(href="#scene") Scene
+  //     li
+  //       a(href="#shader") Shader
+  //     li
+  //       a(href="#texture") Texture
+  //     li
+  //       a(href="#util") Types
 
-  a(name="docs")
   include:markdown-it(plugins=['markdown-it-prism']) ../../lib/docs.md
-  a(href="#top") Back to top
-  hr
-
-  h2 API Documentation
-
-  a(name="animation")
-  include:markdown-it(plugins=['markdown-it-prism']) ../../lib/animation/docs.md
-  a(href="#top") Back to top
-  hr
-
-  a(name="camera")
   include:markdown-it(plugins=['markdown-it-prism']) ../../lib/camera/docs.md
-  a(href="#top") Back to top
-  hr
-
-  a(name="entity")
-  include:markdown-it(plugins=['markdown-it-prism']) ../../lib/entity/docs.md
-  a(href="#top") Back to top
-  hr
-
-  a(name="light")
   include:markdown-it(plugins=['markdown-it-prism']) ../../lib/light/docs.md
-  a(href="#top") Back to top
-  hr
-
-  a(name="material")
-  include:markdown-it(plugins=['markdown-it-prism']) ../../lib/material/docs.md
-  a(href="#top") Back to top
-  hr
-
-  a(name="mesh")
   include:markdown-it(plugins=['markdown-it-prism']) ../../lib/mesh/docs.md
-  a(href="#top") Back to top
-  hr
-
-  a(name="physics")
-  include:markdown-it(plugins=['markdown-it-prism']) ../../lib/physics/docs.md
-  a(href="#top") Back to top
-  hr
-
-  a(name="scene")
-  include:markdown-it(plugins=['markdown-it-prism']) ../../lib/scene/docs.md
-  a(href="#top") Back to top
-  hr
-
-  a(name="shader")
-  include:markdown-it(plugins=['markdown-it-prism']) ../../lib/shader/docs.md
-  a(href="#top") Back to top
-  hr
-
-  a(name="texture")
   include:markdown-it(plugins=['markdown-it-prism']) ../../lib/texture/docs.md
-  a(href="#top") Back to top
-  hr
-
-  a(name="util")
   include:markdown-it(plugins=['markdown-it-prism']) ../../lib/util/docs.md
-  a(href="#top") Back to top

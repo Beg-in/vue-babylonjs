@@ -22,10 +22,10 @@ register([
     path: '/home',
     component: require('./home/vue.pug').default,
   }, {
-    name: 'logo',
-    path: '/logo',
-    component: require('./logo/vue.pug').default,
-  }, {
+    // name: 'home-fullscreen',
+    // path: '/home/fullscreen',
+    // component: require('./home/fullscreen/vue.pug').default,
+  // }, {
     name: 'scene',
     path: '/scene',
     component: require('./scene/vue.pug').default,

@@ -1,0 +1,83 @@
+Scene
+  Camera(type="arcRotate")
+  Box(:position="[2, 0, 0]")
+    Animation(property="rotation.x" :duration="5" :end="Math.PI * 2")
+    // Use a vertex and fragment registered with ShadersStore under the same name
+    // Safe caching, non-reactive
+    // Recommended for reusable shader files
+    Shader(:shader="shader")
+      // How to set uniform values
+      Uniform(variable="color" color="#F00")
+      Uniform(variable="start" :float="0.5")
+
+  Box(:position="[0, -2, 0]")
+    Animation(property="rotation.y" :duration="5" :end="Math.PI * 2")
+    // Use shaders registered with ShadersStore under specific names
+    // Safe caching, non-reactive
+    // Recommended for independently reusable shader files
+    Shader(:vertex="shader" :fragment="shader")
+      Uniform(variable="color" color="#0F0")
+      Uniform(variable="start" :float="1")
+
+  Box(:position="[-2, 0, 0]")
+    Animation(property="rotation.x" :duration="5" :end="-Math.PI * 2")
+    // Use the raw text content from strings defined in this component
+    // Unsafe caching, reactive
+    // USE A UNIQUE VALUE IN THE "name" PROPERTY FOR SAFE CACHING
+    // Recommended for reusable shader components
+    Shader(name="inline" :vertexShader="vertexShader" :fragmentShader="fragmentShader")
+      Uniform(variable="color" color="#00F")
+      Uniform(variable="start" :float="-1")
+
+  Box(:position="[0, 2, 0]")
+    Animation(property="rotation.y" :duration="5" :end="-Math.PI * 2")
+    // Use the raw text content from strings defined in this component
+    // Unsafe caching, reactive
+    // USE A UNIQUE VALUE IN THE "name" PROPERTY FOR SAFE CACHING
+    // Recommended for independently reusable shader components
+    Shader
+      Vertex(name="namedvertex" :content="vertexShader")
+      Fragment(name="namedfragment" :content="fragmentShader")
+      Uniform(variable="color" color="#FF0")
+      Uniform(variable="start" :float="-0.5")
+
+  Box
+    Animation(property="rotation.x" :duration="5" :end="Math.PI * 2")
+    Animation(property="rotation.y" :duration="5" :end="Math.PI * 2")
+    Animation(property="rotation.z" :duration="5" :end="Math.PI * 2")
+    // Use the text content inside Vertex and Fragment components
+    // Unsafe caching, non-reactive
+    // USE A UNIQUE VALUE IN THE "name" PROPERTY FOR SAFE CACHING
+    // only recommended for prototyping
+    Shader(name="text")
+
+      Vertex.
+        precision highp float;
+        attribute vec3 position;
+        uniform mat4 worldViewProjection;
+        uniform float time;
+        varying vec3 direction;
+
+        void main() {
+          gl_Position = worldViewProjection * vec4(position, 1.0);
+          direction = position;
+        }
+
+      Fragment.
+        precision highp float;
+        uniform float time;
+        varying vec3 direction;
+
+        void main() {
+          gl_FragColor = vec4(cos(time / 1000.0) * direction, 1.0);
+        }
+
+  // Others:
+
+  //  Box
+      // Use an element in DOM with a pre-defined id (not recommended for Vue)
+      Shader(name="elements" vertexElement="someid" fragmentElement="someotherid")
+
+  //  Box
+      // Use an fx file on your server
+      Shader(name="fxfile" src="/path/to/file.fx")
