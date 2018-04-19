@@ -1,5 +1,3 @@
-### Shader
-
 #### Details
 
  - This must be a child of a Mesh component

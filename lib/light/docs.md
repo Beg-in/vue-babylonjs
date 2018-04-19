@@ -1,4 +1,4 @@
-### Lights
+#### Description
 
 Define lighting in a scene
 

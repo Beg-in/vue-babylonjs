@@ -1,4 +1,4 @@
-### Texture
+#### Description
 
 A texture to use on a Material component
 

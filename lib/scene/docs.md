@@ -1,4 +1,4 @@
-### Scene
+#### Description
 
 This is the entry point for the entire 3D scene. All components of this library require this to be an ancestor.
 

@@ -1,4 +1,4 @@
-### Camera
+#### Description
 
 This component will define a camera in a scene
 

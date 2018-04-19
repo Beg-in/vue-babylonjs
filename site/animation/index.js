@@ -1,6 +1,6 @@
 module.exports = {
   components: {
-    Example: require('../../examples/logo/vue.pug').default,
+    Example: require('../../examples/animation/vue.pug').default,
     Controls: require('../controls/vue.pug').default,
   },
 };

@@ -1,26 +1,42 @@
-main
-  header(@mouseover="header = true"
-        @mouseleave="header = false")
-    transition
-      .content(v-show="header || menu")
-        .bar
-          router-link.home(to="home") Vue-BabylonJS
-          .hamburger(@click.prevent="menu = !menu")
-            div
-            div
-            div
-        nav(v-show="menu")
-          ul(@click="menu = false")
-            router-link(tag="li" to="scene")
-              a Scene
-            router-link(tag="li" to="animation")
-              a Animations
-            router-link(tag="li" to="material")
-              a Materials
-            router-link(tag="li" to="shader")
-              a Shaders
-            router-link(tag="li" to="properties")
-              a Properties
-            router-link(tag="li" to="physics")
+#viewport.height-100.width-100
+  .frow.visible-sm.visible-xs
+    .hamburger(@click.prevent="sidebar = !sidebar" type="button")
+      div
+      div
+      div
+    h1 Vue-BabylonJS
+  .frow.width-100
+    .col-md-1-5.height-100(:class="{ 'sidebar-hidden': !sidebar }")
+      .sidebar
+        nav.height-100(@click="sidebar = false")
+          .hidden-sm.hidden-xs
+            router-link(to="/home")
+              h1 Vue-BabylonJS
+          ul
+            router-link(tag="li" to="/home")
+              a Home
+            router-link(tag="li" to="/animation")
+              a Animation
+            router-link(tag="li" to="/camera")
+              a Camera
+            router-link(tag="li" to="/entity")
+              a Entity
+            router-link(tag="li" to="/light")
+              a Light
+            router-link(tag="li" to="/material")
+              a Material
+            router-link(tag="li" to="/mesh")
+              a Mesh
+            router-link(tag="li" to="/physics")
               a Physics
-  router-view
+            router-link(tag="li" to="/scene")
+              a Scene
+            router-link(tag="li" to="/shader")
+              a Shader
+            router-link(tag="li" to="/texture")
+              a Texture
+            router-link(tag="li" to="/types")
+              a Types
+    .col-md-4-5.height-100(:class="{ 'sidebar-hidden': sidebar }")
+      main
+        router-view

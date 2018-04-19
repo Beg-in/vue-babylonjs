@@ -1,4 +1,4 @@
-### Animation
+#### Description
 
 This component will apply an animation to an Entity component
 

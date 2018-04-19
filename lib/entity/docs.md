@@ -1,4 +1,4 @@
-### Entity
+#### Description
 
 The basic Entity component to manipulate and transform the scene with
 

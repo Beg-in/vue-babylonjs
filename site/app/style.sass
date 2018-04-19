@@ -1,82 +1,68 @@
 @import ../variables
 
-main,
-nav,
-.content,
-.bar
-  height: 100%
-  width: 100%
+#viewport
   color: $dark-color
-  display: flex
-  flex-wrap: wrap
 
-a
-  text-decoration: none
-  color: $light-color
+main
+  margin: 20px
 
-header
-  height: 40px
+.hamburger
+  background-color: $light-color
   position: fixed
   top: 0
+  left: 0
   z-index: 4
-  width: 100%
-  color: $light-color
+  padding: 5px
+  margin: 5px
+  height: 40px
+  width: 40px
+  border-radius: 0
+  border: none
+  &:hover,
+  &:focus,
+  &:active
+    background-color: $light-color
+  &:hover
+    border: none
+    div
+      background-color: darken($main-color, 10%)
+  div
+    width: 30px
+    height: 5px
+    margin-bottom: 5px
+    background: $main-color
 
-  .content
-    &.v-enter-active,
-    &.v-leave-active
-      transition: transform $animate-speed
-    &.v-enter-active,
-    &.v-leave
-      transform: translateY(0)
-    &.v-enter,
-    &.v-leave-active
-      transform: translateY(-100%)
+@media (max-width: 991px)
+  .sidebar-hidden
+    display: none
 
-  .bar,
-  nav
-    justify-content: flex-end
+.sidebar
+  position: relative
+  width: inherit
 
-  .bar
-    background-color: $main-color
-    .hamburger
-      padding: 7px 10px
-      height: 30px
-      width: 30px
-      div
-        width: 30px
-        height: 5px
-        margin-bottom: 5px
-        background: $light-color
-
-  nav
-    height: auto
-    margin: 15px
-    position: relative
-    &:before
-      content: ""
-      position: absolute
-      border-style: solid
-      display: block
-      width: 0
-      top: -15px
-      right: 10px
-      bottom: auto
-      left: auto
-      border-width: 0 15px 15px
-      border-color: $main-color transparent
-    ul
-      padding: 0
-      margin: 0
-      border-radius: 5px;
-      background: $main-color
-      list-style: none
-      overflow: hidden
-      li
-        display: flex
-        a
-          padding: 10px 15px
-        &:hover
-          background: lighten($main-color, 10%)
-        &.router-link-active
-          background: darken($main-color, 10%)
+nav
+  background-color: darken($light-color, 5%)
+  padding: 15px
+  position: fixed
+  width: inherit
+  color: $dark-color
+  text-decoration: none
+  overflow: scroll
+  ul
+    margin: 0
+    padding: 0
+  li
+    padding-left: 15px
+    &.router-link-active
+      a
+        color: $third-color
+        text-decoration: none
+  a
+    display: block
+    color: $dark-color
+      // background: darken($main-color, 10%)
+    &:hover
+      color: $main-color
+      text-decoration: none
+  ul
+    list-style: none

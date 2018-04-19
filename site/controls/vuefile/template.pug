@@ -1,4 +1,4 @@
-code
+.vuefile
   code(v-show="pug")
     :hl <template lang="pug">
   code(v-show="!pug")
@@ -8,7 +8,8 @@ code
   code(v-show="!pug")
     slot(name="vuehtml")
   :hl </template>
-  code(v-if="$slots.script")
+  code(v-if="$slots.vuescript")
+    br
     :hl <script>
   code(v-if="$slots.vuescript")
     slot(name="vuescript")

@@ -6,7 +6,7 @@ yarn.lock
 package-lock.json
 test
 coverage
-example
+examples
 docs
 properties.json
 CONTRIBUTING.md

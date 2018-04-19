@@ -15,7 +15,7 @@ The following BabylonJS types have specific helpers in this plugin:
  - `Vector2`, `Vector3`, and `Vector4` as a unified `Vector` API
  - `Matrix`
 
-[See the documentation for these helpers for more information](#util)
+<router-link to="/types">See the documentation for Types for more information</router-link>
 
 ### Retrieving BabylonJS Objects
 
@@ -73,5 +73,3 @@ module.exports = {
   },
 };
 ```
-
-[See the Entity documentation for more information](#entity)
