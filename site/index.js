@@ -54,6 +54,10 @@ register([
     path: '/physics',
     component: require('./physics/vue.pug').default,
   }, {
+    name: 'property',
+    path: '/property',
+    component: require('./property/vue.pug').default,
+  }, {
     name: 'scene',
     path: '/scene',
     component: require('./scene/vue.pug').default,

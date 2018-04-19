@@ -1,4 +1,4 @@
-let { Effect } = require('../../classes');
+let { Effect } = require('babylonjs');
 
 const VERTEX = require('./vertex.glsl');
 const FRAGMENT = require('./fragment.glsl');

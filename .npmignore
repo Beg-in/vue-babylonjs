@@ -7,6 +7,7 @@ package-lock.json
 test
 coverage
 examples
+site
 docs
 properties.json
 CONTRIBUTING.md
