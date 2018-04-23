@@ -12,3 +12,4 @@ docs
 properties.json
 CONTRIBUTING.md
 webpack.config.js
+build.config.js

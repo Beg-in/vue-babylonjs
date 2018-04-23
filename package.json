@@ -31,7 +31,7 @@
   },
   "dependencies": {
     "babel-preset-env": "^1.6.1",
-    "babylonjs": "3.2.0-beta.1"
+    "babylonjs": "3.2.0-rc.1"
   },
   "devDependencies": {
     "begin-build": "beg-in/build#vue-loader-15",

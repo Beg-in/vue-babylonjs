@@ -1,25 +1,19 @@
-'use strict';
+let path = require('path');
 
-let prism = require('prismjs');
-let loadLanguages = require('prismjs/components/index.js');
+module.exports = () => {
+  let config = {
+    entry: './lib/index.js',
 
-loadLanguages(['pug']);
-
-module.exports = ({ config, pug }) => {
-  let { module: { rules } } = config;
-  rules.push({
-    test: /\.(glsl|frag|vert)$/,
-    loaders: ['raw-loader', 'glslify-loader'],
-  });
-
-  pug.options.filters = {
-    hl(text, { lang = 'markup' } = {}) {
-      if (text[0] === '\n') {
-        text = text.substring(1);
-      }
-      return `<code lang="${lang}">${prism.highlight(text, prism.languages[lang], lang)}</code>`;
-    },
+    module: {
+      rules: [{
+        test: /js\.$/,
+        loader: 'babel-loader',
+        options: {
+          presets: [['env', { targets: { browsers: ['last 2 versions'] }, useBuiltIns: true }]],
+        },
+      }],
+    }
   };
 
-  return config;
+  return [];
 };
