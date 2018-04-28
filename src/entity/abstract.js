@@ -1,6 +1,6 @@
 import { id, isDisposable, createBus } from '../util';
 
-module.exports = {
+export default {
   inject: {
     _$_sceneReady: 'SceneReady',
 
@@ -132,17 +132,19 @@ module.exports = {
 
   async mounted() {
     if (this.$options.beforeScene) { // Lifecycle Hook
-      this.$entity = await this.$options.beforeScene.call(this, Object.assign({
+      this.$entity = await this.$options.beforeScene.call(this, {
         sceneReady: this._$_sceneReady,
         parentReady: this._$_parentReady,
-      }, this._$_hookArgs));
+        ...this._$_hookArgs
+      });
     }
     this.$scene = await this._$_sceneReady;
     this._$_hookArgs.scene = this.$scene;
     if (this.$options.onScene) { // Lifecycle Hook
-      this.$entity = await this.$options.onScene.call(this, Object.assign({
+      this.$entity = await this.$options.onScene.call(this, {
         parentReady: this._$_parentReady,
-      }, this._$_hookArgs));
+        ...this._$_hookArgs
+      });
     }
     this._$_hookArgs.entity = this.$entity;
     this._$_onParent(await this._$_parentReady);
