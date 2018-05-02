@@ -1,5 +1,5 @@
 import { MeshBuilder } from '../babylon';
-import AbstractMesh from './abstract';
+import * as AbstractMesh from './abstract';
 
 const prepare = fn => ({
   mixins: [AbstractMesh],

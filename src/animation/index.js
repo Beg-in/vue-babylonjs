@@ -14,10 +14,10 @@ import {
   SineEase as sine,
   BezierCurveEase as bezierCurve,
 } from '../babylon';
-import AbstractEntity from '../entity/abstract';
+import * as AbstractEntity from '../entity/abstract';
 import { isFloat } from '../util';
 
-const EASINGS = {
+export const EASINGS = {
   circle,
   back,
   bounce,
@@ -51,337 +51,335 @@ export const EASING_MODES = {
   INOUT: 'inout',
 };
 
-export default {
-  mixins: [AbstractEntity],
+export const mixins = [AbstractEntity];
 
-  data() {
-    return {
-      keys: {},
-    };
+export const data = function () {
+  return {
+    keys: {},
+  };
+};
+
+export const props = {
+  type: {
+    validator: value => Object.values(TYPES).includes(value),
+    default: Object.values(TYPES)[0],
   },
 
-  props: {
-    type: {
-      validator: value => Object.values(TYPES).includes(value),
-      default: Object.values(TYPES)[0],
-    },
-
-    mode: {
-      validator: value => Object.values(MODES).includes(value),
-      default: Object.values(MODES)[0],
-    },
-
-    property: {
-      type: String,
-    },
-
-    fps: {
-      type: Number,
-      default: 60,
-    },
-
-    from: {
-      type: Number,
-      default: 0,
-    },
-
-    to: {
-      type: Number,
-      default: 60,
-    },
-
-    duration: {
-      type: Number,
-      default: null,
-    },
-
-    start: {
-      default: 0,
-    },
-
-    end: {
-      default: 1,
-    },
-
-    loop: {
-      type: Boolean,
-      default: true,
-    },
-
-    speedRatio: {
-      type: Number,
-      default: 1,
-    },
-
-    animatable: {
-      type: Object,
-      default: null,
-    },
-
-    blending: {
-      type: Boolean,
-      default: false,
-    },
-
-    blendingSpeed: {
-      type: Number,
-      default: null,
-    },
-
-    easing: {
-      validator: value => Object.values(EASINGS).includes(value),
-      default: null,
-    },
-
-    easingMode: {
-      validator: value => Object.values(EASING_MODES).includes(value),
-      default: Object.values(EASING_MODES)[0],
-    },
-
-    amplitude: {
-      type: Number,
-      default: 1,
-    },
-
-    bounces: {
-      type: Number,
-      default: 3,
-    },
-
-    bounciness: {
-      type: Number,
-      default: 2,
-    },
-
-    oscillations: {
-      type: Number,
-      default: 3,
-    },
-
-    springiness: {
-      type: Number,
-      default: 3,
-    },
-
-    exponent: {
-      type: Number,
-      default: 2,
-    },
-
-    power: {
-      type: Number,
-      default: 2,
-    },
-
-    x1: {
-      type: Number,
-      default: 0.32,
-    },
-
-    y1: {
-      type: Number,
-      default: -0.73,
-    },
-
-    x2: {
-      type: Number,
-      default: 0.69,
-    },
-
-    y2: {
-      type: Number,
-      default: 1.59,
-    },
+  mode: {
+    validator: value => Object.values(MODES).includes(value),
+    default: Object.values(MODES)[0],
   },
 
-  computed: {
-    easingFunction() {
-      if (!this.easing) {
-        return null;
+  property: {
+    type: String,
+  },
+
+  fps: {
+    type: Number,
+    default: 60,
+  },
+
+  from: {
+    type: Number,
+    default: 0,
+  },
+
+  to: {
+    type: Number,
+    default: 60,
+  },
+
+  duration: {
+    type: Number,
+    default: null,
+  },
+
+  start: {
+    default: 0,
+  },
+
+  end: {
+    default: 1,
+  },
+
+  loop: {
+    type: Boolean,
+    default: true,
+  },
+
+  speedRatio: {
+    type: Number,
+    default: 1,
+  },
+
+  animatable: {
+    type: Object,
+    default: null,
+  },
+
+  blending: {
+    type: Boolean,
+    default: false,
+  },
+
+  blendingSpeed: {
+    type: Number,
+    default: null,
+  },
+
+  easing: {
+    validator: value => Object.values(EASINGS).includes(value),
+    default: null,
+  },
+
+  easingMode: {
+    validator: value => Object.values(EASING_MODES).includes(value),
+    default: Object.values(EASING_MODES)[0],
+  },
+
+  amplitude: {
+    type: Number,
+    default: 1,
+  },
+
+  bounces: {
+    type: Number,
+    default: 3,
+  },
+
+  bounciness: {
+    type: Number,
+    default: 2,
+  },
+
+  oscillations: {
+    type: Number,
+    default: 3,
+  },
+
+  springiness: {
+    type: Number,
+    default: 3,
+  },
+
+  exponent: {
+    type: Number,
+    default: 2,
+  },
+
+  power: {
+    type: Number,
+    default: 2,
+  },
+
+  x1: {
+    type: Number,
+    default: 0.32,
+  },
+
+  y1: {
+    type: Number,
+    default: -0.73,
+  },
+
+  x2: {
+    type: Number,
+    default: 0.69,
+  },
+
+  y2: {
+    type: Number,
+    default: 1.59,
+  },
+};
+
+export const computed = {
+  easingFunction() {
+    if (!this.easing) {
+      return null;
+    }
+    let easing = EASINGS[this.easing];
+    let easingFunction;
+    switch (this.easing) {
+      case 'back':
+        easingFunction = easing(this.amplitude);
+        break;
+      case 'bounce':
+        easingFunction = easing(this.bounces, this.bounciness);
+        break;
+      case 'elastic':
+        easingFunction = easing(this.oscillations, this.springiness);
+        break;
+      case 'exponential':
+        easingFunction = easing(this.exponent);
+        break;
+      case 'power':
+        easingFunction = easing(this.power);
+        break;
+      case 'bezierCurve':
+        easingFunction = easing(this.x1, this.y1, this.x2, this.y2);
+        break;
+      default:
+        easingFunction = easing();
+    }
+    easingFunction.setEasingMode(EasingFunction[`EASINGMODE_EASE${
+      this.easingMode.toUpperCase()
+    }`]);
+    return easingFunction;
+  },
+
+  finish() {
+    return this.duration ? this.duration * this.fps : this.to;
+  },
+
+  frames() {
+    let keys = Object.values(this.keys);
+    if (keys.length < 1) {
+      return [{
+        frame: this.from,
+        value: this.start,
+      }, {
+        frame: this.finish,
+        value: this.end,
+      }];
+    }
+    return keys.map(key => {
+      let frame = Number.parseFloat(key.frame);
+      if (!isFloat(key.frame)) {
+        frame = Math.floor((frame / 100) * this.finish);
       }
-      let easing = EASINGS[this.easing];
-      let easingFunction;
-      switch (this.easing) {
-        case 'back':
-          easingFunction = easing(this.amplitude);
-          break;
-        case 'bounce':
-          easingFunction = easing(this.bounces, this.bounciness);
-          break;
-        case 'elastic':
-          easingFunction = easing(this.oscillations, this.springiness);
-          break;
-        case 'exponential':
-          easingFunction = easing(this.exponent);
-          break;
-        case 'power':
-          easingFunction = easing(this.power);
-          break;
-        case 'bezierCurve':
-          easingFunction = easing(this.x1, this.y1, this.x2, this.y2);
-          break;
-        default:
-          easingFunction = easing();
+      let out = {
+        frame,
+        value: key.value,
+      };
+      if (key.outTangent) {
+        out.outTangent = key.outTangent;
       }
-      easingFunction.setEasingMode(EasingFunction[`EASINGMODE_EASE${
-        this.easingMode.toUpperCase()
-      }`]);
-      return easingFunction;
-    },
-
-    finish() {
-      return this.duration ? this.duration * this.fps : this.to;
-    },
-
-    frames() {
-      let keys = Object.values(this.keys);
-      if (keys.length < 1) {
-        return [{
-          frame: this.from,
-          value: this.start,
-        }, {
-          frame: this.finish,
-          value: this.end,
-        }];
+      if (key.inTangent) {
+        out.inTangent = key.inTangent;
       }
-      return keys.map(key => {
-        let frame = Number.parseFloat(key.frame);
-        if (!isFloat(key.frame)) {
-          frame = Math.floor((frame / 100) * this.finish);
-        }
-        let out = {
-          frame,
-          value: key.value,
-        };
-        if (key.outTangent) {
-          out.outTangent = key.outTangent;
-        }
-        if (key.inTangent) {
-          out.inTangent = key.inTangent;
-        }
-        return out;
-      });
-    },
-
-    animationType() {
-      return Animation[`ANIMATIONTYPE_${this.type.toUpperCase()}`];
-    },
-
-    animationLoopMode() {
-      return Animation[`ANIMATIONLOOPMODE_${this.mode.toUpperCase()}`];
-    },
+      return out;
+    });
   },
 
-  methods: {
-    enableBlending(speed) {
-      this.$entity.enableBlending(speed);
-    },
-
-    disableBlending() {
-      this.$entity.disableBlending();
-    },
-
-    setEasingFunction() {
-      this.$entity.setEasingFunction(this.easingFunction);
-    },
-
-    setFrames() {
-      if (this.$entity) {
-        this.$entity.setKeys(this.frames);
-      }
-    },
+  animationType() {
+    return Animation[`ANIMATIONTYPE_${this.type.toUpperCase()}`];
   },
 
-  watch: {
-    fps() {
-      this.$entity.framePerSecond = this.fps;
-    },
+  animationLoopMode() {
+    return Animation[`ANIMATIONLOOPMODE_${this.mode.toUpperCase()}`];
+  },
+};
 
-    property() {
-      this.$entity.targetProperty = this.property;
-    },
-
-    animationType() {
-      this.dataType = this.animationType;
-    },
-
-    animationLoopMode() {
-      this.loopMode = this.animationLoopMode;
-    },
-
-    frames() {
-      this.setFrames();
-    },
-
-    easingFunction() {
-      this.setEasingFunction();
-    },
-
-    speedRatio() {
-      this.$entity.speedRatio = this.speedRatio;
-    },
-
-    loop() {
-      this.$entity.loopAnimation = this.loop;
-    },
-
-    blending() {
-      if (this.blending) {
-        this.enableBlending(this.blendingSpeed);
-      } else {
-        this.disableBlending();
-      }
-    },
+export const methods = {
+  enableBlending(speed) {
+    this.$entity.enableBlending(speed);
   },
 
-  events: {
-    setKey({ name, key }) {
-      this.$set(this.keys, name, key);
-    },
-
-    removeKey(name) {
-      this.$delete(this.keys, name);
-    },
-
-    reset() {
-      this.$entity.stop();
-    },
-
-    enableBlending(speed) {
-      this.enableBlending(speed);
-    },
-
-    disableBlending() {
-      this.disableBlending();
-    },
-
-    goToFrame(frame) {
-      this.$entity.goToFrame(frame);
-    },
-
-    pause() {
-      this.$entity.pause();
-    },
-
-    restart() {
-      this.$entity.restart();
-    },
-
-    stop() {
-      this.$entity.stop();
-    },
+  disableBlending() {
+    this.$entity.disableBlending();
   },
 
-  onScene({ name }) {
-    return new Animation(name, this.property, this.fps, this.animationType, this.animationLoopMode);
+  setEasingFunction() {
+    this.$entity.setEasingFunction(this.easingFunction);
   },
 
-  onParent({ parent, entity, scene }) {
-    this.setEasingFunction();
+  setFrames() {
+    if (this.$entity) {
+      this.$entity.setKeys(this.frames);
+    }
+  },
+};
+
+export const watch = {
+  fps() {
+    this.$entity.framePerSecond = this.fps;
+  },
+
+  property() {
+    this.$entity.targetProperty = this.property;
+  },
+
+  animationType() {
+    this.dataType = this.animationType;
+  },
+
+  animationLoopMode() {
+    this.loopMode = this.animationLoopMode;
+  },
+
+  frames() {
     this.setFrames();
-    parent.animations.push(entity);
-    scene.beginAnimation(parent, this.from, this.finish, this.loop, this.speedRatio, () => {
-      this.$event.$emit('end');
-    }, this.animatable);
   },
+
+  easingFunction() {
+    this.setEasingFunction();
+  },
+
+  speedRatio() {
+    this.$entity.speedRatio = this.speedRatio;
+  },
+
+  loop() {
+    this.$entity.loopAnimation = this.loop;
+  },
+
+  blending() {
+    if (this.blending) {
+      this.enableBlending(this.blendingSpeed);
+    } else {
+      this.disableBlending();
+    }
+  },
+};
+
+export const events = {
+  setKey({ name, key }) {
+    this.$set(this.keys, name, key);
+  },
+
+  removeKey(name) {
+    this.$delete(this.keys, name);
+  },
+
+  reset() {
+    this.$entity.stop();
+  },
+
+  enableBlending(speed) {
+    this.enableBlending(speed);
+  },
+
+  disableBlending() {
+    this.disableBlending();
+  },
+
+  goToFrame(frame) {
+    this.$entity.goToFrame(frame);
+  },
+
+  pause() {
+    this.$entity.pause();
+  },
+
+  restart() {
+    this.$entity.restart();
+  },
+
+  stop() {
+    this.$entity.stop();
+  },
+};
+
+export const onScene = function ({ name }) {
+  return new Animation(name, this.property, this.fps, this.animationType, this.animationLoopMode);
+};
+
+export const onParent = function ({ parent, entity, scene }) {
+  this.setEasingFunction();
+  this.setFrames();
+  parent.animations.push(entity);
+  scene.beginAnimation(parent, this.from, this.finish, this.loop, this.speedRatio, () => {
+    this.$event.$emit('end');
+  }, this.animatable);
 };

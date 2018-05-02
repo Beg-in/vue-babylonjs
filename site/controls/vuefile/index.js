@@ -3,6 +3,6 @@ module.exports = {
     pug: {
       type: Boolean,
       default: false,
-    }
+    },
   },
 };

@@ -1,10 +1,8 @@
 import { PointLight } from '../babylon';
-import AbstractLight from './';
+import * as AbstractLight from './';
 
-export default {
-  mixins: [AbstractLight],
+export const mixins = [AbstractLight];
 
-  onScene({ name, position, scene }) {
-    return new PointLight(name, position, scene);
-  },
+export const onScene = function ({ name, position, scene }) {
+  return new PointLight(name, position, scene);
 };

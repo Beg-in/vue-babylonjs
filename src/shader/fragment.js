@@ -1,11 +1,9 @@
-import Content from './content';
+import * as Content from './content';
 
-export default {
-  mixins: [Content],
+export const mixins = [Content];
 
-  methods: {
-    setStore() {
-      this.$bus.$emit('setFragment', this.shader);
-    },
+export const methods = {
+  setStore() {
+    this.$bus.$emit('setFragment', this.shader);
   },
 };

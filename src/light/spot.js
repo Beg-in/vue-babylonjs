@@ -1,33 +1,31 @@
 import { SpotLight } from '../babylon';
-import DirectionalLight from './directional';
+import * as DirectionalLight from './directional';
 import { isFloat } from '../util';
 
-export default {
-  mixins: [DirectionalLight],
+export const mixins = [DirectionalLight];
 
-  props: {
-    angle: {
-      validator: isFloat,
-      default: Math.PI / 2,
-    },
-
-    exponent: {
-      validator: isFloat,
-      default: 1.5,
-    },
+export const props = {
+  angle: {
+    validator: isFloat,
+    default: Math.PI / 2,
   },
 
-  watch: {
-    angle() {
-      this.$entity.angle = this.angle;
-    },
+  exponent: {
+    validator: isFloat,
+    default: 1.5,
+  },
+};
 
-    exponent() {
-      this.$entity.exponent = this.exponent;
-    },
+export const watch = {
+  angle() {
+    this.$entity.angle = this.angle;
   },
 
-  onScene({ name, position, scene }) {
-    return new SpotLight(name, position, this.directionVector3, this.angle, this.exponent, scene);
+  exponent() {
+    this.$entity.exponent = this.exponent;
   },
+};
+
+export const onScene = function ({ name, position, scene }) {
+  return new SpotLight(name, position, this.directionVector3, this.angle, this.exponent, scene);
 };

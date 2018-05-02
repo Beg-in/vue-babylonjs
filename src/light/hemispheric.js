@@ -1,10 +1,8 @@
 import { HemisphericLight } from '../babylon';
-import DirectionalLight from './directional';
+import * as DirectionalLight from './directional';
 
-export default {
-  mixins: [DirectionalLight],
+export const mixins = [DirectionalLight];
 
-  onScene({ name, scene }) {
-    return new HemisphericLight(name, this.directionVector3, scene);
-  },
+export const onScene = function ({ name, scene }) {
+  return new HemisphericLight(name, this.directionVector3, scene);
 };

@@ -54,7 +54,10 @@ export const vec4 = {
 
 export const toVec4 = value => toVec(value, Vector4, ({ w, x, y, z }) => [w, x, y, z]);
 
-export const $vector = value => {
+export const $vector = (...value) => {
+  if (Array.isArray(value[0])) {
+    [value] = value;
+  }
   if (vecValidator(value, Vector4)) {
     return toVec4(value);
   } else if (vecValidator(value, Vector3)) {

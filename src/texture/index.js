@@ -1,5 +1,5 @@
 import { Texture } from '../babylon';
-import AbstractEntity from '../entity/abstract';
+import * as AbstractEntity from '../entity/abstract';
 
 export const TYPES = {
   DIFFUSE: 'diffuse',
@@ -28,87 +28,85 @@ export const TYPES = {
   SPECULAR_GLOSSINESS: 'specularGlossiness',
 };
 
-export default {
-  mixins: [AbstractEntity],
+export const mixins = [AbstractEntity];
 
-  props: {
-    type: {
-      validator: value => Object.values(TYPES).includes(value),
-      default: Object.values(TYPES)[0],
-    },
-
-    property: {
-      type: String,
-      default: null,
-    },
-
-    src: {
-      type: String,
-      default: null,
-    },
-
-    value: {
-      validator: value => value instanceof Texture,
-      default: null,
-    },
+export const props = {
+  type: {
+    validator: value => Object.values(TYPES).includes(value),
+    default: Object.values(TYPES)[0],
   },
 
-  computed: {
-    identifier() {
-      return this.property || `${this.type}Texture`;
-    },
+  property: {
+    type: String,
+    default: null,
   },
 
-  methods: {
-    create() {
-      let texture = this.value || new Texture(this.src, this.$scene);
-      this.$replace(texture);
-    },
-
-    dispose(property = this.identifier) {
-      this.$bus.$emit('disposeTexture', { property });
-    },
-
-    set() {
-      this.$bus.$emit('setTexture', {
-        property: this.identifier,
-        texture: this.$entity,
-      });
-    },
-
-    change() {
-      if (!this.$entity) {
-        this.create();
-      }
-      this.set();
-    },
+  src: {
+    type: String,
+    default: null,
   },
 
-  watch: {
-    identifier(_, property) {
-      this.dispose(property);
-      this.set();
-    },
+  value: {
+    validator: value => value instanceof Texture,
+    default: null,
+  },
+};
 
-    src() {
-      this.dispose();
+export const computed = {
+  identifier() {
+    return this.property || `${this.type}Texture`;
+  },
+};
+
+export const methods = {
+  create() {
+    let texture = this.value || new Texture(this.src, this.$scene);
+    this.$replace(texture);
+  },
+
+  dispose(property = this.identifier) {
+    this.$bus.$emit('disposeTexture', { property });
+  },
+
+  set() {
+    this.$bus.$emit('setTexture', {
+      property: this.identifier,
+      texture: this.$entity,
+    });
+  },
+
+  change() {
+    if (!this.$entity) {
       this.create();
-      this.set();
-    },
+    }
+    this.set();
+  },
+};
 
-    value() {
-      this.dispose();
-      this.create();
-      this.set();
-    },
+export const watch = {
+  identifier(_, property) {
+    this.dispose(property);
+    this.set();
   },
 
-  onParent() {
-    this.$bus.$on('change', this.change);
-    this.change();
-  },
-
-  beforeDestroy() {
+  src() {
     this.dispose();
+    this.create();
+    this.set();
   },
+
+  value() {
+    this.dispose();
+    this.create();
+    this.set();
+  },
+};
+
+export const onParent = function () {
+  this.$bus.$on('change', this.change);
+  this.change();
+};
+
+export const beforeDestroy = function () {
+  this.dispose();
 };

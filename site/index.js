@@ -1,7 +1,7 @@
 let Vue = require('vue');
 let build = require('begin-build');
 let { create, register } = require('begin-build/router');
-Vue.use(require('../'));
+Vue.use(require('../src'));
 
 let app = require('./app/vue.pug');
 // debugger;

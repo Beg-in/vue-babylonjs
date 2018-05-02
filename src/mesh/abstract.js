@@ -1,12 +1,10 @@
-import AbstractEntity from '../entity/abstract';
+import * as AbstractEntity from '../entity/abstract';
 
-export default {
-  mixins: [AbstractEntity],
+export const mixins = [AbstractEntity];
 
-  props: {
-    options: {
-      type: Object,
-      default: () => ({}),
-    },
+export const props = {
+  options: {
+    type: Object,
+    default: () => ({}),
   },
 };

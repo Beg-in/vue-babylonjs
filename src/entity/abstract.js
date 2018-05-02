@@ -1,185 +1,183 @@
 import { id, isDisposable, createBus } from '../util';
 
-export default {
-  inject: {
-    _$_sceneReady: 'SceneReady',
+export const inject = {
+  _$_sceneReady: 'SceneReady',
 
-    _$_parentReady: {
-      from: 'EntityReady',
-      default: Promise.resolve(null),
-    },
+  _$_parentReady: {
+    from: 'EntityReady',
+    default: Promise.resolve(null),
+  },
 
-    $bus: {
-      from: 'EntityBus',
-      default() {
-        return createBus.call(this);
-      },
-    },
-
-    $sceneBus: {
-      from: 'SceneBus',
-      default() {
-        return createBus.call(this);
-      },
+  $bus: {
+    from: 'EntityBus',
+    default() {
+      return createBus.call(this);
     },
   },
 
-  provide() {
-    return {
-      EntityReady: this._$_entityReady,
-      EntityBus: this.$event,
-    };
-  },
-
-  model: {
-    prop: '_$_model',
-    event: 'change',
-  },
-
-  props: {
-    _$_model: {
-      type: Object,
-      default: null,
-    },
-
-    name: {
-      type: String,
-      default: id,
-    },
-
-    properties: {
-      type: Object,
-      default: null,
+  $sceneBus: {
+    from: 'SceneBus',
+    default() {
+      return createBus.call(this);
     },
   },
+};
 
-  methods: {
-    _$_applyProperties() {
-      if (this.$entity && this.properties) {
-        Object.assign(this.$entity, this.properties);
-      }
-    },
+export const provide = function () {
+  return {
+    EntityReady: this._$_entityReady,
+    EntityBus: this.$event,
+  };
+};
 
-    async _$_init() {
-      if (this.$options._$_onTransform) { // Private Lifecycle Hook
-        await this.$options._$_onTransform.call(this);
-      }
-      if (this.$options.onEntity) { // Lifecycle Hook
-        await this.$options.onEntity.call(this, this._$_hookArgs);
-      }
-      if (isDisposable(this.$entity)) {
-        this.$entity.onDispose = () => {
-          if (!this._$_destroyed) {
-            this.$destroy();
-          }
-        };
-      }
-      this.$emit('change', this.$entity);
-    },
+export const model = {
+  prop: '_$_model',
+  event: 'change',
+};
 
-    async _$_onParent(parent) {
-      this._$_parent = parent;
-      this._$_hookArgs.parent = this._$_parent;
-      if (this.$options.onParent) { // Lifecycle Hook
-        await this.$options.onParent.call(this, this._$_hookArgs);
-      }
-    },
-
-    async $replace(entity) {
-      if (isDisposable(this.$entity)) {
-        this._$_destroyed = true;
-        this.$entity.dispose();
-        this._$_destroyed = false;
-      }
-      this.$entity = entity;
-      await this._$_init();
-      this.$event.$emit('change', this.$entity);
-    },
+export const props = {
+  _$_model: {
+    type: Object,
+    default: null,
   },
 
-  watch: {
-    properties: {
-      handler() {
-        this._$_applyProperties();
-      },
-      deep: true,
-    },
-
-    _$_model() {
-      if (this.$entity !== this._$_model) {
-        this.$replace(this._$_model);
-      }
-    },
+  name: {
+    type: String,
+    default: id,
   },
 
-  beforeCreate() {
-    this.$event = createBus.call(this);
-    this._$_entityReady = new Promise(resolve => {
-      this._$_resolveEntity = resolve;
-    });
+  properties: {
+    type: Object,
+    default: null,
   },
+};
 
-  created() {
-    this._$_hookArgs = {
-      name: this.name,
-    };
-    if (this.$options.events) {
-      Object.entries(this.$options.events).forEach(([name, fn]) => {
-        this.$event.$on(name, fn.bind(this));
-      });
+export const methods = {
+  _$_applyProperties() {
+    if (this.$entity && this.properties) {
+      Object.assign(this.$entity, this.properties);
     }
   },
 
-  async mounted() {
-    if (this.$options.beforeScene) { // Lifecycle Hook
-      this.$entity = await this.$options.beforeScene.call(this, {
-        sceneReady: this._$_sceneReady,
-        parentReady: this._$_parentReady,
-        ...this._$_hookArgs
-      });
+  async _$_init() {
+    if (this.$options._$_onTransform) { // Private Lifecycle Hook
+      await this.$options._$_onTransform.call(this);
     }
-    this.$scene = await this._$_sceneReady;
-    this._$_hookArgs.scene = this.$scene;
-    if (this.$options.onScene) { // Lifecycle Hook
-      this.$entity = await this.$options.onScene.call(this, {
-        parentReady: this._$_parentReady,
-        ...this._$_hookArgs
-      });
+    if (this.$options.onEntity) { // Lifecycle Hook
+      await this.$options.onEntity.call(this, this._$_hookArgs);
     }
-    this._$_hookArgs.entity = this.$entity;
-    this._$_onParent(await this._$_parentReady);
-    this.$bus.$on('change', this._$_onParent.bind(this));
-    if (this._$_model) {
-      this.$replace(this._$_model);
-    } else {
-      await this._$_init();
-    }
-    this._$_resolveEntity(this.$entity);
-    if (this.$options.beforeRender) { // Render Loop Hook
-      this._$_beforeRender = this.$options.beforeRender.bind(this);
-      this.$scene.registerBeforeRender(this._$_beforeRender);
-    }
-    if (this.$options.afterRender) { // Render Loop Hook
-      this._$_afterRender = this.$options.afterRender.bind(this);
-      this.$scene.registerAfterRender(this._$_afterRender);
-    }
-    this._$_applyProperties();
-  },
-
-  beforeDestroy() {
-    this._$_destroyed = true;
     if (isDisposable(this.$entity)) {
-      this.$entity.dispose();
+      this.$entity.onDispose = () => {
+        if (!this._$_destroyed) {
+          this.$destroy();
+        }
+      };
     }
-    if (this._$_beforeRender) {
-      this.$scene.unregisterBeforeRender(this._$_beforeRender);
-    }
-    if (this._$_afterRender) {
-      this.$scene.unregisterAfterRender(this._$_afterRender);
+    this.$emit('change', this.$entity);
+  },
+
+  async _$_onParent(parent) {
+    this._$_parent = parent;
+    this._$_hookArgs.parent = this._$_parent;
+    if (this.$options.onParent) { // Lifecycle Hook
+      await this.$options.onParent.call(this, this._$_hookArgs);
     }
   },
 
-  render(createElement) {
-    return createElement('div', this.$slots.default);
+  async $replace(entity) {
+    if (isDisposable(this.$entity)) {
+      this._$_destroyed = true;
+      this.$entity.dispose();
+      this._$_destroyed = false;
+    }
+    this.$entity = entity;
+    await this._$_init();
+    this.$event.$emit('change', this.$entity);
   },
+};
+
+export const watch = {
+  properties: {
+    handler() {
+      this._$_applyProperties();
+    },
+    deep: true,
+  },
+
+  _$_model() {
+    if (this.$entity !== this._$_model) {
+      this.$replace(this._$_model);
+    }
+  },
+};
+
+export const beforeCreate = function () {
+  this.$event = createBus.call(this);
+  this._$_entityReady = new Promise(resolve => {
+    this._$_resolveEntity = resolve;
+  });
+};
+
+export const created = function () {
+  this._$_hookArgs = {
+    name: this.name,
+  };
+  if (this.$options.events) {
+    Object.entries(this.$options.events).forEach(([name, fn]) => {
+      this.$event.$on(name, fn.bind(this));
+    });
+  }
+};
+
+export const mounted = async function () {
+  if (this.$options.beforeScene) { // Lifecycle Hook
+    this.$entity = await this.$options.beforeScene.call(this, {
+      sceneReady: this._$_sceneReady,
+      parentReady: this._$_parentReady,
+      ...this._$_hookArgs,
+    });
+  }
+  this.$scene = await this._$_sceneReady;
+  this._$_hookArgs.scene = this.$scene;
+  if (this.$options.onScene) { // Lifecycle Hook
+    this.$entity = await this.$options.onScene.call(this, {
+      parentReady: this._$_parentReady,
+      ...this._$_hookArgs,
+    });
+  }
+  this._$_hookArgs.entity = this.$entity;
+  this._$_onParent(await this._$_parentReady);
+  this.$bus.$on('change', this._$_onParent.bind(this));
+  if (this._$_model) {
+    this.$replace(this._$_model);
+  } else {
+    await this._$_init();
+  }
+  this._$_resolveEntity(this.$entity);
+  if (this.$options.beforeRender) { // Render Loop Hook
+    this._$_beforeRender = this.$options.beforeRender.bind(this);
+    this.$scene.registerBeforeRender(this._$_beforeRender);
+  }
+  if (this.$options.afterRender) { // Render Loop Hook
+    this._$_afterRender = this.$options.afterRender.bind(this);
+    this.$scene.registerAfterRender(this._$_afterRender);
+  }
+  this._$_applyProperties();
+};
+
+export const beforeDestroy = function () {
+  this._$_destroyed = true;
+  if (isDisposable(this.$entity)) {
+    this.$entity.dispose();
+  }
+  if (this._$_beforeRender) {
+    this.$scene.unregisterBeforeRender(this._$_beforeRender);
+  }
+  if (this._$_afterRender) {
+    this.$scene.unregisterAfterRender(this._$_afterRender);
+  }
+};
+
+export const render = function (createElement) {
+  return createElement('div', this.$slots.default);
 };

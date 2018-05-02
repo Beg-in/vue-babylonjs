@@ -1,63 +1,63 @@
-import AbstractEntity from '../entity/abstract';
+import * as AbstractEntity from '../entity/abstract';
 
-export default {
-  mixins: [AbstractEntity],
+export const mixins = [AbstractEntity];
 
-  inject: {
-    ShaderName: {
-      default: null,
+export const inject = {
+  ShaderName: {
+    default: null,
+  },
+};
+
+export const data = function () {
+  return {
+    text: null,
+  };
+};
+
+export const props = {
+  name: {
+    type: String,
+    validator() {
+      return value => value || this.ShaderName;
     },
   },
 
-  data() {
+  content: {
+    type: String,
+    default: null,
+  },
+};
+
+export const computed = {
+  uid() {
+    return this.name || this.ShaderName;
+  },
+
+  value() {
+    return this.content || this.text;
+  },
+
+  shader() {
     return {
-      text: null,
+      name: this.uid,
+      value: this.value,
     };
   },
+};
 
-  props: {
-    name: {
-      type: String,
-      validator: value => value || this.ShaderName,
-    },
-
-    content: {
-      type: String,
-      default: null,
-    },
-  },
-
-  computed: {
-    uid() {
-      return this.name || this.ShaderName;
-    },
-
-    value() {
-      return this.content || this.text;
-    },
-
-    shader() {
-      return {
-        name: this.uid,
-        value: this.value,
-      };
-    },
-  },
-
-  watch: {
-    shader() {
-      this.setStore();
-    },
-  },
-
-  mounted() {
-    this.text = this.$refs.content.textContent;
+export const watch = {
+  shader() {
     this.setStore();
   },
+};
 
-  render(createElement) {
-    return createElement('div', {
-      ref: 'content',
-    }, this.$slots.default);
-  },
+export const mounted = function () {
+  this.text = this.$refs.content.textContent;
+  this.setStore();
+};
+
+export const render = function (createElement) {
+  return createElement('div', {
+    ref: 'content',
+  }, this.$slots.default);
 };

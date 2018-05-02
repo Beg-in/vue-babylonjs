@@ -2,8 +2,8 @@
   "name": "vue-babylonjs",
   "version": "1.0.0-beta.3",
   "files": [
-    "dist",
-    "lib"
+    "dist/*",
+    "lib/*"
   ],
   "main": "dist/umd.js",
   "module": "dist/esm.js",
@@ -32,23 +32,23 @@
     "b": "CONTEXT=$(pwd) npm explore begin-build -- npm run",
     "start": "npm run b start:client",
     "build": "rm -rf docs && npm run b build:prd",
-    "dist": "rm -rf lib dist && run-p dist:rollup dist:babel",
-    "dist:rollup": "rollup --config",
-    "dist:babel": "babel --plugins transform-es2015-modules-umd src --out-dir lib"
+    "dist": "rm -rf lib dist && rollup --config"
   },
   "peerDependencies": {
     "vue": "^2.2.0"
   },
   "dependencies": {
-    "babylonjs": "^3.2.0-rc.3"
+    "babylonjs": "^3.2.0"
   },
   "devDependencies": {
     "babel-cli": "^6.26.0",
-    "babel-plugin-transform-es2015-modules-umd": "^6.24.1",
+    "babel-plugin-external-helpers": "^6.22.0",
+    "babel-plugin-transform-es2015-modules-commonjs": "^6.26.2",
     "babel-preset-env": "^1.6.1",
     "babel-preset-stage-3": "^6.24.1",
     "begin-build": "beg-in/build#vue-loader-15",
     "begin-project": "0.3.1",
+    "find": "^0.2.9",
     "frow": "^3.0.3",
     "glslify-loader": "1.0.2",
     "jstransformer-markdown-it": "^2.1.0",

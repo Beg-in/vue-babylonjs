@@ -59,7 +59,10 @@ export const color4 = {
 
 export const toColor4 = value => toColor(value, Color4, ({ r, g, b, a }) => [r, g, b, a]);
 
-export const $color = value => {
+export const $color = (...value) => {
+  if (Array.isArray(value[0])) {
+    [value] = value;
+  }
   if (colorValidator(value, Color4)) {
     return toColor4(value);
   }

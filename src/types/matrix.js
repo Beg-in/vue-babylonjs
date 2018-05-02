@@ -13,4 +13,9 @@ export const matrix = {
   default: () => Matrix.Zero(),
 };
 
-export const $matrix = toMatrix;
+export const $matrix = (...value) => {
+  if (Array.isArray(value[0])) {
+    [value] = value;
+  }
+  return toMatrix(value);
+};
