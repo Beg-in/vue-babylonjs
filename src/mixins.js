@@ -4,7 +4,6 @@ import * as Entity from './entity';
 import * as Property from './property';
 import * as Material from './material';
 import * as Texture from './texture';
-import * as Physics from './physics';
 import * as Animation from './animation';
 import * as Key from './animation/key';
 import * as DirectionalLight from './light/directional';
@@ -24,7 +23,6 @@ export {
   Property,
   Material,
   Texture,
-  Physics,
   Animation,
   Key,
   DirectionalLight,

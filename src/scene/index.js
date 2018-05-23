@@ -1,4 +1,4 @@
-import { Engine, Scene, Color3, Vector3, CannonJSPlugin, OimoJSPlugin } from '../babylon';
+import { Engine, Scene, Color3, Vector3 } from '../babylon';
 import { createBus } from '../util';
 import { vecValidator as validator, toVec3 } from '../types/vector';
 import { color3, toColor3 } from '../types/color';
@@ -8,11 +8,6 @@ export const FOG_TYPES = {
   EXP: 'exp',
   EXP2: 'exp2',
   LINEAR: 'linear',
-};
-
-export const PHYSICS_ENGINES = {
-  CANNON: 'cannon',
-  OIMO: 'oimo',
 };
 
 export const provide = function () {
@@ -82,11 +77,6 @@ export const props = {
   main: {
     validator: color3.validator,
     default: null,
-  },
-
-  physics: {
-    type: String,
-    default: Object.values(PHYSICS_ENGINES)[0],
   },
 
   gravity: {
@@ -200,14 +190,15 @@ export const methods = {
     this.$emit('change', this.scene);
   },
 
-  // TODO: refactor for tree shaking
-  initPhysics() {
-    if (!this.physicsEngine) {
-      this.physicsEngine = this.physics === PHYSICS_ENGINES.CANNON
-        ? new CannonJSPlugin()
-        : new OimoJSPlugin();
-      this.scene.enablePhysics(this.gravityVector3, this.physicsEngine);
+  setGravity() {
+    if (this.physicsEngine) {
+      this.physicsEngine.setGravity(this.gravityVector3);
     }
+  },
+
+  initPhysics() {
+    this.physicsEngine = this.scene && this.scene.getPhysicsEngine();
+    this.setGravity();
   },
 };
 
@@ -243,6 +234,10 @@ export const watch = {
   debug() {
     this.debugLayer();
   },
+
+  gravityVector3() {
+    this.setGravity();
+  },
 };
 
 export const beforeCreate = function () {
@@ -267,10 +262,6 @@ export const mounted = function () {
 export const beforeDestroy = function () {
   window.removeEventListener('resize', this.resize);
   this.engine.stopRenderLoop();
-  if (this.physicsEngine) {
-    this.physicsEngine.dispose();
-    this.physicsEngine = null;
-  }
   this.scene.dispose();
   this.vrHelper = null;
   this.scene = null;
