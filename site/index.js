@@ -1,10 +1,9 @@
 let Vue = require('vue');
 let build = require('begin-build');
 let { create, register } = require('begin-build/router');
-Vue.use(require('../src'));
+Vue.use(require('../src/full'));
 
 let app = require('./app/vue.pug');
-// debugger;
 
 let router = create({
   mode: 'hash',

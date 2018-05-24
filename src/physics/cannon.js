@@ -1,4 +1,4 @@
-import 'cannon';
+import './vendor/cannon';
 import { CannonJSPlugin } from '../babylon';
 import * as AbstractPhysics from './abstract';
 

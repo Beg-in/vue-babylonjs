@@ -1,4 +1,4 @@
-import 'oimo';
+import './vendor/oimo';
 import { OimoJSPlugin } from '../babylon';
 import * as AbstractPhysics from './abstract';
 

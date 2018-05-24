@@ -6,6 +6,11 @@ import { fileSync as find } from 'find';
 const plugins = [resolve(), babel({
   plugins: ['external-helpers'],
 })];
+const globals = {
+  oimo: 'OIMO',
+  cannon: 'CANNON',
+  earcut: 'EARCUT',
+};
 const FILES = find(/.*\/.+\/.+\.js$/, './src').reduce((out, file) => ({
   ...out,
   [file.replace(/src\//, '').replace(/\.js$/, '')]: file,
@@ -25,7 +30,7 @@ export default [{
     name: 'VueBabylonjs',
     file: 'dist/umd.js',
   },
-  plugins: [...plugins, uglify()],
+  plugins: [...plugins, uglify],
 }, {
   input: {
     index: 'src/core.js',
