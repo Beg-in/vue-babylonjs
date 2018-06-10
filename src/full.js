@@ -1,15 +1,13 @@
 import * as BABYLON from './babylon';
-import { API as CORE, install as init } from './core';
+import { install as init } from './core';
 import { Cannon as Physics } from './physics';
 import * as mixins from './mixins';
 
-const API = { ...CORE, BABYLON };
+export function install(Vue, options = {}) {
+  Object.assign(Vue.prototype, { BABYLON });
+  Object.assign(Vue, { BABYLON });
+  init(Vue, { components: { ...mixins, Physics }, ...options });
+}
 
-export default {
-  install(Vue, options = {}) {
-    Object.assign(Vue.prototype, API);
-    Object.assign(Vue, API);
-    init(Vue, { components: { ...mixins, Physics }, ...options });
-  },
-  ...API,
-};
+export { BABYLON };
+export * from './api';

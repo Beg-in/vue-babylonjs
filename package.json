@@ -38,7 +38,7 @@
     "vue": "^2.2.0"
   },
   "dependencies": {
-    "babylonjs": "^3.2.0"
+    "babylonjs": "^3.3.0-alpha.6"
   },
   "devDependencies": {
     "babel-cli": "^6.26.0",

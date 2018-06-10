@@ -1,6 +1,8 @@
-import { PhysicsImpostor } from '../babylon';
+import { PhysicsImpostor, Vector3 } from '../babylon';
 import * as AbstractEntity from '../entity/abstract';
 import { capitalize } from '../util';
+
+let physicsEngine;
 
 export const TYPES = {
   BOX: 'box',
@@ -13,6 +15,13 @@ export const TYPES = {
 };
 
 export const mixins = [AbstractEntity];
+
+export const inject = {
+  gravity: {
+    from: 'SceneGravity',
+    default: new Vector3(0, -9.81, 0),
+  },
+};
 
 export const props = {
   type: {
@@ -112,9 +121,9 @@ export const watch = {
 };
 
 export const onScene = function ({ scene }) {
-  if (!scene.getPhysicsEngine()) {
-    this.initPhysics();
-    this.$sceneBus.$emit('physics');
+  if (!physicsEngine) {
+    let Plugin = this.getPhysicsPlugin();
+    physicsEngine = scene.enablePhysics(this.gravity, new Plugin());
   }
 };
 

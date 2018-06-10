@@ -1,11 +1,14 @@
-import './vendor/oimo';
-import { OimoJSPlugin } from '../babylon';
+import * as oimo from 'oimo';
+import { OimoJSPlugin as Plugin } from '../babylon';
 import * as AbstractPhysics from './abstract';
 
 export const mixins = [AbstractPhysics];
 
 export const methods = {
-  initPhysics() {
-    this.$scene.enablePhysics(null, new OimoJSPlugin());
+  getPhysicsPlugin() {
+    if (!window.OIMO) {
+      window.OIMO = oimo;
+    }
+    return Plugin;
   },
 };

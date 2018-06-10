@@ -15,6 +15,7 @@ export const provide = function () {
     EngineReady: this.EngineReady,
     SceneReady: this.SceneReady,
     SceneBus: this.sceneBus,
+    SceneGravity: this.gravityVector3,
   };
 };
 
@@ -191,14 +192,9 @@ export const methods = {
   },
 
   setGravity() {
-    if (this.physicsEngine) {
+    if (this.scene && this.scene.getPhysicsEngine()) {
       this.physicsEngine.setGravity(this.gravityVector3);
     }
-  },
-
-  initPhysics() {
-    this.physicsEngine = this.scene && this.scene.getPhysicsEngine();
-    this.setGravity();
   },
 };
 
@@ -248,10 +244,6 @@ export const beforeCreate = function () {
   this.EngineReady = new Promise(resolve => {
     this.resolveEngine = resolve;
   });
-};
-
-export const created = function () {
-  this.sceneBus.$on('physics', this.initPhysics);
 };
 
 export const mounted = function () {

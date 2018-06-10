@@ -1,13 +1,13 @@
-import { $vector } from './types/vector';
-import { $color } from './types/color';
-import { $matrix } from './types/matrix';
-
-export const API = { $vector, $color, $matrix };
+import * as earcut from 'earcut';
+import * as api from './api';
 
 export const install = (Vue, { components = {} } = {}) => {
-  Object.assign(Vue.prototype, API);
-  Object.assign(Vue, API);
+  if (!window.earcut) {
+    window.earcut = earcut.default || earcut;
+  }
+  Object.assign(Vue.prototype, api);
+  Object.assign(Vue, api);
   Object.entries(components).forEach(entry => Vue.component(...entry));
 };
 
-export { $vector, $color, $matrix };
+export * from './api';

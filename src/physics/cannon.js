@@ -1,11 +1,14 @@
-import './vendor/cannon';
-import { CannonJSPlugin } from '../babylon';
+import * as cannon from 'cannon';
+import { CannonJSPlugin as Plugin } from '../babylon';
 import * as AbstractPhysics from './abstract';
 
 export const mixins = [AbstractPhysics];
 
 export const methods = {
-  initPhysics() {
-    this.$scene.enablePhysics(null, new CannonJSPlugin());
+  getPhysicsPlugin() {
+    if (!window.CANNON) {
+      window.CANNON = cannon;
+    }
+    return Plugin;
   },
 };

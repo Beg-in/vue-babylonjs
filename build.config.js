@@ -7,6 +7,13 @@ loadLanguages(['pug']);
 
 module.exports = ({ config, pug }) => {
   let { module: { rules } } = config;
+
+  rules.forEach(rule => {
+    if (rule.loader === 'babel-loader') {
+      rule.exclude = /node_modules\/(?!(begin-|babylonjs))/;
+    }
+  });
+
   rules.push({
     test: /\.(glsl|frag|vert)$/,
     loaders: ['raw-loader', 'glslify-loader'],
@@ -19,11 +26,6 @@ module.exports = ({ config, pug }) => {
       }
       return `<code lang="${lang}">${prism.highlight(text, prism.languages[lang], lang)}</code>`;
     },
-  };
-
-  config.externals = {
-    oimo: 'OIMO',
-    cannon: 'CANNON',
   };
 
   return config;
