@@ -7,8 +7,8 @@
   ],
   "main": "dist/umd.js",
   "module": "dist/esm.js",
-  "unpkg": "dist/umd.js",
-  "jsdelivr": "dist/umd.js",
+  "unpkg": "dist/umd.min.js",
+  "jsdelivr": "dist/umd.min.js",
   "engines": {
     "node": ">=8.9"
   },
@@ -59,7 +59,7 @@
     "oimo": "^1.0.9",
     "prismjs": "^1.14.0",
     "raw-loader": "0.5.1",
-    "rollup": "^0.59.2",
+    "rollup": "^0.60.1",
     "rollup-plugin-babel": "^3.0.4",
     "rollup-plugin-node-resolve": "^3.3.0",
     "rollup-plugin-uglify": "^4.0.0"
