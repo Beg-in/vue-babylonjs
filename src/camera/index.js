@@ -9,10 +9,10 @@ import {
   TouchCamera as touch,
   GamepadCamera as gamepad,
 } from '../babylon';
-import * as AbstractEntity from '../entity/abstract';
+import AbstractEntity from '../entity/abstract';
 import { vec3, toVec3 } from '../types/vector';
 
-export const TYPES = {
+const TYPES = {
   universal,
   free,
   follow,
@@ -23,130 +23,132 @@ export const TYPES = {
   gamepad,
 };
 
-export const mixins = [AbstractEntity];
+export default {
+  mixins: [AbstractEntity],
 
-export const inject = ['EngineReady'];
+  inject: ['EngineReady'],
 
-export const props = {
-  type: {
-    validator: value => Object.keys(TYPES).includes(value),
-    default: Object.keys(TYPES)[0],
+  props: {
+    type: {
+      validator: value => Object.keys(TYPES).includes(value),
+      default: Object.keys(TYPES)[0],
+    },
+
+    position: {
+      validator: vec3.validator,
+      default: () => new Vector3(0, 0, -10),
+    },
+
+    target: { ...vec3 },
+
+    alpha: {
+      type: Number,
+      default: -Math.PI / 2,
+    },
+
+    beta: {
+      type: Number,
+      default: Math.PI / 2,
+    },
+
+    radius: {
+      type: Number,
+      default: 10,
+    },
   },
 
-  position: {
-    validator: vec3.validator,
-    default: () => new Vector3(0, 0, -10),
+  computed: {
+    positionVector3() {
+      return toVec3(this.position);
+    },
+
+    targetVector3() {
+      return toVec3(this.target);
+    },
+
+    args() {
+      let out = [this.name];
+      if (this.type === 'arcRotate' || this.type === 'arcFollow') {
+        out = out.concat([this.alpha, this.beta, this.radius, this.targetVector3]);
+      } else {
+        out = out.concat([this.positionVector3]);
+      }
+      return out.concat([this.$scene]);
+    },
   },
 
-  target: vec3,
+  methods: {
+    attachControl() {
+      this.$entity.attachControl(this.canvas);
+    },
 
-  alpha: {
-    type: Number,
-    default: -Math.PI / 2,
+    detachControl() {
+      this.$entity.detachControl();
+    },
+
+    create() {
+      if (this.$entity) {
+        this.detachControl();
+        delete this.$entity.onDispose;
+        this.$entity.dispose();
+      }
+      this.$entity = new TYPES[this.type](...this.args);
+      this.$entity.onDispose = () => {
+        this.detachControl();
+        if (!this._$_destroyed) {
+          this.$destroy();
+        }
+      };
+    },
   },
 
-  beta: {
-    type: Number,
-    default: Math.PI / 2,
+  watch: {
+    type() {
+      this.create();
+    },
+
+    position() {
+      this.$entity.position.copyFrom(this.positionVector3);
+    },
+
+    target() {
+      this.$entity.setTarget(this.targetVector3);
+    },
+
+    alpha() {
+      this.$entity.alpha = this.alpha;
+    },
+
+    beta() {
+      this.$entity.beta = this.beta;
+    },
+
+    radius() {
+      this.$entity.radius = this.radius;
+    },
   },
 
-  radius: {
-    type: Number,
-    default: 10,
-  },
-};
+  events: {
+    attachControl() {
+      this.attachControl();
+    },
 
-export const computed = {
-  positionVector3() {
-    return toVec3(this.position);
-  },
-
-  targetVector3() {
-    return toVec3(this.target);
-  },
-
-  args() {
-    let out = [this.name];
-    if (this.type === 'arcRotate' || this.type === 'arcFollow') {
-      out = out.concat([this.alpha, this.beta, this.radius, this.targetVector3]);
-    } else {
-      out = out.concat([this.positionVector3]);
-    }
-    return out.concat([this.$scene]);
-  },
-};
-
-export const methods = {
-  attachControl() {
-    this.$entity.attachControl(this.canvas);
-  },
-
-  detachControl() {
-    this.$entity.detachControl();
-  },
-
-  create() {
-    if (this.$entity) {
+    detachControl() {
       this.detachControl();
-      delete this.$entity.onDispose;
+    },
+  },
+
+  async onScene({ scene }) {
+    this.canvas = scene.getEngine().getRenderingCanvas();
+    this.create();
+    this.attachControl();
+    return this.$entity;
+  },
+
+  beforeDestroy() {
+    this._$_destroyed = true;
+    if (this.$entity && this.$entity.dispose) {
       this.$entity.dispose();
     }
-    this.$entity = new TYPES[this.type](...this.args);
-    this.$entity.onDispose = () => {
-      this.detachControl();
-      if (!this._$_destroyed) {
-        this.$destroy();
-      }
-    };
   },
-};
-
-export const watch = {
-  type() {
-    this.create();
-  },
-
-  position() {
-    this.$entity.position.copyFrom(this.positionVector3);
-  },
-
-  target() {
-    this.$entity.setTarget(this.targetVector3);
-  },
-
-  alpha() {
-    this.$entity.alpha = this.alpha;
-  },
-
-  beta() {
-    this.$entity.beta = this.beta;
-  },
-
-  radius() {
-    this.$entity.radius = this.radius;
-  },
-};
-
-export const events = {
-  attachControl() {
-    this.attachControl();
-  },
-
-  detachControl() {
-    this.detachControl();
-  },
-};
-
-export const onScene = async function ({ scene }) {
-  this.canvas = scene.getEngine().getRenderingCanvas();
-  this.create();
-  this.attachControl();
-  return this.$entity;
-};
-
-export const beforeDestroy = function () {
-  this._$_destroyed = true;
-  if (this.$entity && this.$entity.dispose) {
-    this.$entity.dispose();
-  }
 };

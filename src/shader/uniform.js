@@ -1,7 +1,9 @@
-import * as Variable from './variable';
+import Variable from './variable';
 
-export const mixins = [Variable];
+export default {
+  mixins: [Variable],
 
-export const beforeCreate = function () {
-  this.kind = 'uniform';
+  beforeCreate() {
+    this.kind = 'uniform';
+  },
 };

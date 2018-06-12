@@ -1,38 +1,18 @@
-import * as Scene from './scene';
-import * as Camera from './camera';
-import * as Entity from './entity';
-import * as Property from './property';
-import * as Material from './material';
-import * as Texture from './texture';
-import * as Animation from './animation';
-import * as Key from './animation/key';
-import * as DirectionalLight from './light/directional';
-import * as HemisphericLight from './light/hemispheric';
-import * as PointLight from './light/point';
-import * as SpotLight from './light/spot';
-import * as Shader from './shader';
-import * as Vertex from './shader/vertex';
-import * as Fragment from './shader/fragment';
-import * as Attribute from './shader/attribute';
-import * as Uniform from './shader/uniform';
-
-export {
-  Scene,
-  Camera,
-  Entity,
-  Property,
-  Material,
-  Texture,
-  Animation,
-  Key,
-  DirectionalLight,
-  HemisphericLight,
-  PointLight,
-  SpotLight,
-  Shader,
-  Vertex,
-  Fragment,
-  Attribute,
-  Uniform,
-};
+export { default as Scene } from './scene';
+export { default as Camera } from './camera';
+export { default as Entity } from './entity';
+export { default as Property } from './property';
+export { default as Material } from './material';
+export { default as Texture } from './texture';
+export { default as Animation } from './animation';
+export { default as Key } from './animation/key';
+export { default as DirectionalLight } from './light/directional';
+export { default as HemisphericLight } from './light/hemispheric';
+export { default as PointLight } from './light/point';
+export { default as SpotLight } from './light/spot';
+export { default as Shader } from './shader';
+export { default as Vertex } from './shader/vertex';
+export { default as Fragment } from './shader/fragment';
+export { default as Attribute } from './shader/attribute';
+export { default as Uniform } from './shader/uniform';
 export * from './mesh';

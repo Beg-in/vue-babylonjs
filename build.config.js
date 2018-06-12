@@ -28,5 +28,11 @@ module.exports = ({ config, pug }) => {
     },
   };
 
-  return config;
+  config.externals = {
+    oimo: true,
+    cannon: true,
+    earcut: true
+  };
+
+return config;
 };

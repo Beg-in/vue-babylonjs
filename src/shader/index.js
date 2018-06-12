@@ -1,15 +1,15 @@
 import { Effect, ShaderMaterial } from '../babylon';
-import * as AbstractEntity from '../entity/abstract';
+import AbstractEntity from '../entity/abstract';
 import { id } from '../util';
 
-export const VERTEX = 'VertexShader';
-export const FRAGMENT = 'FragmentShader';
-export const ATTRIBUTES = {
+const VERTEX = 'VertexShader';
+const FRAGMENT = 'FragmentShader';
+const ATTRIBUTES = {
   POSITION: 'position',
   NORMAL: 'normal',
   UV: 'uv',
 };
-export const UNIFORMS = {
+const UNIFORMS = {
   WORLD: 'world',
   WORLD_VIEW: 'worldView',
   WORLD_VIEW_PROJECTION: 'worldViewProjection',
@@ -17,9 +17,9 @@ export const UNIFORMS = {
   PROJECTION: 'projection',
   TIME: 'time',
 };
-export const NAME = 'vue-babylonjs';
-export const DEFAULT_VERTEX_NAME = `${NAME}${VERTEX}`;
-export const DEFAULT_VERTEX = `
+const NAME = 'vue-babylonjs';
+const DEFAULT_VERTEX_NAME = `${NAME}${VERTEX}`;
+const DEFAULT_VERTEX = `
 attribute vec3 position;
 attribute vec2 uv;
 uniform mat4 worldViewProjection;
@@ -31,8 +31,8 @@ void main() {
   vUv = uv;
 }
 `;
-export const DEFAULT_FRAGMENT_NAME = `${NAME}${FRAGMENT}`;
-export const DEFAULT_FRAGMENT = `
+const DEFAULT_FRAGMENT_NAME = `${NAME}${FRAGMENT}`;
+const DEFAULT_FRAGMENT = `
 precision highp float;
 
 void main() {
@@ -40,199 +40,201 @@ void main() {
 }
 `;
 
-export const mixins = [AbstractEntity];
+export default {
+  mixins: [AbstractEntity],
 
-export const data = function () {
-  return {
-    uniformStore: {},
-    attributeStore: {},
-    vertexComponent: null,
-    fragmentComponent: null,
-  };
-};
-
-export const provide = function () {
-  return {
-    ShaderName: this.name,
-  };
-};
-
-export const props = {
-  name: {
-    type: String,
-    default: null,
-  },
-
-  vertex: { // vertex name in shader store
-    type: String,
-    default: null,
-  },
-
-  vertexElement: { // vertex script id
-    type: String,
-    default: null,
-  },
-
-  vertexShader: { // raw vertex shader code
-    type: String,
-    default: null,
-  },
-
-  fragment: { // fragment name in shader store
-    type: String,
-    default: null,
-  },
-
-  fragmentElement: { // fragment script id
-    type: String,
-    default: null,
-  },
-
-  fragmentShader: { // raw fragment shader code
-    type: String,
-    default: null,
-  },
-
-  shader: { // shader and fragment name in shader store
-    type: String,
-    default: null,
-  },
-
-  src: { // fx file path
-    type: String,
-    default: null,
-  },
-};
-
-export const computed = {
-  options() {
-    if (this.src) {
-      return this.src;
-    }
-    if (this.shader) {
-      return {
-        fragment: this.shader,
-        vertex: this.shader,
-      };
-    }
-    let options = {};
-    if (this.vertexComponent) {
-      options.vertex = this.vertexComponent;
-    } else if (this.vertex) {
-      options.vertex = this.vertex;
-    } else if (this.vertexElement) {
-      options.vertexElement = this.vertexElement;
-    } else if (this.vertexShader) {
-      this.storeShader(VERTEX, this.uid, this.vertexShader);
-      options.vertex = this.uid;
-    } else {
-      if (!Effect.ShadersStore[DEFAULT_VERTEX_NAME]) {
-        Effect.ShadersStore[DEFAULT_VERTEX_NAME] = DEFAULT_VERTEX;
-      }
-      options.vertex = NAME;
-    }
-    if (this.fragmentComponent) {
-      options.fragment = this.fragmentComponent;
-    } else if (this.fragment) {
-      options.fragment = this.fragment;
-    } else if (this.fragmentElement) {
-      options.fragmentElement = this.fragmentElement;
-    } else if (this.fragmentShader) {
-      this.storeShader(FRAGMENT, this.uid, this.fragmentShader);
-      options.fragment = this.uid;
-    } else {
-      if (!Effect.ShadersStore[DEFAULT_FRAGMENT_NAME]) {
-        Effect.ShadersStore[DEFAULT_FRAGMENT_NAME] = DEFAULT_FRAGMENT;
-      }
-      options.fragment = NAME;
-    }
-    return options;
-  },
-
-  attributes() {
-    return Object.values(ATTRIBUTES).concat(Object.keys(this.attributeStore));
-  },
-
-  uniforms() {
-    return Object.values(UNIFORMS).concat(Object.keys(this.uniformStore));
-  },
-
-  variables() {
+  data() {
     return {
-      attributes: this.attributes,
-      uniforms: this.uniforms,
+      uniformStore: {},
+      attributeStore: {},
+      vertexComponent: null,
+      fragmentComponent: null,
     };
   },
-};
 
-export const methods = {
-  createMaterial() {
-    if (!this._$_parent) {
-      return;
-    }
-    this.$replace(new ShaderMaterial(this.name, this.$scene, this.options, this.variables));
-    this._$_parent.material = this.$entity;
+  provide() {
+    return {
+      ShaderName: this.name,
+    };
   },
 
-  setValue(store, variable, value) {
-    this.$entity[`set${store[variable]}`](variable, value);
+  props: {
+    name: {
+      type: String,
+      default: null,
+    },
+
+    vertex: { // vertex name in shader store
+      type: String,
+      default: null,
+    },
+
+    vertexElement: { // vertex script id
+      type: String,
+      default: null,
+    },
+
+    vertexShader: { // raw vertex shader code
+      type: String,
+      default: null,
+    },
+
+    fragment: { // fragment name in shader store
+      type: String,
+      default: null,
+    },
+
+    fragmentElement: { // fragment script id
+      type: String,
+      default: null,
+    },
+
+    fragmentShader: { // raw fragment shader code
+      type: String,
+      default: null,
+    },
+
+    shader: { // shader and fragment name in shader store
+      type: String,
+      default: null,
+    },
+
+    src: { // fx file path
+      type: String,
+      default: null,
+    },
   },
 
-  storeShader(type, name, value) {
-    Effect.ShadersStore[name + type] = value;
+  computed: {
+    options() {
+      if (this.src) {
+        return this.src;
+      }
+      if (this.shader) {
+        return {
+          fragment: this.shader,
+          vertex: this.shader,
+        };
+      }
+      let options = {};
+      if (this.vertexComponent) {
+        options.vertex = this.vertexComponent;
+      } else if (this.vertex) {
+        options.vertex = this.vertex;
+      } else if (this.vertexElement) {
+        options.vertexElement = this.vertexElement;
+      } else if (this.vertexShader) {
+        this.storeShader(VERTEX, this.uid, this.vertexShader);
+        options.vertex = this.uid;
+      } else {
+        if (!Effect.ShadersStore[DEFAULT_VERTEX_NAME]) {
+          Effect.ShadersStore[DEFAULT_VERTEX_NAME] = DEFAULT_VERTEX;
+        }
+        options.vertex = NAME;
+      }
+      if (this.fragmentComponent) {
+        options.fragment = this.fragmentComponent;
+      } else if (this.fragment) {
+        options.fragment = this.fragment;
+      } else if (this.fragmentElement) {
+        options.fragmentElement = this.fragmentElement;
+      } else if (this.fragmentShader) {
+        this.storeShader(FRAGMENT, this.uid, this.fragmentShader);
+        options.fragment = this.uid;
+      } else {
+        if (!Effect.ShadersStore[DEFAULT_FRAGMENT_NAME]) {
+          Effect.ShadersStore[DEFAULT_FRAGMENT_NAME] = DEFAULT_FRAGMENT;
+        }
+        options.fragment = NAME;
+      }
+      return options;
+    },
+
+    attributes() {
+      return Object.values(ATTRIBUTES).concat(Object.keys(this.attributeStore));
+    },
+
+    uniforms() {
+      return Object.values(UNIFORMS).concat(Object.keys(this.uniformStore));
+    },
+
+    variables() {
+      return {
+        attributes: this.attributes,
+        uniforms: this.uniforms,
+      };
+    },
   },
 
-  getStore(kind) {
-    if (kind === 'attribute') {
-      return this.attributeStore;
-    }
-    return this.uniformStore;
-  },
-};
+  methods: {
+    createMaterial() {
+      if (!this._$_parent) {
+        return;
+      }
+      this.$replace(new ShaderMaterial(this.name, this.$scene, this.options, this.variables));
+      this._$_parent.material = this.$entity;
+    },
 
-export const watch = {
-  options() {
+    setValue(store, variable, value) {
+      this.$entity[`set${store[variable]}`](variable, value);
+    },
+
+    storeShader(type, name, value) {
+      Effect.ShadersStore[name + type] = value;
+    },
+
+    getStore(kind) {
+      if (kind === 'attribute') {
+        return this.attributeStore;
+      }
+      return this.uniformStore;
+    },
+  },
+
+  watch: {
+    options() {
+      this.createMaterial();
+    },
+  },
+
+  events: {
+    registerVariable({ kind, variable, type }) {
+      this.getStore(kind)[variable] = type;
+    },
+
+    setVariable({ kind, variable, value }) {
+      this.setValue(this.getStore(kind), variable, value);
+    },
+
+    disposeVariable({ kind, variable }) {
+      delete this.getStore(kind)[variable];
+    },
+
+    setVertex({ name, value }) {
+      this.vertexComponent = name;
+      this.storeShader(VERTEX, name, value);
+    },
+
+    setFragment({ name, value }) {
+      this.fragmentComponent = name;
+      this.storeShader(FRAGMENT, name, value);
+    },
+  },
+
+  beforeCreate() {
+    this.uid = id();
+  },
+
+  onParent() {
     this.createMaterial();
   },
-};
 
-export const events = {
-  registerVariable({ kind, variable, type }) {
-    this.getStore(kind)[variable] = type;
+  beforeRender() {
+    this.$entity.setFloat('time', performance.now());
   },
 
-  setVariable({ kind, variable, value }) {
-    this.setValue(this.getStore(kind), variable, value);
+  beforeDestroy() {
+    this._$_destroyed = true;
+    this.$entity.dispose();
   },
-
-  disposeVariable({ kind, variable }) {
-    delete this.getStore(kind)[variable];
-  },
-
-  setVertex({ name, value }) {
-    this.vertexComponent = name;
-    this.storeShader(VERTEX, name, value);
-  },
-
-  setFragment({ name, value }) {
-    this.fragmentComponent = name;
-    this.storeShader(FRAGMENT, name, value);
-  },
-};
-
-export const beforeCreate = function () {
-  this.uid = id();
-};
-
-export const onParent = function () {
-  this.createMaterial();
-};
-
-export const beforeRender = function () {
-  this.$entity.setFloat('time', performance.now());
-};
-
-export const beforeDestroy = function () {
-  this._$_destroyed = true;
-  this.$entity.dispose();
 };

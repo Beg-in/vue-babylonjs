@@ -30,9 +30,16 @@
   "license": "MIT",
   "scripts": {
     "b": "CONTEXT=$(pwd) npm explore begin-build -- npm run",
-    "start": "npm run b start:client",
+    "start": "npm run vendor && npm run b start:client",
     "build": "rm -rf docs && npm run b build:prd",
-    "dist": "rm -rf lib dist && rollup --config"
+    "dist": "npm run vendor && rm -rf lib dist && rollup --config",
+    "lib:entry": "echo \"window.${GLOBAL:=$DEP} = window.${GLOBAL:=$DEP} || require('$DEP');\" >> vendor/$DEP.js",
+    "lib:rollup": "webpack ./vendor/$DEP.js --module-bind js=babel-loader -o ./vendor/$DEP.js",
+    "lib": "npm run lib:entry && npm run lib:rollup",
+    "vendor:earcut": "DEP=earcut npm run lib",
+    "vendor:cannon": "GLOBAL=CANNON DEP=cannon npm run lib",
+    "vendor:oimo": "GLOBAL=OIMO DEP=oimo npm run lib",
+    "vendor": "rm -rf vendor && mkdir -p vendor && run-p vendor:*"
   },
   "peerDependencies": {
     "vue": "^2.2.0"

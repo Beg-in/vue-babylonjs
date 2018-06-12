@@ -1,5 +1,5 @@
-import * as Cannon from './cannon';
-import * as Oimo from './oimo';
+import Cannon from './cannon';
+import Oimo from './oimo';
 
 export {
   Cannon,

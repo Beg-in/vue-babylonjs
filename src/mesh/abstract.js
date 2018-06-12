@@ -1,10 +1,12 @@
-import * as Entity from '../entity';
+import Entity from '../entity';
 
-export const mixins = [Entity];
+export default {
+  mixins: [Entity],
 
-export const props = {
-  options: {
-    type: Object,
-    default: () => ({}),
+  props: {
+    options: {
+      type: Object,
+      default: () => ({}),
+    },
   },
 };

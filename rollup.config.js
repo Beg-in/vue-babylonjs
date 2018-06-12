@@ -1,6 +1,5 @@
 import babel from 'rollup-plugin-babel';
 import resolve from 'rollup-plugin-node-resolve';
-import uglify from 'rollup-plugin-uglify';
 import { fileSync as find } from 'find';
 
 const name = 'VueBabylonjs';
@@ -11,12 +10,18 @@ const FILES = find(/.*\/.+\/.+\.js$/, './src').reduce((out, file) => ({
   ...out,
   [file.replace(/src\//, '').replace(/\.js$/, '')]: file,
 }), {});
+const globals = {
+  earcut: 'earcut',
+  oimo: 'OIMO',
+  cannon: 'CANNON',
+};
 
 export default [{
   input: 'src/index.js',
   output: {
     format: 'es',
     file: 'dist/esm.js',
+    globals,
   },
   plugins,
 }, {
@@ -25,16 +30,9 @@ export default [{
     format: 'umd',
     name,
     file: 'dist/umd.js',
+    globals,
   },
   plugins,
-}, {
-  input: 'src/full.js',
-  output: {
-    format: 'umd',
-    name,
-    file: 'dist/umd.min.js',
-  },
-  plugins: [...plugins, uglify],
 }, {
   input: {
     index: 'src/core.js',
@@ -44,6 +42,7 @@ export default [{
   output: {
     format: 'cjs',
     dir: './lib',
+    globals,
   },
   plugins,
 }];

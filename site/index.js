@@ -1,8 +1,8 @@
 let Vue = require('vue');
 let build = require('begin-build');
 let { create, register } = require('begin-build/router');
-let vb = require('../dist/umd');
-Vue.use(vb);
+
+Vue.use(require('../src/full'));
 
 let app = require('./app/vue.pug');
 

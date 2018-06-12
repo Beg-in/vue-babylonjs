@@ -1,31 +1,33 @@
 import { DirectionalLight } from '../babylon';
-import * as AbstractLight from './';
+import AbstractLight from './';
 import { vec3, toVec3 } from '../types/vector';
 
-export const mixins = [AbstractLight];
+export default {
+  mixins: [AbstractLight],
 
-export const props = {
-  direction: vec3,
-};
-
-export const computed = {
-  directionVector3() {
-    return toVec3(this.direction);
+  props: {
+    direction: { ...vec3 },
   },
-};
 
-export const watch = {
-  directionVector3() {
-    this.setDirection();
+  computed: {
+    directionVector3() {
+      return toVec3(this.direction);
+    },
   },
-};
 
-export const methods = {
-  setDirection() {
-    this.$entity.direction.copyFrom(this.directionVector3);
+  watch: {
+    directionVector3() {
+      this.setDirection();
+    },
   },
-};
 
-export const onScene = function ({ name, scene }) {
-  return new DirectionalLight(name, this.directionVector3, scene);
+  methods: {
+    setDirection() {
+      this.$entity.direction.copyFrom(this.directionVector3);
+    },
+  },
+
+  onScene({ name, scene }) {
+    return new DirectionalLight(name, this.directionVector3, scene);
+  },
 };

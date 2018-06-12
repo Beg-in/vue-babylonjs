@@ -1,13 +1,13 @@
-import * as cannon from 'cannon';
-import { setup } from '../global';
+import '../../vendor/cannon';
 import { CannonJSPlugin as Plugin } from '../babylon';
-import * as AbstractPhysics from './abstract';
+import AbstractPhysics from './abstract';
 
-export const mixins = [AbstractPhysics];
+export default {
+  mixins: [AbstractPhysics],
 
-export const methods = {
-  getPhysicsPlugin() {
-    setup('CANNON', cannon);
-    return Plugin;
+  methods: {
+    getPhysicsPlugin() {
+      return Plugin;
+    },
   },
 };

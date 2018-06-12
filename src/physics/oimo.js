@@ -1,13 +1,13 @@
-import * as oimo from 'oimo';
-import { setup } from '../global';
+import '../../vendor/oimo';
 import { OimoJSPlugin as Plugin } from '../babylon';
-import * as AbstractPhysics from './abstract';
+import AbstractPhysics from './abstract';
 
-export const mixins = [AbstractPhysics];
+export default {
+  mixins: [AbstractPhysics],
 
-export const methods = {
-  getPhysicsPlugin() {
-    setup('OIMO', oimo);
-    return Plugin;
+  methods: {
+    getPhysicsPlugin() {
+      return Plugin;
+    },
   },
 };
