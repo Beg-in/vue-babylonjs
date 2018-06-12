@@ -5,8 +5,8 @@ export default {
   mixins: [Entity],
 
   props: {
-    diffuse: { ...color3 },
-    specular: { ...color3 },
+    diffuse: color3,
+    specular: color3,
   },
 
   computed: {

@@ -8,8 +8,8 @@ export default {
   mixins: [AbstractEntity],
 
   props: {
-    position: { ...vec3 },
-    rotation: { ...vec3 },
+    position: vec3,
+    rotation: vec3,
     scaling: {
       validator,
       default: () => Vector3.One(),

@@ -6,7 +6,7 @@ export default {
   mixins: [AbstractLight],
 
   props: {
-    direction: { ...vec3 },
+    direction: vec3,
   },
 
   computed: {

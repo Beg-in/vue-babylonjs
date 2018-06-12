@@ -44,5 +44,7 @@ export default [{
     dir: './lib',
     globals,
   },
-  plugins,
+  plugins: [resolve(), babel({
+    plugins: ['external-helpers', 'babel-plugin-add-module-exports'],
+  })],
 }];

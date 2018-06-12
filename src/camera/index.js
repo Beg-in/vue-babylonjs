@@ -39,7 +39,7 @@ export default {
       default: () => new Vector3(0, 0, -10),
     },
 
-    target: { ...vec3 },
+    target: vec3,
 
     alpha: {
       type: Number,
