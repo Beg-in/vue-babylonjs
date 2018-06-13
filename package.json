@@ -32,9 +32,11 @@
     "b": "CONTEXT=$(pwd) npm explore begin-build -- npm run",
     "start": "npm run vendor && npm run b start:client",
     "build": "rm -rf docs && npm run b build:prd",
-    "dist": "npm run vendor && rm -rf lib dist && rollup --config",
+    "dist:rollup": "rollup --config ",
+    "dist:uglify": "uglifyjs dist/umd.js -c -m -o dist/umd.min.js",
+    "dist": "npm run vendor && rm -rf lib dist && npm run dist:rollup && npm run dist:uglify",
     "lib:entry": "echo \"window.${GLOBAL:=$DEP} = window.${GLOBAL:=$DEP} || require('$DEP');\" >> vendor/$DEP.js",
-    "lib:rollup": "webpack ./vendor/$DEP.js --module-bind js=babel-loader -o ./vendor/$DEP.js",
+    "lib:rollup": "webpack --mode=none ./vendor/$DEP.js --module-bind js=babel-loader -o ./vendor/$DEP.js",
     "lib": "npm run lib:entry && npm run lib:rollup",
     "vendor:earcut": "DEP=earcut npm run lib",
     "vendor:cannon": "GLOBAL=CANNON DEP=cannon npm run lib",
@@ -45,13 +47,12 @@
     "vue": "^2.2.0"
   },
   "dependencies": {
-    "babylonjs": "^3.3.0-alpha.6"
+    "babylonjs": "^3.2.0"
   },
   "devDependencies": {
     "babel-cli": "^6.26.0",
-    "babel-plugin-add-module-exports": "0.2.1",
     "babel-plugin-external-helpers": "^6.22.0",
-    "babel-plugin-transform-es2015-modules-commonjs": "^6.26.2",
+    "babel-plugin-transform-runtime": "^6.23.0",
     "babel-preset-env": "^1.7.0",
     "babel-preset-stage-3": "^6.24.1",
     "begin-build": "^0.15.0-beta.2",
@@ -69,6 +70,7 @@
     "raw-loader": "0.5.1",
     "rollup": "^0.60.1",
     "rollup-plugin-babel": "^3.0.4",
+    "rollup-plugin-commonjs": "^9.1.3",
     "rollup-plugin-node-resolve": "^3.3.0",
     "rollup-plugin-uglify": "^4.0.0",
     "uglify-js": "3.4.0"

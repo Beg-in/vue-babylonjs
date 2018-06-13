@@ -22,6 +22,10 @@ register([
     path: '/home',
     component: require('./home/vue.pug').default,
   }, {
+    name: 'installation',
+    path: '/installation',
+    component: require('./installation/vue.pug').default,
+  }, {
     // name: 'home-fullscreen',
     // path: '/home/fullscreen',
     // component: require('./home/fullscreen/vue.pug').default,

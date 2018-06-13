@@ -22,6 +22,7 @@ $ yarn start
 Navigate your browser to http://localhost:8080
 
 Note: port may change depending on usage in your system, observe the terminal output when running the start command to see what port the site is running on.
+Note: this will generate library files in the `vendor` directory. These should not be modified manually and are ignored by git.
 
 ### Building the Example Site for Github Pages
 
@@ -40,6 +41,12 @@ $ yarn cz
 ```
 
 ### Releases
+
+Prepare the package for distribution:
+
+```bash
+$ yarn dist
+```
 
 This package follows Symantic Versioning use the following scripts to tag the package and update the version number.
 

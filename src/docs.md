@@ -1,3 +1,10 @@
+**Create high quality 3D graphics in the web as easily as writing HTML and CSS.**
+
+## Getting Started
+
+### Installation and Usage
+<router-link to="/installation">See instructions here</router-link>
+
 ## Important things to know
 
  - **All components of this library must be a descendant of the Scene component**
@@ -73,3 +80,5 @@ module.exports = {
   },
 };
 ```
+
+<router-link to="/entity">See the Entity documentation for more information</router-link>

@@ -3,7 +3,7 @@
 let prism = require('prismjs');
 let loadLanguages = require('prismjs/components/index.js');
 
-loadLanguages(['pug']);
+loadLanguages(['pug', 'bash']);
 
 module.exports = ({ config, pug }) => {
   let { module: { rules } } = config;
@@ -19,14 +19,16 @@ module.exports = ({ config, pug }) => {
     loaders: ['raw-loader', 'glslify-loader'],
   });
 
-  pug.options.filters = {
-    hl(text, { lang = 'markup' } = {}) {
-      if (text[0] === '\n') {
-        text = text.substring(1);
-      }
-      return `<code lang="${lang}">${prism.highlight(text, prism.languages[lang], lang)}</code>`;
-    },
+  let hl = (text, { lang = 'markup' } = {}) => {
+    if (text[0] === '\n') {
+      text = text.substring(1);
+    }
+    return `<code lang="${lang}">${prism.highlight(text, prism.languages[lang], lang)}</code>`;
   };
+  pug.options.filters = {
+    hl,
+  };
+  pug.options.data.hl = hl;
 
   config.externals = {
     oimo: true,

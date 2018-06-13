@@ -2,8 +2,6 @@ import { PhysicsImpostor, Vector3 } from '../babylon';
 import AbstractEntity from '../entity/abstract';
 import { capitalize } from '../util';
 
-let physicsEngine;
-
 const TYPES = {
   BOX: 'box',
   CYLINDER: 'cylinder',
@@ -122,9 +120,9 @@ export default {
   },
 
   onScene({ scene }) {
-    if (!physicsEngine) {
+    if (!scene.getPhysicsEngine()) {
       let Plugin = this.getPhysicsPlugin();
-      physicsEngine = scene.enablePhysics(this.gravity, new Plugin());
+      scene.enablePhysics(this.gravity, new Plugin());
     }
   },
 

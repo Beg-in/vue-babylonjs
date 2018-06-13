@@ -42,47 +42,9 @@ Scene
     Box(v-for="position in boxes" :position="position")
 ```
 
-## API Documentation
-[See the documentation website (work in progress)](https://beg-in.github.io/vue-babylonjs/)
+## Getting Started, Installation, and API Documentation
 
-## Getting Started
-
-[See the complete starter example on Glitch](https://glitch.com/edit/#!/vue-babylonjs-starter)
-
-### Installation
-
-Get it off of [NPM](https://www.npmjs.com/package/vue-babylonjs):
-```shell
-$ npm install vue-babylonjs
-```
-
-**or** (using [yarn](https://yarnpkg.com/en/)):
-
-```shell
-$ yarn add vue-babylonjs
-```
-
-In your script:
-
-```js
-let Vue = require('vue');
-Vue.use(require('vue-babylonjs'));
-```
-
-In your template:
-
-```html
-<Scene>
-  <Box :position="[0, 0, 5]"></Box>
-</Scene>
-```
-
-**or** (Pug):
-
-```pug
-Scene
-  Box(:position="[0, 0, 5]")
-```
+[See the documentation website](https://beg-in.github.io/vue-babylonjs/)
 
 ## Updates
 
