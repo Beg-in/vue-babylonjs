@@ -31,7 +31,7 @@
   "scripts": {
     "b": "CONTEXT=$(pwd) npm explore begin-build -- npm run",
     "start": "npm run vendor && npm run b start:client",
-    "build": "rm -rf docs && npm run b build:prd",
+    "build": "npm run vendor && rm -rf docs && npm run b build:prd",
     "dist:rollup": "rollup --config ",
     "dist:uglify": "uglifyjs dist/umd.js -c -m -o dist/umd.min.js",
     "dist": "npm run vendor && rm -rf lib dist && npm run dist:rollup && npm run dist:uglify",
