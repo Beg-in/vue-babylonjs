@@ -1,4 +1,4 @@
-import '../../vendor/oimo';
+import * as oimo from 'oimo';
 import { OimoJSPlugin as Plugin } from '../babylon';
 import AbstractPhysics from './abstract';
 
@@ -7,6 +7,9 @@ export default {
 
   methods: {
     getPhysicsPlugin() {
+      if (!window.OIMO) {
+        window.OIMO = oimo;
+      }
       return Plugin;
     },
   },

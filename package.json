@@ -30,18 +30,11 @@
   "license": "MIT",
   "scripts": {
     "b": "CONTEXT=$(pwd) npm explore begin-build -- npm run",
-    "start": "npm run vendor && npm run b start:client",
-    "build": "npm run vendor && rm -rf docs && npm run b build:prd",
-    "dist:rollup": "rollup --config ",
+    "start": "npm run b start:client",
+    "build": "rm -rf docs && npm run b build:prd",
+    "dist:rollup": "rollup --config",
     "dist:uglify": "uglifyjs dist/umd.js -c -m -o dist/umd.min.js",
-    "dist": "npm run vendor && rm -rf lib dist && npm run dist:rollup && npm run dist:uglify",
-    "lib:entry": "echo \"window.${GLOBAL:=$DEP} = window.${GLOBAL:=$DEP} || require('$DEP');\" >> vendor/$DEP.js",
-    "lib:rollup": "webpack --mode=none ./vendor/$DEP.js --module-bind js=babel-loader -o ./vendor/$DEP.js",
-    "lib": "npm run lib:entry && npm run lib:rollup",
-    "vendor:earcut": "DEP=earcut npm run lib",
-    "vendor:cannon": "GLOBAL=CANNON DEP=cannon npm run lib",
-    "vendor:oimo": "GLOBAL=OIMO DEP=oimo npm run lib",
-    "vendor": "rm -rf vendor && mkdir -p vendor && run-p vendor:*"
+    "dist": "rm -rf lib dist && npm run dist:rollup && npm run dist:uglify"
   },
   "peerDependencies": {
     "vue": "^2.2.0"
@@ -70,6 +63,7 @@
     "raw-loader": "0.5.1",
     "rollup": "^0.60.1",
     "rollup-plugin-babel": "^3.0.4",
+    "rollup-plugin-cleanup": "^3.0.0-beta.1",
     "rollup-plugin-commonjs": "^9.1.3",
     "rollup-plugin-node-resolve": "^3.3.0",
     "rollup-plugin-uglify": "^4.0.0",

@@ -1,7 +1,8 @@
 import babel from 'rollup-plugin-babel';
 import resolve from 'rollup-plugin-node-resolve';
 import commonjs from 'rollup-plugin-commonjs';
-import { fileSync as find } from 'find';
+import cleanup from 'rollup-plugin-cleanup';
+// import { fileSync as find } from 'find';
 
 const name = 'VueBabylonjs';
 const plugins = [
@@ -12,25 +13,20 @@ const plugins = [
     ignore: 'node_modules/!(babylonjs)',
   }),
   commonjs({
-    include: 'node_modules/**'
+    include: 'node_modules/**',
   }),
+  cleanup(),
 ];
 // const FILES = find(/.*\/.+\/.+\.js$/, './src').reduce((out, file) => ({
 //   ...out,
 //   [file.replace(/src\//, '').replace(/\.js$/, '')]: file,
 // }), {});
-const globals = {
-  earcut: 'earcut',
-  oimo: 'OIMO',
-  cannon: 'CANNON',
-};
 
 export default [{
   input: 'src/index.js',
   output: {
     format: 'es',
     file: 'dist/esm.js',
-    globals,
   },
   plugins,
 }, {
@@ -39,7 +35,6 @@ export default [{
     format: 'umd',
     name,
     file: 'dist/umd.js',
-    globals,
   },
   plugins,
 // }, {

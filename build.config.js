@@ -30,11 +30,5 @@ module.exports = ({ config, pug }) => {
   };
   pug.options.data.hl = hl;
 
-  config.externals = {
-    oimo: true,
-    cannon: true,
-    earcut: true
-  };
-
-return config;
+  return config;
 };
