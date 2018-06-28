@@ -26,7 +26,11 @@ export default {
       await this._$_sceneReady;
       let assetContainer = await SceneLoader.LoadAssetContainerAsync(this.src);
       await this._$_parentReady;
-      this.$replace(assetContainer.createRootMesh());
+      if (assetContainer.meshes.length > 1) {
+        this.$replace(assetContainer.createRootMesh());
+      } else {
+        this.$replace(assetContainer.meshes[0]);
+      }
       assetContainer.addAllToScene();
     },
   },
