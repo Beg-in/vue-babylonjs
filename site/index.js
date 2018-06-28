@@ -35,11 +35,13 @@ import shader from './shader.vue';
 import texture from './texture.vue';
 import types from './types.vue';
 import about from './about.vue';
+import asset from './asset.vue';
 
 register([
   ...Object.entries({
     home,
     installation,
+    asset,
     animation,
     camera,
     entity,

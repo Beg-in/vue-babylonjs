@@ -41,9 +41,6 @@
   "peerDependencies": {
     "vue": "^2.2.0"
   },
-  "dependencies": {
-    "babylonjs": "^3.2.0"
-  },
   "devDependencies": {
     "@babel/core": "^7.1.0",
     "@babel/plugin-external-helpers": "^7.0.0",
@@ -51,6 +48,8 @@
     "@babel/preset-env": "^7.1.0",
     "@babel/runtime": "^7.0.0",
     "babel-plugin-external-helpers": "^6.22.0",
+    "@babylonjs/core": "^4.0.0-alpha.32",
+    "@babylonjs/loaders": "^4.0.0-alpha.32",
     "begin-build": "^0.16.0",
     "begin-project": "^0.4.0",
     "cannon": "^0.6.2",
@@ -63,7 +62,7 @@
     "jstransformer-pug": "^0.3.0",
     "markdown-it-prism": "^1.1.2",
     "oimo": "^1.0.9",
-    "prismjs": "^1.14.0",
+    "prismjs": "^1.15.0",
     "raw-loader": "0.5.1",
     "rollup": "^0.66.2",
     "rollup-plugin-babel": "^4.0.3",

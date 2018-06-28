@@ -1,1 +1,1 @@
-export * from 'babylonjs/es6';
+export * from '@babylonjs/core';

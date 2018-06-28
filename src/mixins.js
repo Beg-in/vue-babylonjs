@@ -2,6 +2,7 @@ export { default as Scene } from './scene';
 export { default as Camera } from './camera';
 export { default as Entity } from './entity';
 export { default as Property } from './property';
+export { default as Asset } from './asset';
 export { default as Material } from './material';
 export { default as Texture } from './texture';
 export { default as Animation } from './animation';

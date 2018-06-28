@@ -10,7 +10,7 @@ module.exports = ({ config, pug }) => {
 
   rules.forEach(rule => {
     if (rule.loader === 'babel-loader') {
-      rule.exclude = /node_modules\/(?!(begin-|babylonjs))/;
+      rule.exclude = /node_modules\/(?!(begin-|babylonjs$))/;
     }
   });
 

@@ -45,6 +45,8 @@ export default {
               .folder-name API
             router-link(tag="li" to="/animation")
               a Animation
+            router-link(tag="li" to="/asset")
+              a Asset
             router-link(tag="li" to="/camera")
               a Camera
             router-link(tag="li" to="/entity")
