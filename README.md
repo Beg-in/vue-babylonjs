@@ -9,37 +9,40 @@ Quickly make a 3D animation:
 
 It's this easy:
 
-```html
-<Scene>
+```vue
+<template>
+  <Scene>
     <Camera></Camera>
     <HemisphericLight diffuse="#0000FF"></HemisphericLight>
     <Entity :position="[0, 0, 5]">
-        <Animation property="rotation.x" :duration="5">
-            <Key frame="0%" :value="0"></Key>
-            <Key frame="100%" :value="Math.PI * 2"></Key>
-        </Animation>
-        <Animation property="rotation.y" :duration="5" :end="Math.PI * 2"></Animation>
-        <Animation property="rotation.z" :duration="5" :end="Math.PI * 2"></Animation>
-        <PointLight diffuse="#FF0000"></PointLight>
-        <Box v-for="position in boxes" :position="position"></Box>
-    </Entity>
+      <Animation property="rotation.x" :duration="5">
+        <Key frame="0%" :value="0"></Key>
+        <Key frame="100%" :value="Math.PI * 2"></Key>
+      </Animation>
+      <Animation property="rotation.y" :duration="5" :end="Math.PI * 2"></Animation>
+      <Animation property="rotation.z" :duration="5" :end="Math.PI * 2"></Animation>
+      <PointLight diffuse="#FF0000"></PointLight>
+      <Box v-for="position in boxes" :position="position"></Box>
+  </Entity>
 </Scene>
 ```
 
 It's even easier if you use [Pug (Jade)](https://pugjs.org) for templating:
 
-```pug
-Scene
-  Camera
-  HemisphericLight(diffuse="#0000FF")
-  Entity(:position="[0, 0, 5]")
-    Animation(property="rotation.x" :duration="5")
-      Key(frame="0%" :value="0")
-      Key(frame="100%" :value="Math.PI * 2")
-    Animation(property="rotation.y" :duration="5" :end="Math.PI * 2")
-    Animation(property="rotation.z" :duration="5" :end="Math.PI * 2")
-    PointLight(diffuse="#FF0000")
-    Box(v-for="position in boxes" :position="position")
+```vue
+<template lang="pug">
+  Scene
+    Camera
+    HemisphericLight(diffuse="#0000FF")
+    Entity(:position="[0, 0, 5]")
+      Animation(property="rotation.x" :duration="5")
+        Key(frame="0%" :value="0")
+        Key(frame="100%" :value="Math.PI * 2")
+      Animation(property="rotation.y" :duration="5" :end="Math.PI * 2")
+      Animation(property="rotation.z" :duration="5" :end="Math.PI * 2")
+      PointLight(diffuse="#FF0000")
+      Box(v-for="position in boxes" :position="position")
+</template>
 ```
 
 ## Getting Started, Installation, and API Documentation
