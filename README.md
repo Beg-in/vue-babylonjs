@@ -23,8 +23,9 @@ It's this easy:
       <Animation property="rotation.z" :duration="5" :end="Math.PI * 2"></Animation>
       <PointLight diffuse="#FF0000"></PointLight>
       <Box v-for="position in boxes" :position="position"></Box>
-  </Entity>
-</Scene>
+    </Entity>
+  </Scene>
+</template>
 ```
 
 It's even easier if you use [Pug (Jade)](https://pugjs.org) for templating:
