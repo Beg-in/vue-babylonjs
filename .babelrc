@@ -3,5 +3,12 @@
   "presets": ["stage-3", ["env", {
     "modules": false,
     "useBuiltIns": true
-  }]]
+  }]],
+  "env": {
+    "test": {
+      "presets": [["env", {
+        "modules": "commonjs"
+      }]]
+    }
+  }
 }

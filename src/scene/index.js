@@ -2,6 +2,7 @@ import { Engine, Scene, Color3, Vector3 } from '../babylon';
 import { createBus } from '../util';
 import { vecValidator as validator, toVec3 } from '../types/vector';
 import { color3, toColor3 } from '../types/color';
+import { registerObservers } from '../observable';
 
 const FOG_TYPES = {
   NONE: 'none',
@@ -179,6 +180,7 @@ export default {
     setScene() {
       this.engine = new Engine(this.$refs.scene, true);
       this.scene = new Scene(this.engine);
+      this.observers = registerObservers.call(this, this.scene);
       this.setAmbientColor();
       this.setFogMode();
       this.resolveScene(this.scene);
@@ -255,6 +257,7 @@ export default {
   beforeDestroy() {
     window.removeEventListener('resize', this.resize);
     this.engine.stopRenderLoop();
+    this.observers();
     this.scene.dispose();
     this.vrHelper = null;
     this.scene = null;
