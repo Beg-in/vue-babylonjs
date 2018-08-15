@@ -34,13 +34,15 @@
     "build": "rm -rf docs && npm run b build:prd",
     "dist:rollup": "rollup --config",
     "dist:uglify": "uglifyjs dist/umd.js -c -m -o dist/umd.min.js",
-    "dist": "rm -rf lib dist && npm run dist:rollup && npm run dist:uglify"
+    "dist": "rm -rf lib dist && npm run dist:rollup && npm run dist:uglify",
+    "postinstall": "opencollective-postinstall"
   },
   "peerDependencies": {
     "vue": "^2.2.0"
   },
   "dependencies": {
-    "babylonjs": "^3.2.0"
+    "babylonjs": "^3.2.0",
+    "opencollective": "^1.0.3"
   },
   "devDependencies": {
     "babel-cli": "^6.26.0",
@@ -70,5 +72,9 @@
     "uglify-js": "3.4.0"
   },
   "// HACK: postcss-loader must have config": "",
-  "postcss": {}
+  "postcss": {},
+  "collective": {
+    "type": "opencollective",
+    "url": "https://opencollective.com/vue-babylonjs"
+  }
 }
