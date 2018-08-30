@@ -43,7 +43,7 @@ html, body {
  - `fogColor` (Color) - Color to use for fog
  - `fullscreen` (Boolean) - Enable fullscreen - default `false`
  - `debug` (Boolean) - Enable debug mode - default `false`
- - `environment` (IEnvironmentHelperOptions) - Options for the default environment: [See the interface documentation](http://doc.babylonjs.com/classes/interfaces/babylon.ienvironmenthelperoptions)
+ - `environment` (IEnvironmentHelperOptions) - Options for the default environment: [See the interface documentation](https://doc.babylonjs.com/api/interfaces/babylon.ienvironmenthelperoptions)
  - `main` (Color) - Primary color of all the available elements when using the default environment
  - `physics` (String) - Optionally change the physics engine to use, see below for valid values:
     - `"cannon"`
