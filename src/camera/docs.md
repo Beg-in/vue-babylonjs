@@ -4,7 +4,7 @@ This component will define a camera in a scene
 
 #### Details
 
-The [BabylonJS guide to cameras](http://doc.babylonjs.com/babylon101/cameras) can be helpful here.
+The [BabylonJS guide to cameras](https://doc.babylonjs.com/babylon101/cameras) can be helpful here.
 
  - Can be defined anywhere as a descendant of the Scene component
  - Can be transformed (moved/rotated) by using a parent Entity

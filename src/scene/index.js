@@ -179,7 +179,9 @@ export default {
 
     setScene() {
       this.engine = new Engine(this.$refs.scene, true);
+      this.$emit('engine', this.engine);
       this.scene = new Scene(this.engine);
+      this.$emit('scene', this.scene);
       this.observers = registerObservers.call(this, this.scene);
       this.setAmbientColor();
       this.setFogMode();
@@ -191,7 +193,6 @@ export default {
       this.debugLayer();
       this.scene.executeWhenReady(this.resize); // HACK: investigate sqaush effect on initial load
       this.scene.executeWhenReady(this.defaultEnvrionment);
-      this.$emit('change', this.scene);
     },
 
     setGravity() {

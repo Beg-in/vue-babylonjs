@@ -28,14 +28,14 @@ Use `MeshBuilder` to constuct a `Mesh` for basic primitive shapes
 
 #### Details
 
-The [BabylonJS guide to basic shapes](http://doc.babylonjs.com/babylon101/discover_basic_elements) can be helpful here.
+The [BabylonJS guide to basic shapes](https://doc.babylonjs.com/babylon101/discover_basic_elements) can be helpful here.
 
  - Inherits properties from the Entity component for transform attributes `position`, `rotation`, and `scaling`
  - Can be colored by using the Material component as a child of the mesh
  - The `Polygon` class from BabylonJS has been renamed to PolygonMesh here since `polygon` is a reserved HTML tag name
  - The `options` attribute is non-reactive, create a new mesh instead of manipulating this object (this will change in the future)
 
-[See the BabylonJS documentaion on the `MeshBuilder` class](http://doc.babylonjs.com/api/classes/babylon.meshbuilder)
+[See the BabylonJS documentaion on the `MeshBuilder` class](https://doc.babylonjs.com/api/classes/babylon.meshbuilder)
 
 #### Usage
 
@@ -69,4 +69,4 @@ The [BabylonJS guide to basic shapes](http://doc.babylonjs.com/babylon101/discov
 
 #### Props
 
- - `options` (Object) - options passed to [`MeshBuilder`](http://doc.babylonjs.com/api/classes/babylon.meshbuilder)
+ - `options` (Object) - options passed to [`MeshBuilder`](https://doc.babylonjs.com/api/classes/babylon.meshbuilder)

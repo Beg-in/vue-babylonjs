@@ -1,0 +1,16 @@
+article
+  h2 Scene
+
+  h4 Example
+
+  Controls(:inline="true" route="/observable/fullscreen")
+    Example
+    h5(slot="filename") observable.vue
+    pre(slot="pug")
+      include:hl(lang="pug") ../../examples/observable/template
+    pre(slot="html")
+      include:hl:pug(pretty=true) ../../examples/observable/template
+    pre(slot="script")
+      include:hl(lang="javascript") ../../examples/observable/index.js
+
+  include:markdown-it(plugins=['markdown-it-prism']) ../../src/observable/docs.md

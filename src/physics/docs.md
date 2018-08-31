@@ -4,7 +4,7 @@ Add physics to an Entity component
 
 #### Details
 
-The BabylonJS [guide to using a physics engine](http://doc.babylonjs.com/how_to/using_the_physics_engine) can be helpful here.
+The BabylonJS [guide to using a physics engine](https://doc.babylonjs.com/how_to/using_the_physics_engine) can be helpful here.
 
  - Must be a child of the entity you wish to add physics to
  - The physics engine will be initilized automatically when a Physics component is used in the scene

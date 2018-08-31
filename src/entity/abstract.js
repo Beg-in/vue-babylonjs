@@ -1,4 +1,5 @@
 import { id, isDisposable, createBus } from '../util';
+import { registerObservers } from '../observable';
 
 export default {
   inject: {
@@ -32,12 +33,12 @@ export default {
   },
 
   model: {
-    prop: '_$_model',
-    event: 'change',
+    prop: '_$_input',
+    event: '_$_output',
   },
 
   props: {
-    _$_model: {
+    _$_input: {
       type: Object,
       default: null,
     },
@@ -75,7 +76,9 @@ export default {
           }
         };
       }
-      this.$emit('change', this.$entity);
+      this.$event.$emit('_$_output', this.$entity);
+      this.$event.$emit('change', this.$entity);
+      this.$nextTick(() => this.$emit('entity', this._$_hookArgs));
     },
 
     async _$_onParent(parent) {
@@ -84,6 +87,7 @@ export default {
       if (this.$options.onParent) { // Lifecycle Hook
         await this.$options.onParent.call(this, this._$_hookArgs);
       }
+      this.$emit('parent', this._$_hookArgs);
     },
 
     async $replace(entity) {
@@ -97,7 +101,6 @@ export default {
       }
       this.$entity = entity;
       await this._$_init();
-      this.$event.$emit('change', this.$entity);
     },
   },
 
@@ -109,9 +112,9 @@ export default {
       deep: true,
     },
 
-    _$_model() {
-      if (this.$entity !== this._$_model) {
-        this.$replace(this._$_model);
+    _$_input() {
+      if (this.$entity !== this._$_input) {
+        this.$replace(this._$_input);
       }
     },
   },
@@ -144,17 +147,19 @@ export default {
     }
     this.$scene = await this._$_sceneReady;
     this._$_hookArgs.scene = this.$scene;
+    let sceneArgs = {
+      parentReady: this._$_parentReady,
+      ...this._$_hookArgs,
+    };
     if (this.$options.onScene) { // Lifecycle Hook
-      this.$entity = await this.$options.onScene.call(this, {
-        parentReady: this._$_parentReady,
-        ...this._$_hookArgs,
-      });
+      this.$entity = await this.$options.onScene.call(this, sceneArgs);
     }
+    this.$emit('scene', sceneArgs);
     this._$_hookArgs.entity = this.$entity;
     this._$_onParent(await this._$_parentReady);
     this.$bus.$on('change', this._$_onParent.bind(this));
-    if (this._$_model) {
-      this.$replace(this._$_model);
+    if (this._$_input) {
+      this.$replace(this._$_input);
     } else {
       await this._$_init();
     }
@@ -175,6 +180,7 @@ export default {
     if (this._$_clearObservers) {
       this._$_clearObservers();
     }
+    this.$emit('dispose');
     if (isDisposable(this.$entity)) {
       this.$entity.dispose();
     }
