@@ -1,2 +1,3 @@
 Scene(@before-render$="beforeRender")
-  Box(:position="[0, 0, 5]" :scaling="[1, yScale, 1]" @entity="onBox" v-model="box")
+  Box(:position="[-2, 0, 5]" :scaling="scale.box" @entity="onBox" v-model="box")
+  Box(:position="[2, 0, 5]" :scaling="scale.sphere" @entity="onSphere")

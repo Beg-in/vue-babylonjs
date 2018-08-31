@@ -76,9 +76,9 @@ export default {
           }
         };
       }
-      this.$event.$emit('_$_output', this.$entity);
+      this.$emit('_$_output', this.$entity);
       this.$event.$emit('change', this.$entity);
-      this.$nextTick(() => this.$emit('entity', this._$_hookArgs));
+      this.$emit('entity', this._$_hookArgs);
     },
 
     async _$_onParent(parent) {

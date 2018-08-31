@@ -3,12 +3,18 @@ module.exports = {
     return {
       tick: 1,
       box: null,
+      start: 0,
     };
   },
 
   computed: {
-    yScale() {
-      return 2 + Math.sin(this.tick * 0.01);
+    scale() {
+      let a = 2 + Math.cos(this.tick * 0.01);
+      let b = 2 + Math.sin(this.tick * 0.01);
+      return {
+        box: [a, b, 1],
+        sphere: [b, a, 1],
+      };
     },
   },
 
@@ -18,11 +24,13 @@ module.exports = {
     },
 
     onBox() {
-      this.ready();
     },
 
-    ready() {
-      console.log('box is now ready', this.box);
+    onSphere() {
     },
+  },
+
+  mounted() {
+    this.start = performance.now();
   },
 };
