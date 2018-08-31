@@ -10,3 +10,52 @@ The [BabylonJS guide to observables](https://doc.babylonjs.com/how_to/observable
  - The implementation is based on custom event's within Vue and uses Vue's `$listeners` property to efficiently register subscribers with their associated Observables.
 
 #### Usage
+
+**Scene observables checked during each renderLoop (in the order they are checked)**
+
+| Event Prop | Scene Object Observable Name |
+| --- | --- |
+| `@before-animations$` | onBeforeAnimationsObservable |
+| `@after-animations$` | onAfterAnimationsObservable |
+| `@before-physics$` | onBeforePhysicsObservable |
+| `@after-physics$` | onAfterPhysicsObservable |
+| `@before-render$` | onBeforeRenderObservable |
+| `@before-render-targets-render$` | onBeforeRenderTargetsRenderObservable |
+| `@after-render-targets-render$` | onAfterRenderTargetsRenderObservable |
+| `@before-camera-render$` | onBeforeCameraRenderObservable |
+| `@before-active-meshes-evaluation$` | onBeforeActiveMeshesEvaluationObservable |
+| `@after-active-meshes-evaluation$` | onAfterActiveMeshesEvaluationObservable |
+| `@before-particles-rendering$` | onBeforeParticlesRenderingObservable |
+| `@after-particles-rendering$` | onAfterParticlesRenderingObservable |
+| `@before-draw-phase$` | onBeforeDrawPhaseObservable |
+| `@after-draw-phase$` | onAfterDrawPhaseObservable |
+| `@after-camera-render$` | onAfterCameraRenderObservable |
+| `@after-render$` | onAfterRenderObservable |
+
+**Other Scene observables**
+
+| Event Prop | Scene Object Observable Name |
+| --- | --- |
+| `@before-rendering-group$` | onBeforeRenderingGroupObservable |
+| `@after-rendering-group$` | onAfterRenderingGroupObservable |
+| `@before-sprites-rendering$` | onBeforeSpritesRenderingObservable |
+| `@after-sprites-rendering$` | onAfterSpritesRenderingObservable |
+| `@before-step$` | onBeforeStepObservable |
+| `@after-step$` | onAfterStepObservable |
+| `@new-camera-added$` | onNewCameraAddedObservable |
+| `@camera-removed$` | onCameraRemovedObservable |
+| `@data-loaded$` | onDataLoadedObservable |
+| `@dispose$` | onDisposeObservable |
+| `@new-geometry-added$` | onNewGeometryAddedObservable |
+| `@geometry-removed$` | onGeometryRemovedObservable |
+| `@pre-keyboard$` | onPreKeyboardObservable |
+| `@keyboard$` | onKeyboardObservable |
+| `@new-light-added$` | onNewLightAddedObservable |
+| `@light-removed$` | onLightRemovedObservable |
+| `@new-mesh-added$` | onNewMeshAddedObservable |
+| `@mesh-removed$` | onMeshRemovedObservable |
+| `@new-transform-node-added$` | onNewTransformNodeAddedObservable |
+| `@transform-node-removed$` | onTransformNodeRemovedObservable |
+| `@pre-pointer$` | onPrePointerObservable |
+| `@pointer$` | onPointerObservable |
+| `@ready$` | onReadyObservable |

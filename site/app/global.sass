@@ -69,3 +69,36 @@ canvas
   display: block
   &:focus
     outline: none
+
+table
+  border-collapse: collapse
+  margin: 1rem 0
+  display: block
+  overflow-x: auto
+
+  thead
+    display: table-header-group
+    vertical-align: middle
+    border-color: inherit
+
+  tr
+    display: table-row
+    vertical-align: inherit
+    border-color: inherit
+
+    &:nth-child(2n)
+      background-color: #f6f8fa
+
+
+  th
+    font-weight: bold
+    text-align: -internal-center
+
+  td, th
+    border: 1px solid #dfe2e5
+    padding: .6em 1em
+
+  tbody
+    display: table-row-group
+    vertical-align: middle
+    border-color: inherit
