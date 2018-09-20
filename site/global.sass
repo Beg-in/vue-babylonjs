@@ -1,0 +1,104 @@
+@import ./variables
+@import ~frow
+
+html, body
+  margin: 0
+  padding: 0
+  height: 100%
+  font-family: "Tajawal"
+  color: $dark-color
+  background-color: $light-color
+
+h1, h2, h3, h4
+  color: $dark-color
+  font-weight: 700
+h1, h2, h3, h4, h5, p
+  margin-bottom: 24px
+  padding: 0
+h1
+  font-size: 36px
+h2
+  font-size: 26px
+  margin: 24px 0 6px
+h3
+  font-size: 24px
+h4
+  font-size: 20px
+h5
+  font-size: 18px
+
+a
+  color: $main-color
+  margin: 0
+  padding: 0
+  vertical-align: baseline
+
+ul
+  list-style-type: disc
+  padding-left: 15px
+li
+  line-height: 24px
+  ul
+    margin-left: 24px
+p, ul, ol
+  font-size: 16px
+  line-height: 24px
+
+pre
+  padding: 0px 24px
+  max-width: 800px
+  white-space: pre-wrap
+code
+  font-family: Consolas, Monaco, Andale Mono, monospace
+  line-height: 1.5
+  font-size: 13px
+  margin-bottom: 24px
+  *:not(pre) > &
+    background-color: $background-color
+    color: $third-color
+    padding: 1px 5px
+    margin: 0
+
+hr
+  width: 100%
+  text-align: left
+  margin: 20px auto 20px 0
+  color: $secondary-color
+
+canvas
+  display: block
+  &:focus
+    outline: none
+
+table
+  border-collapse: collapse
+  margin: 1rem 0
+  display: block
+  overflow-x: auto
+
+  thead
+    display: table-header-group
+    vertical-align: middle
+    border-color: inherit
+
+  tr
+    display: table-row
+    vertical-align: inherit
+    border-color: inherit
+
+    &:nth-child(2n)
+      background-color: #f6f8fa
+
+
+  th
+    font-weight: bold
+    text-align: -internal-center
+
+  td, th
+    border: 1px solid #dfe2e5
+    padding: .6em 1em
+
+  tbody
+    display: table-row-group
+    vertical-align: middle
+    border-color: inherit

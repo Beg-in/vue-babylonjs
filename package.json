@@ -31,7 +31,7 @@
   "scripts": {
     "b": "CONTEXT=$(pwd) npm explore begin-build -- npm run",
     "start": "npm run b start:client",
-    "build": "rm -rf docs && npm run b build:prd",
+    "build": "rm -rf docs && npm run b build",
     "dist:rollup": "rollup --config",
     "dist:uglify": "uglifyjs dist/umd.js -c -m -o dist/umd.min.js",
     "dist": "rm -rf lib dist && npm run dist:rollup && npm run dist:uglify",
@@ -50,10 +50,11 @@
     "babel-plugin-transform-runtime": "^6.23.0",
     "babel-preset-env": "^1.7.0",
     "babel-preset-stage-3": "^6.24.1",
-    "begin-build": "^0.15.0-beta.2",
-    "begin-project": "0.3.1",
+    "begin-build": "^0.16.0",
+    "begin-project": "^0.4.0",
     "cannon": "^0.6.2",
     "earcut": "^2.1.3",
+    "eslint-plugin-vue": "^5.0.0-beta.3",
     "find": "^0.2.9",
     "frow": "^3.0.4",
     "glslify-loader": "1.0.2",
@@ -75,7 +76,5 @@
     "require": [
       "babel-register"
     ]
-  },
-  "// HACK: postcss-loader must have config": "",
-  "postcss": {}
+  }
 }

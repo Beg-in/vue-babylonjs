@@ -4,12 +4,12 @@ This component will apply an animation to an Entity component
 
 #### Details
 
-The [BabylonJS guide to animations](https://doc.babylonjs.com/babylon101/animations) can be helpful here.
+The [BabylonJS guide to animations](http://doc.babylonjs.com/babylon101/animations) can be helpful here.
 
  - Must be a child component of an existing Entity
  - Properties are in the format `myObject.myProperty`
 
-See [the BabylonJS api documentation on the Animation class](https://doc.babylonjs.com/api/classes/babylon.animation)
+See [the BabylonJS api documentation on the Animation class](http://doc.babylonjs.com/api/classes/babylon.animation)
 
 #### Usage
 
