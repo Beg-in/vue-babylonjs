@@ -27,3 +27,14 @@ export const createBus = function () {
 export const camelize = str => str.split('-').reduce((result, [first, ...rest]) => result + first.toUpperCase() + rest.join(''), '');
 
 export const last = ([...arr]) => arr.pop();
+
+export class Deferred extends Promise {
+  constructor() {
+    super((resolve, reject) => {
+      this.resolve = resolve;
+      this.reject = reject;
+    });
+  }
+}
+
+export const defer = () => new Deferred();

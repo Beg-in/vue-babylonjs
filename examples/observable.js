@@ -1,9 +1,13 @@
+import { defer } from '../../src/util';
+
 export default {
   data() {
     return {
-      tick: 1,
+      deferredBox: defer(),
+      deferredSphere: defer(),
       box: null,
-      start: 0,
+      sphere: null,
+      tick: 1,
     };
   },
 
@@ -24,13 +28,20 @@ export default {
     },
 
     onBox() {
+      this.deferredBox.resolve();
     },
 
-    onSphere() {
+    onSphere(sphere) {
+      this.sphere = sphere;
+      this.deferredSphere.resolve();
+    },
+
+    async init() {
+      await Promise.all([this.deferredBox, this.deferredSphere]);
     },
   },
 
   mounted() {
-    this.start = performance.now();
+    this.init();
   },
 };
