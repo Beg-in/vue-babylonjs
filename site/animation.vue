@@ -1,5 +1,5 @@
 <script>
-import Example from '../examples/animation/vue.pug';
+import Example from '../examples/animation.vue';
 import Controls from './controls.vue';
 
 export default {
