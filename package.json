@@ -1,6 +1,6 @@
 {
   "name": "vue-babylonjs",
-  "version": "1.0.0-beta.5",
+  "version": "1.0.0-beta.6",
   "files": [
     "dist/*",
     "lib/*"
@@ -34,7 +34,7 @@
     "build": "rm -rf docs && npm run b build",
     "dist:rollup": "rollup --config",
     "dist:uglify": "uglifyjs dist/umd.js -c -m -o dist/umd.min.js",
-    "dist": "rm -rf lib dist && npm run dist:rollup && npm run dist:uglify",
+    "dist": "BABEL_ENV=dist rm -rf lib dist && npm run dist:rollup && npm run dist:uglify",
     "test": "BABEL_ENV=test npm run b project test",
     "test:watch": "BABEL_ENV=test npm run b test"
   },
@@ -45,11 +45,12 @@
     "babylonjs": "^3.2.0"
   },
   "devDependencies": {
-    "babel-cli": "^6.26.0",
+    "@babel/core": "^7.1.0",
+    "@babel/plugin-external-helpers": "^7.0.0",
+    "@babel/plugin-transform-runtime": "^7.1.0",
+    "@babel/preset-env": "^7.1.0",
+    "@babel/runtime": "^7.0.0",
     "babel-plugin-external-helpers": "^6.22.0",
-    "babel-plugin-transform-runtime": "^6.23.0",
-    "babel-preset-env": "^1.7.0",
-    "babel-preset-stage-3": "^6.24.1",
     "begin-build": "^0.16.0",
     "begin-project": "^0.4.0",
     "cannon": "^0.6.2",
@@ -64,12 +65,11 @@
     "oimo": "^1.0.9",
     "prismjs": "^1.14.0",
     "raw-loader": "0.5.1",
-    "rollup": "^0.64.1",
-    "rollup-plugin-babel": "^3.0.4",
+    "rollup": "^0.66.2",
+    "rollup-plugin-babel": "^4.0.3",
     "rollup-plugin-cleanup": "^3.0.0",
-    "rollup-plugin-commonjs": "^9.1.5",
+    "rollup-plugin-commonjs": "^9.1.8",
     "rollup-plugin-node-resolve": "^3.3.0",
-    "rollup-plugin-uglify": "^4.0.0",
     "uglify-js": "^3.4.7"
   },
   "ava": {

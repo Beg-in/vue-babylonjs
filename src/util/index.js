@@ -28,13 +28,12 @@ export const camelize = str => str.split('-').reduce((result, [first, ...rest]) 
 
 export const last = ([...arr]) => arr.pop();
 
-export class Deferred extends Promise {
-  constructor() {
-    super((resolve, reject) => {
-      this.resolve = resolve;
-      this.reject = reject;
-    });
-  }
-}
-
-export const defer = () => new Deferred();
+export const defer = () => {
+  let split;
+  let promise = new Promise((...args) => {
+    split = args;
+  });
+  let [complete, error] = split;
+  Object.assign(promise, { complete, error });
+  return promise;
+};

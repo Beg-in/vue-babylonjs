@@ -29,6 +29,12 @@ html, body {
 }
 ```
 
+#### Events
+ - `engine` - When the scene object is available
+ - `scene` - When the scene object is available
+ - `complete` - When all child entities are available
+ - All observables from `Scene`, see the Observable documentation for details
+
 #### Props
 
  - `ambient` (Color) - Ambient lighting color for the scene

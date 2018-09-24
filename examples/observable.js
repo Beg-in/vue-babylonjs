@@ -1,20 +1,17 @@
-import { defer } from '../../src/util';
-
 export default {
   data() {
     return {
-      deferredBox: defer(),
-      deferredSphere: defer(),
       box: null,
       sphere: null,
-      tick: 1,
+      time: performance.now(),
+      frames: 0,
     };
   },
 
   computed: {
     scale() {
-      let a = 2 + Math.cos(this.tick * 0.01);
-      let b = 2 + Math.sin(this.tick * 0.01);
+      let a = 2 + Math.cos(this.time * 0.001);
+      let b = 2 + Math.sin(this.time * 0.001);
       return {
         box: [a, b, 1],
         sphere: [b, a, 1],
@@ -24,24 +21,19 @@ export default {
 
   methods: {
     beforeRender() {
-      this.tick++;
+      this.time = performance.now();
     },
 
-    onBox() {
-      this.deferredBox.resolve();
+    onSphere(event) {
+      console.log('onSphere', event);
+      // the entity event includes entity reference
+      this.sphere = event.entity;
     },
 
-    onSphere(sphere) {
-      this.sphere = sphere;
-      this.deferredSphere.resolve();
+    complete(event) {
+      console.log('complete', event);
+      console.log('box', this.box);
+      console.log('sphere', this.sphere);
     },
-
-    async init() {
-      await Promise.all([this.deferredBox, this.deferredSphere]);
-    },
-  },
-
-  mounted() {
-    this.init();
   },
 };

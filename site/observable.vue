@@ -12,7 +12,7 @@ export default {
 
 <template lang="pug">
 article
-  h2 Scene
+  h2 Observable
 
   h4 Example
 

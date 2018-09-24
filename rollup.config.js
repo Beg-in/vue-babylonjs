@@ -9,8 +9,8 @@ const plugins = [
   resolve(),
   babel({
     runtimeHelpers: true,
-    plugins: ['external-helpers', 'transform-runtime'],
-    ignore: 'node_modules/!(babylonjs)',
+    plugins: ['@babel/plugin-external-helpers', '@babel/plugin-transform-runtime'],
+    ignore: ['node_modules/!(babylonjs)'],
   }),
   commonjs({
     include: 'node_modules/**',

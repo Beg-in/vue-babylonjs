@@ -1,4 +1,4 @@
-import { id, isDisposable, createBus } from '../util';
+import { id, isDisposable, createBus, defer } from '../util';
 import { registerObservers } from '../observable';
 
 export default {
@@ -102,6 +102,14 @@ export default {
       this.$entity = entity;
       await this._$_init();
     },
+
+    register({ name }) {
+      this._$_children[name] = defer();
+    },
+
+    complete({ name, entity }) {
+      this._$_children[name].complete({ name, entity });
+    },
   },
 
   watch: {
@@ -121,9 +129,7 @@ export default {
 
   beforeCreate() {
     this.$event = createBus.call(this);
-    this._$_entityReady = new Promise(resolve => {
-      this._$_resolveEntity = resolve;
-    });
+    this._$_entityReady = defer();
   },
 
   created() {
@@ -137,24 +143,29 @@ export default {
     }
   },
 
+  beforeMount() {
+    this._$_children = {};
+    this.$event.$on('register', this.register);
+    this.$event.$on('complete', this.complete);
+    this.$bus.$emit('register', { name: this.name });
+  },
+
   async mounted() {
     if (this.$options.beforeScene) { // Lifecycle Hook
-      this.$entity = await this.$options.beforeScene.call(this, {
+      this.$entity = await this.$options.beforeScene.call(this, Object.assign({
         sceneReady: this._$_sceneReady,
         parentReady: this._$_parentReady,
-        ...this._$_hookArgs,
-      });
+      }, this._$_hookArgs));
     }
     this.$scene = await this._$_sceneReady;
     this._$_hookArgs.scene = this.$scene;
-    let sceneArgs = {
+    let sceneArgs = Object.assign({
       parentReady: this._$_parentReady,
-      ...this._$_hookArgs,
-    };
+    }, this._$_hookArgs);
+    this.$emit('scene', sceneArgs);
     if (this.$options.onScene) { // Lifecycle Hook
       this.$entity = await this.$options.onScene.call(this, sceneArgs);
     }
-    this.$emit('scene', sceneArgs);
     this._$_hookArgs.entity = this.$entity;
     this._$_onParent(await this._$_parentReady);
     this.$bus.$on('change', this._$_onParent.bind(this));
@@ -163,7 +174,6 @@ export default {
     } else {
       await this._$_init();
     }
-    this._$_resolveEntity(this.$entity);
     if (this.$options.beforeRender) { // Render Loop Hook
       this._$_beforeRender = this.$options.beforeRender.bind(this);
       this.$scene.registerBeforeRender(this._$_beforeRender);
@@ -172,7 +182,16 @@ export default {
       this._$_afterRender = this.$options.afterRender.bind(this);
       this.$scene.registerAfterRender(this._$_afterRender);
     }
+    this._$_entityReady.complete(this.$entity);
+    this.$bus.$emit('complete', { name: this.name, entity: this.$entity });
     this._$_applyProperties();
+    let children = await Promise.all(Object.values(this._$_children));
+    children = children.reduce((out, { name, entity }) => {
+      out[name] = entity;
+      return out;
+    }, {});
+    this._$_hookArgs.children = children;
+    this.$emit('complete', this._$_hookArgs);
   },
 
   beforeDestroy() {

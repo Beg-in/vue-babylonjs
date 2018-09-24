@@ -1,5 +1,5 @@
 import { Engine, Scene, Color3, Vector3 } from '../babylon';
-import { createBus } from '../util';
+import { createBus, defer } from '../util';
 import { vecValidator as validator, toVec3 } from '../types/vector';
 import { color3, toColor3 } from '../types/color';
 import { registerObservers } from '../observable';
@@ -18,6 +18,7 @@ export default {
       SceneReady: this.SceneReady,
       SceneBus: this.sceneBus,
       SceneGravity: this.gravityVector3,
+      EntityBus: this.$event,
     };
   },
 
@@ -200,6 +201,14 @@ export default {
         this.physicsEngine.setGravity(this.gravityVector3);
       }
     },
+
+    register({ name }) {
+      this._$_children[name] = defer();
+    },
+
+    complete({ name, entity }) {
+      this._$_children[name].complete({ name, entity });
+    },
   },
 
   watch: {
@@ -248,11 +257,24 @@ export default {
     this.EngineReady = new Promise(resolve => {
       this.resolveEngine = resolve;
     });
+    this.$event = createBus.call(this);
   },
 
-  mounted() {
+  beforeMount() {
+    this._$_children = {};
+    this.$event.$on('register', this.register);
+    this.$event.$on('complete', this.complete);
+  },
+
+  async mounted() {
     this.setScene(this.$refs.scene);
     window.addEventListener('resize', this.resize);
+    let children = await Promise.all(Object.values(this._$_children));
+    children = children.reduce((out, { name, entity }) => {
+      out[name] = entity;
+      return out;
+    }, {});
+    this.$emit('complete', { children, scene: this.scene, engine: this.engine });
   },
 
   beforeDestroy() {
