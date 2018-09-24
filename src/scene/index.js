@@ -1,7 +1,8 @@
 import { Engine, Scene, Color3, Vector3 } from '../babylon';
-import { createBus } from '../util';
+import { createBus, defer } from '../util';
 import { vecValidator as validator, toVec3 } from '../types/vector';
 import { color3, toColor3 } from '../types/color';
+import { registerObservers } from '../observable';
 
 const FOG_TYPES = {
   NONE: 'none',
@@ -17,6 +18,7 @@ export default {
       SceneReady: this.SceneReady,
       SceneBus: this.sceneBus,
       SceneGravity: this.gravityVector3,
+      EntityBus: this.$event,
     };
   },
 
@@ -178,7 +180,10 @@ export default {
 
     setScene() {
       this.engine = new Engine(this.$refs.scene, true);
+      this.$emit('engine', this.engine);
       this.scene = new Scene(this.engine);
+      this.$emit('scene', this.scene);
+      this.observers = registerObservers.call(this, this.scene);
       this.setAmbientColor();
       this.setFogMode();
       this.resolveScene(this.scene);
@@ -189,13 +194,20 @@ export default {
       this.debugLayer();
       this.scene.executeWhenReady(this.resize); // HACK: investigate sqaush effect on initial load
       this.scene.executeWhenReady(this.defaultEnvrionment);
-      this.$emit('change', this.scene);
     },
 
     setGravity() {
       if (this.scene && this.scene.getPhysicsEngine()) {
         this.physicsEngine.setGravity(this.gravityVector3);
       }
+    },
+
+    register({ name }) {
+      this._$_children[name] = defer();
+    },
+
+    complete({ name, entity }) {
+      this._$_children[name].complete({ name, entity });
     },
   },
 
@@ -245,16 +257,30 @@ export default {
     this.EngineReady = new Promise(resolve => {
       this.resolveEngine = resolve;
     });
+    this.$event = createBus.call(this);
   },
 
-  mounted() {
+  beforeMount() {
+    this._$_children = {};
+    this.$event.$on('register', this.register);
+    this.$event.$on('complete', this.complete);
+  },
+
+  async mounted() {
     this.setScene(this.$refs.scene);
     window.addEventListener('resize', this.resize);
+    let children = await Promise.all(Object.values(this._$_children));
+    children = children.reduce((out, { name, entity }) => {
+      out[name] = entity;
+      return out;
+    }, {});
+    this.$emit('complete', { children, scene: this.scene, engine: this.engine });
   },
 
   beforeDestroy() {
     window.removeEventListener('resize', this.resize);
     this.engine.stopRenderLoop();
+    this.observers();
     this.scene.dispose();
     this.vrHelper = null;
     this.scene = null;

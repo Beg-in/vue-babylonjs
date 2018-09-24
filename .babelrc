@@ -1,7 +1,18 @@
 {
   "comments": false,
-  "presets": ["stage-3", ["env", {
-    "modules": false,
-    "useBuiltIns": true
-  }]]
+  "presets": [["@babel/preset-env", {
+    "targets": "last 2 versions"
+  }]],
+  "env": {
+    "dist": {
+      "presets": [["@babel/preset-env", {
+        "modules": false
+      }]]
+    },
+    "test": {
+      "presets": [["@babel/preset-env", {
+        "modules": "commonjs"
+      }]]
+    }
+  }
 }

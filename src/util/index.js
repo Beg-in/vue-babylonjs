@@ -23,3 +23,17 @@ export const createBus = function () {
   let Vue = this.constructor.super;
   return new Vue();
 };
+
+export const camelize = str => str.split('-').reduce((result, [first, ...rest]) => result + first.toUpperCase() + rest.join(''), '');
+
+export const last = ([...arr]) => arr.pop();
+
+export const defer = () => {
+  let split;
+  let promise = new Promise((...args) => {
+    split = args;
+  });
+  let [complete, error] = split;
+  Object.assign(promise, { complete, error });
+  return promise;
+};

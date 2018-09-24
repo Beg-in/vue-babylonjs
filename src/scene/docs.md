@@ -9,7 +9,7 @@ This is the entry point for the entire 3D scene. All components of this library 
  - Although physics options are defined on the scene, it will not be initialized until a `Physics` component is used
  - The model from this component is the raw BabylonJS scene object. Use this to obtain access to the engine and physics engine (when initialized).
 
-See [the BabylonJS api documentation on the Scene class](http://doc.babylonjs.com/api.html?scene) for more details.
+See [the BabylonJS api documentation on the Scene class](https://doc.babylonjs.com/api/classes/babylon.scene) for more details.
 
 #### Usage
 
@@ -28,6 +28,12 @@ html, body {
   height: 100%;
 }
 ```
+
+#### Events
+ - `engine` - When the scene object is available
+ - `scene` - When the scene object is available
+ - `complete` - When all child entities are available
+ - All observables from `Scene`, see the Observable documentation for details
 
 #### Props
 

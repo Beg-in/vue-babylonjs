@@ -1,0 +1,8 @@
+div
+  // events take either a method name or logic content
+  // the complete event happens after all children have been initialized and bound
+  Scene(@complete="complete" @before-render$="beforeRender" @after-render$="++frames")
+    // you can use v-model bindings instead of event entity reference
+    Box(:position="[-2, 0, 5]" :scaling="scale.box" v-model="box")
+    Sphere(:position="[2, 0, 5]" :scaling="scale.sphere" @entity="onSphere")
+  div(v-text="`Frames: ${frames}`" style="position: absolute; color: white; bottom: 0; padding: 15px")

@@ -6,7 +6,7 @@ import * as mixins from './mixins';
 export function install(Vue, options = {}) {
   Object.assign(Vue.prototype, { BABYLON });
   Object.assign(Vue, { BABYLON });
-  init(Vue, { components: { ...mixins, Physics }, ...options });
+  init(Vue, Object.assign({ components: Object.assign({ Physics }, mixins) }, options));
 }
 
 export { BABYLON };

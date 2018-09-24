@@ -4,7 +4,7 @@ Apply a material to a mesh
 
 #### Details
 
-The [BabylonJS guide to materials](http://doc.babylonjs.com/babylon101/materials) can be helpful here.
+The [BabylonJS guide to materials](https://doc.babylonjs.com/babylon101/materials) can be helpful here.
 
  - Must be a child of a Mesh component
  - Both StandardMaterial and PBRMaterial classes are available to use through the Material component

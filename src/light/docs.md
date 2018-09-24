@@ -11,7 +11,7 @@ Define lighting in a scene
 
 #### Details
 
-The [BabylonJS guide to lights](http://doc.babylonjs.com/babylon101/lights) can be helpful here.
+The [BabylonJS guide to lights](https://doc.babylonjs.com/babylon101/lights) can be helpful here.
 
  - Can be defined anywhere as a descendant of the Scene component
  - Can be transformed (position) with an ancestor Entity component

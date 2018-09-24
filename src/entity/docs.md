@@ -18,6 +18,14 @@ The basic Entity component to manipulate and transform the scene with
 </Scene>
 ```
 
+#### Events
+ - `scene` - When the parent scene object is available
+ - `parent` - When the parent entity is available
+ - `entity` - When the underlying BabylonJS object is available
+ - `complete` - When all child entities are available
+ - `dispose` - When this Entity has been scheduled for disposal
+ - All observables from `Scene` and the underlying BabylonJS object, see the Observable documentation for details
+
 #### Props
 
  - `name` (String) - The unique name to give an entity in BabylonJS (automatic random uid if not defined)
@@ -28,14 +36,14 @@ The basic Entity component to manipulate and transform the scene with
 
 ##### Mixin functionality:
 
- - The Entity component can be used as a Vue mixin, import/require `vue-babylonjs/entity` to use it in this manner
- - The default Entity mixin includes transform properties like `position`, `rotation`, and `scaling`, use `vue-babylonjs/lib/entity/abstract` instead to omit this functionality
- - When using the abstract entity instead for a mixin, be sure to call `this.$replace(entity)` to set the Entity's underlying BabylonJS object
+ - The Entity component can be used as a Vue mixin, `import Entity from 'vue-babylonjs';` to use it in this manner
+ - The default Entity mixin includes transform properties like `position`, `rotation`, and `scaling`, use `import AbstractEntity from 'vue-babylonjs';`  instead to omit this functionality
+ - When using `AbstractEntity` as a mixin, be sure to call `this.$replace(entity)` to set the Entity's underlying BabylonJS object
  - In the source code, methods and variables with a leading underscore (`_`) are marked "private" and are not guaranteed to remain or function the same in future versions of the plugin
  - Most components, if not all indirectly, inherit from Entity through this mixin functionality
  - To better understand this functionality it can be helpful to read the source code of the other components defined in this plugin
  - Most other components in this library can also be used as a mixin, but their property and function names may conflict with your names, when in doubt check the source code of the component you are mixing in
- - Look through the directory tree in `lib` to see what components are available to mixin
+ - See `src/mixins.js` to see what components are available to mixin
 
 Public properties:
 
@@ -60,7 +68,6 @@ Custom Lifecycle Hooks:
     - `beforeRender` - called before every frame renders
     - `afterRender` - called after every frame renders
  - These functions are passed a single object containing references to variables used at that stage of the Entity lifecycle, the object will have the following properties:
-    - `classes` - a reference to all of BabylonJS (always available)
     - `name` - a reference to this Entity's unique `name` value (always available)
     - `scene` - a reference to the root Scene object from BabylonJS (available during and after `onScene`)
     - `parent` - a reference to the parent Entity's `$entity` (available during and after `onParent`)

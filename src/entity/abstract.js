@@ -1,4 +1,5 @@
-import { id, isDisposable, createBus } from '../util';
+import { id, isDisposable, createBus, defer } from '../util';
+import { registerObservers } from '../observable';
 
 export default {
   inject: {
@@ -32,12 +33,12 @@ export default {
   },
 
   model: {
-    prop: '_$_model',
-    event: 'change',
+    prop: '_$_input',
+    event: '_$_output',
   },
 
   props: {
-    _$_model: {
+    _$_input: {
       type: Object,
       default: null,
     },
@@ -61,6 +62,7 @@ export default {
     },
 
     async _$_init() {
+      this._$_clearObservers = registerObservers.call(this, this.$scene);
       if (this.$options._$_onTransform) { // Private Lifecycle Hook
         await this.$options._$_onTransform.call(this);
       }
@@ -74,7 +76,9 @@ export default {
           }
         };
       }
-      this.$emit('change', this.$entity);
+      this.$emit('_$_output', this.$entity);
+      this.$event.$emit('change', this.$entity);
+      this.$emit('entity', this._$_hookArgs);
     },
 
     async _$_onParent(parent) {
@@ -83,9 +87,13 @@ export default {
       if (this.$options.onParent) { // Lifecycle Hook
         await this.$options.onParent.call(this, this._$_hookArgs);
       }
+      this.$emit('parent', this._$_hookArgs);
     },
 
     async $replace(entity) {
+      if (this._$_clearObservers) {
+        this._$_clearObservers();
+      }
       if (isDisposable(this.$entity)) {
         this._$_destroyed = true;
         this.$entity.dispose();
@@ -93,7 +101,14 @@ export default {
       }
       this.$entity = entity;
       await this._$_init();
-      this.$event.$emit('change', this.$entity);
+    },
+
+    register({ name }) {
+      this._$_children[name] = defer();
+    },
+
+    complete({ name, entity }) {
+      this._$_children[name].complete({ name, entity });
     },
   },
 
@@ -105,18 +120,16 @@ export default {
       deep: true,
     },
 
-    _$_model() {
-      if (this.$entity !== this._$_model) {
-        this.$replace(this._$_model);
+    _$_input() {
+      if (this.$entity !== this._$_input) {
+        this.$replace(this._$_input);
       }
     },
   },
 
   beforeCreate() {
     this.$event = createBus.call(this);
-    this._$_entityReady = new Promise(resolve => {
-      this._$_resolveEntity = resolve;
-    });
+    this._$_entityReady = defer();
   },
 
   created() {
@@ -130,31 +143,37 @@ export default {
     }
   },
 
+  beforeMount() {
+    this._$_children = {};
+    this.$event.$on('register', this.register);
+    this.$event.$on('complete', this.complete);
+    this.$bus.$emit('register', { name: this.name });
+  },
+
   async mounted() {
     if (this.$options.beforeScene) { // Lifecycle Hook
-      this.$entity = await this.$options.beforeScene.call(this, {
+      this.$entity = await this.$options.beforeScene.call(this, Object.assign({
         sceneReady: this._$_sceneReady,
         parentReady: this._$_parentReady,
-        ...this._$_hookArgs,
-      });
+      }, this._$_hookArgs));
     }
     this.$scene = await this._$_sceneReady;
     this._$_hookArgs.scene = this.$scene;
+    let sceneArgs = Object.assign({
+      parentReady: this._$_parentReady,
+    }, this._$_hookArgs);
+    this.$emit('scene', sceneArgs);
     if (this.$options.onScene) { // Lifecycle Hook
-      this.$entity = await this.$options.onScene.call(this, {
-        parentReady: this._$_parentReady,
-        ...this._$_hookArgs,
-      });
+      this.$entity = await this.$options.onScene.call(this, sceneArgs);
     }
     this._$_hookArgs.entity = this.$entity;
     this._$_onParent(await this._$_parentReady);
     this.$bus.$on('change', this._$_onParent.bind(this));
-    if (this._$_model) {
-      this.$replace(this._$_model);
+    if (this._$_input) {
+      this.$replace(this._$_input);
     } else {
       await this._$_init();
     }
-    this._$_resolveEntity(this.$entity);
     if (this.$options.beforeRender) { // Render Loop Hook
       this._$_beforeRender = this.$options.beforeRender.bind(this);
       this.$scene.registerBeforeRender(this._$_beforeRender);
@@ -163,11 +182,24 @@ export default {
       this._$_afterRender = this.$options.afterRender.bind(this);
       this.$scene.registerAfterRender(this._$_afterRender);
     }
+    this._$_entityReady.complete(this.$entity);
+    this.$bus.$emit('complete', { name: this.name, entity: this.$entity });
     this._$_applyProperties();
+    let children = await Promise.all(Object.values(this._$_children));
+    children = children.reduce((out, { name, entity }) => {
+      out[name] = entity;
+      return out;
+    }, {});
+    this._$_hookArgs.children = children;
+    this.$emit('complete', this._$_hookArgs);
   },
 
   beforeDestroy() {
     this._$_destroyed = true;
+    if (this._$_clearObservers) {
+      this._$_clearObservers();
+    }
+    this.$emit('dispose');
     if (isDisposable(this.$entity)) {
       this.$entity.dispose();
     }
