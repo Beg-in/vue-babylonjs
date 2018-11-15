@@ -23,8 +23,6 @@ article
       include:hl(lang="pug") ../examples/animation.pug
     pre(slot="html")
       include:hl:pug(pretty=true) ../examples/animation.pug
-    pre(slot="script")
-      include:hl(lang="javascript") ../examples/animation.js
 
   include:markdown-it(plugins=['markdown-it-prism']) ../src/animation/docs.md
 </template>

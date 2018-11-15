@@ -41,21 +41,26 @@ export default {
     value() {
       if (this.any) {
         return this.any;
-      } else if (this.float !== null) {
+      }
+      if (this.float !== null) {
         return this.float;
-      } else if (this.color) {
+      }
+      if (this.color) {
         if (color4.validator(this.color)) {
           return toColor4(this.color);
         }
         return toColor3(this.color);
-      } else if (this.vector) {
+      }
+      if (this.vector) {
         if (vec4.validator(this.vector)) {
           return toVec4(this.vector);
-        } else if (vec3.validator(this.vector)) {
+        }
+        if (vec3.validator(this.vector)) {
           return toVec3(this.vector);
         }
         return toVec2(this.vector);
-      } else if (this.matrix) {
+      }
+      if (this.matrix) {
         return toMatrix(this.matrix);
       }
       return null;
