@@ -1,9 +1,34 @@
 Scene
+<<<<<<< HEAD
   DirectionalLight(specular="#0F0", diffuse="#F00" , direction="[2,0,0]")
+=======
+<<<<<<< HEAD
+  DirectionalLight(specular="#0F0", diffuse="#F00", :direction="[0,0,100]")
+    Animation(property="direction.z", :duration="10")
+      Key(frame="0%", :value="0")
+      Key(frame="100%", :value="Math.Pi * 2")
+
+  Cylinder(:position="[-2,0,0]")
+    Material(diffuse="#00F")
+    //- Animation(property="rotation.x", :duration="3", :end="Math.PI * 2")  
+  Box(:position="[0,0,0]")
+    Material(diffuse="#ffffff")
+    //- Animation(property="rotation.x", :duration="3", :end="Math.PI * 2")
+    //- Animation(property="rotation.y", :duration="3", :end="Math.PI * -2")
+  Box(:position="[2,0,0]")
+=======
+  DirectionLight(specular="#0F0", diffuse="#F00" , :direction="[0,0,50]")
+>>>>>>> a6be13e815c3861f4751e47ff63404da2f0008e6
   
   Box(:position="[-2,0,0]")
     Material(diffuse="#ffffff")
   Box(:position="[1.3,0,0]")
+>>>>>>> 0a0b72f0c199dcce68f6445ef3adbf1d5e4c52f2
     Material(diffuse="#FF0")
+<<<<<<< HEAD
+=======
+    //- Animation(property="rotation.x", :duration="3", :end="Math.PI * 2")
+    //- Animation(property="rotation.y", :duration="3", :end="Math.PI * 2")
+>>>>>>> a6be13e815c3861f4751e47ff63404da2f0008e6
   
   

@@ -58,8 +58,6 @@ article
       include:hl(lang="pug") ../examples/light.pug
     pre(slot="html")
       include:hl:pug(pretty=true) ../examples/light.pug
-    pre(slot="script")
-      include:hl(lang="javascript") ../examples/animation.js
   h4 Point Light Demonstration
   p  Imagine there is a lightbulb between two spheres,
   p  then the light points to the right side of the left yellow sphere,
@@ -75,8 +73,6 @@ article
       include:hl(lang="pug") ../examples/spotLight.pug
     pre(slot="html")
       include:hl:pug(pretty=true) ../examples/spotLight.pug
-    pre(slot="script")
-      include:hl(lang="javascript") ../examples/animation.js
   h4 Spot Light Demonstration        
   br
   br
