@@ -31,8 +31,9 @@ article
       include:hl(lang="pug") ../examples/directionalLight.pug
     pre(slot="html")
       include:hl:pug(pretty=true) ../examples/directionalLight.pug
-  h3 Directional Light Demonstration
-
+  h4 Directional Light Demonstration
+  br
+  br
   
 
   Controls(:inline="true" route="/light/fullscreen")
@@ -42,8 +43,9 @@ article
       include:hl(lang="pug") ../examples/hemLight.pug
     pre(slot="html")
       include:hl:pug(pretty=true) ../examples/hemLight.pug
-  h3  Hemispheric Light Demonstration
-
+  h4  Hemispheric Light Demonstration
+  br
+  br
 
   
 
@@ -56,8 +58,9 @@ article
       include:hl:pug(pretty=true) ../examples/light.pug
     pre(slot="script")
       include:hl(lang="javascript") ../examples/animation.js
-  h3 Point Light Demonstration
-
+  h4 Point Light Demonstration
+  br
+  br
   
 
   Controls(:inline="true" route="/light/fullscreen")
@@ -69,7 +72,8 @@ article
       include:hl:pug(pretty=true) ../examples/spotLight.pug
     pre(slot="script")
       include:hl(lang="javascript") ../examples/animation.js
-  h3 Spot Light Demonstration        
-
+  h4 Spot Light Demonstration        
+  br
+  br
   include:markdown-it(plugins=['markdown-it-prism']) ../src/light/docs.md
 </template>
