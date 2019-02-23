@@ -1,5 +1,7 @@
 Scene
-  DirectionalLight(v-model="myLight")
-  HemisphericLight(diffuse="#F00")
-  PointLight(specular="#0F0")
-  SpotLight
+  Camera(type="arcRotate")
+  PointLight(:position="[0,0,0]", specular="#FF0000")
+  Sphere(:position="[-2,0,0]")
+    Material(specular="FFFF--")
+  Sphere(:position="[1.3,0,0]")
+    Material(diffuse="7FFF00")
