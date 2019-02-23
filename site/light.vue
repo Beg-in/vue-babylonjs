@@ -41,8 +41,8 @@ article
     pre(slot="html")
       include:hl:pug(pretty=true) ../examples/hemLight.pug
   h4  Hemispheric Light Demonstration
-  p   The two boxes above is the same boxes from 'Directional Light Demonstration'. 
-  p   Notice that the color changes with hemispheric light. 
+  p   The two boxes above is the same boxes from 'Directional Light Demonstration'.
+  p   Notice that the color changes with hemispheric light.
   br
   br
 
@@ -53,8 +53,6 @@ article
       include:hl(lang="pug") ../examples/light.pug
     pre(slot="html")
       include:hl:pug(pretty=true) ../examples/light.pug
-    pre(slot="script")
-      include:hl(lang="javascript") ../examples/animation.js
   h4 Point Light Demonstration
   br
   br
@@ -66,8 +64,6 @@ article
       include:hl(lang="pug") ../examples/spotLight.pug
     pre(slot="html")
       include:hl:pug(pretty=true) ../examples/spotLight.pug
-    pre(slot="script")
-      include:hl(lang="javascript") ../examples/animation.js
   h4 Spot Light Demonstration
   br
   br

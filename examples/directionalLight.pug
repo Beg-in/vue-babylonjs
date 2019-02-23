@@ -1,13 +1,17 @@
 Scene
-  DirectionLight(specular="#0F0", diffuse="#F00" , :direction="[0,0,50]")
-  
-  Box(:position="[-2,0,0]")
+  DirectionalLight(specular="#0F0", diffuse="#F00", :direction="[0,0,100]")
+    Animation(property="direction.z", :duration="10")
+      Key(frame="0%", :value="0")
+      Key(frame="100%", :value="Math.Pi * 2")
+
+  Cylinder(:position="[-2,0,0]")
+    Material(diffuse="#00F")
+    //- Animation(property="rotation.x", :duration="3", :end="Math.PI * 2")
+  Box(:position="[0,0,0]")
     Material(diffuse="#ffffff")
-    Animation(property="rotation.x", :duration="3", :end="Math.PI * 2")
-    Animation(property="rotation.y", :duration="3", :end="Math.PI * -2")
-  Box(:position="[1.3,0,0]")
+    //- Animation(property="rotation.x", :duration="3", :end="Math.PI * 2")
+    //- Animation(property="rotation.y", :duration="3", :end="Math.PI * -2")
+  Box(:position="[2,0,0]")
     Material(diffuse="#FF0")
-    Animation(property="rotation.x", :duration="3", :end="Math.PI * 2")
-    Animation(property="rotation.y", :duration="3", :end="Math.PI * 2")
-  
-  
+    //- Animation(property="rotation.x", :duration="3", :end="Math.PI * 2")
+    //- Animation(property="rotation.y", :duration="3", :end="Math.PI * 2")
