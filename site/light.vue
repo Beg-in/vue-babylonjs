@@ -44,6 +44,8 @@ article
     pre(slot="html")
       include:hl:pug(pretty=true) ../examples/hemLight.pug
   h4  Hemispheric Light Demonstration
+  p   The two boxes above is the same boxes from 'Directional Light Demonstration'. 
+  p   Notice that the color changes with hemispheric light. 
   br
   br
 
