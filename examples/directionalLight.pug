@@ -1,0 +1,16 @@
+Scene
+  DirectionLight(specular="#0F0", diffuse="#F00" , :direction="[0,0,50]")
+  
+  Cylinder(:position="[-2,0,0]")
+    Material(diffuse="#00F")
+    Animation(property="rotation.x", :duration="3", :end="Math.PI * 2")  
+  Box(:position="[0,0,0]")
+    Material(diffuse="#000")
+    Animation(property="rotation.x", :duration="3", :end="Math.PI * 2")
+    Animation(property="rotation.y", :duration="3", :end="Math.PI * -2")
+  Box(:position="[2,0,0]")
+    Material(diffuse="#FF0")
+    Animation(property="rotation.x", :duration="3", :end="Math.PI * 2")
+    Animation(property="rotation.y", :duration="3", :end="Math.PI * 2")
+  
+  
