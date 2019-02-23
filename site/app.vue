@@ -31,6 +31,8 @@ export default {
               a Home
             router-link(tag="li" to="/installation")
               a Installation
+            router-link(tag="li" to="/about")
+              a About
             li
               strong API
             router-link(tag="li" to="/animation")
@@ -59,20 +61,6 @@ export default {
               a Texture
             router-link(tag="li" to="/types")
               a Types
-            li
-              strong More
-            li
-              external(href="https://github.com/Beg-in/vue-babylonjs") Github
-            li
-              external(href="https://github.com/Beg-in/vue-babylonjs/issues/1") Updates / Newsletter
-            li
-              external(href="https://github.com/Beg-in/vue-babylonjs/blob/master/CHANGELOG.md") Changelog
-            li
-              external(href="https://github.com/Beg-in/vue-babylonjs/blob/master/CONTRIBUTING.md") Contributing
-            li
-              external(href="https://beg.in") By Brian Jesse via Begin
-            li
-              external(href="https://twitter.com/Brain_Bacon") Follow me on Twitter
           p &copy; 2018-present Brian Jesse
     .col-md-4-5.height-100(:class="{ 'sidebar-hidden': sidebar }")
       main
