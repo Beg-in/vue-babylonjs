@@ -71,5 +71,17 @@ article
   br
   br
 
+  //
+    Controls(:inline="true" route="/light/fullscreen")
+      Example4
+      h5(slot="filename") spotLight.vue
+      pre(slot="pug")
+        include:hl(lang="pug") ../examples/spotLight.pug
+      pre(slot="html")
+        include:hl:pug(pretty=true) ../examples/spotLight.pug
+    h4 Spot Light Demonstration
+    br
+    br
+
   include:markdown-it(plugins=['markdown-it-prism']) ../src/light/docs.md
 </template>
