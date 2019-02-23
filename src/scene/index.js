@@ -169,6 +169,7 @@ export default {
     },
 
     defaultEnvironment() {
+      console.log('defaultEnvironment')
       if (this.scene.cameras.length < 1) {
         this.scene.createDefaultCameraOrLight(true, true, true);
         let helper = this.scene.createDefaultEnvironment(this.environment);
