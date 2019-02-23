@@ -56,8 +56,6 @@ article
       include:hl(lang="pug") ../examples/light.pug
     pre(slot="html")
       include:hl:pug(pretty=true) ../examples/light.pug
-    pre(slot="script")
-      include:hl(lang="javascript") ../examples/animation.js
   h4 Point Light Demonstration
   br
   br
@@ -70,8 +68,6 @@ article
       include:hl(lang="pug") ../examples/spotLight.pug
     pre(slot="html")
       include:hl:pug(pretty=true) ../examples/spotLight.pug
-    pre(slot="script")
-      include:hl(lang="javascript") ../examples/animation.js
   h4 Spot Light Demonstration        
   br
   br
