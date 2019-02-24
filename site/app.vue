@@ -2,7 +2,13 @@
 <style lang="sass" src="./highlight.sass"></style>
 
 <script>
+import Logo from './assets/github.svg';
+
 export default {
+  components: {
+    Logo,
+  },
+
   data() {
     return {
       sidebar: false,
@@ -63,6 +69,8 @@ export default {
               a Texture
             router-link(tag="li" to="/types")
               a Types
+            .frow
+              a.github-logo(href="https://github.com/Beg-in/vue-babylonjs") #[Logo]
           p &copy; 2018-present Brian Jesse
     .col-md-4-5.height-100(:class="{ 'sidebar-hidden': sidebar }")
       main
@@ -143,7 +151,7 @@ nav
         background-color: lighten($dark-color, 50%)
         border-radius: 3px
   .folder-name
-    padding-top: 5px
+    padding-top: 15px
     font-weight: bold
     border-bottom: 2px solid $main-color
     line-height: 80%
@@ -160,6 +168,12 @@ nav
       text-decoration: none
       background-color: lighten($dark-color, 70%)
       border-radius: 3px
+  .github-logo
+    margin-top: 30px
+    width: 45px
+    display: block
+  p
+    text-align: center
   ul
     list-style: none
 </style>
