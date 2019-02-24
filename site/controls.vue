@@ -69,7 +69,7 @@ export default {
 
 .controls
   margin-bottom: 10px
-  max-width: 550px
+  max-width: 1024px
 
 .controls-container
   position: relative
