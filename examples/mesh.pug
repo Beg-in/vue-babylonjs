@@ -1,0 +1,22 @@
+Scene
+  Sphere(:position="[5,0,0]" :scaling="[1,1,1]")
+  Torus(:position="[3, 0, 0]")
+  Box(:v-model="myBox" :position="[1.5, 0, 0]")
+    Material(diffuse="#F00" :metallic="0" :roughness="1")
+  Cylinder(:position="[0, 0, 0]")
+    Material(diffuse="#0F0" :metallic="0" :roughness="1") 
+  //DashedLines
+    Disc(:rotation="[0, Math.PI, 0]")
+  //Ground(:options="{width: 10, height: 10}")
+  IcoSphere(:position="[-2, 0, 0]")
+  //Lathe
+  //LineSystem
+  //Plane
+  //PolygonMesh
+  //Polyhedron
+  //Ribbon(:position="[9, 0, 0]")
+  //TiledGround
+  TorusKnot(:position="[-7, 0, 0]")
+  //Tube(:position="[0, 0, 10]")
+  //ExtrudePolygon(:position="[5, 0, 0]")
+  
