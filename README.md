@@ -7,7 +7,7 @@ Quickly make a 3D animation:
 
 ![3D Animation](https://thumbs.gfycat.com/WhiteTangibleIndianspinyloach-size_restricted.gif)
 
-It's this easy:
+It is this easy:
 
 ```vue
 <template>
