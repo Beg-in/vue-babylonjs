@@ -1,6 +1,6 @@
 <template lang="pug">
 article
-  h1 About
+  h2 About
   .frow.gutters
     .col-md-1-2
       .frow
