@@ -189,12 +189,10 @@ export default {
       this.setFogMode();
       this.resolveScene(this.scene);
       this.resolveEngine(this.engine);
-      this.$nextTick(this.defaultEnvironment);
       this.engine.runRenderLoop(() => this.scene.render());
       this.requestFullScreen();
       this.debugLayer();
       this.scene.executeWhenReady(this.resize); // HACK: investigate sqaush effect on initial load
-      this.scene.executeWhenReady(this.defaultEnvrionment);
     },
 
     setGravity() {
@@ -276,6 +274,7 @@ export default {
       return out;
     }, {});
     this.$emit('complete', { children, scene: this.scene, engine: this.engine });
+    this.defaultEnvironment();
   },
 
   beforeDestroy() {
