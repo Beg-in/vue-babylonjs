@@ -1,7 +1,9 @@
 Scene(@complete="complete")
   Camera(type="arcRotate", @entity="onCamera")
-  SpotLight(:direction="[0,5,0]", :position="[0,-3,0]", :angle="Math.PI/2", :exponent="40",diffuse="#7FFF00",specular="#7FFF00")
+  //- SpotLight(:direction="[0,0,-5]", :angle="Math.PI/2", :exponent="40",diffuse="#7FFF00",specular="#7FFF00")
+  Spotlight(:position="[0,5,0]", specular="#FF0000")
   Ground(:position="[0,1,0]",:options="{width:10, height:10}")
+  Plane(:options="{width:20, height:20}")
     Material(specular="#FF0")
   
       
