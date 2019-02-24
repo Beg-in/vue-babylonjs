@@ -58,7 +58,7 @@
     "eslint-plugin-vue": "^5.0.0-beta.3",
     "find": "^0.2.9",
     "frow": "^3.0.4",
-    "glslify-loader": "1.0.2",
+    "glslify-loader": "^2.0.0",
     "jstransformer-markdown-it": "^2.1.0",
     "jstransformer-pug": "^0.3.0",
     "markdown-it-prism": "^1.1.2",
