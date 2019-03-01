@@ -15,16 +15,16 @@ article
         a(href="https://github.com/Beg-in/vue-babylonjs/blob/master/CONTRIBUTING.md") Contributing
         a(href="https://beg.in/") From Begin
     .col-md-1-2
-      include:markdown-it(plugins=['markdown-it-prism']) ../src/about/docs.md
+      include:markdown-it(plugins=['markdown-it-prism']) ./about.md
 </template>
 <style lang="sass" scoped>
 @import ./variables
 
-.founder-image 
+.founder-image
   border-radius: 50%
   width: 290px
   height: 290px
-  margin: 0 auto 
+  margin: 0 auto
 
 .founder-name
   text-align: center
@@ -34,7 +34,7 @@ article
 
 .founder-twitter
   display: block
-  text-align: center  
+  text-align: center
 
 .links
   margin-top: 90px

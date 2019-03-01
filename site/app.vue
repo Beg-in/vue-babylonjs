@@ -30,7 +30,7 @@ export default {
       .sidebar
         nav.height-100(@click="sidebar = false")
           .hidden-sm.hidden-xs
-            h1 
+            h1
               router-link(to="/home") Vue-BabylonJS
           ul
             li
@@ -70,8 +70,8 @@ export default {
             router-link(tag="li" to="/types")
               a Types
             .frow
-              a.github-logo(href="https://github.com/Beg-in/vue-babylonjs") #[Logo]
-          p &copy; 2018-present Brian Jesse
+              external.github-logo(href="https://github.com/Beg-in/vue-babylonjs") #[Logo]
+          p &copy; {{new Date().getFullYear()}} Brian Jesse
     .col-md-4-5.height-100(:class="{ 'sidebar-hidden': sidebar }")
       main
         router-view

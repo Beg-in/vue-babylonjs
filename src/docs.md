@@ -8,8 +8,8 @@
 #### Vue-BabylonJS is a powerful tool. You can create 3D graphics featuring:
 - <router-link to="/physics">Physics</router-link>
 - <router-link to="/light">Lighting Properties</router-link>
-- <router-link to="/camera-movement">Movement</router-link>
-- <router-link to="/texture">Textures</router-link> or <router-link to="/materials">Materials</router-link>
+- <router-link to="/camera">Cameras</router-link>
+- <router-link to="/texture">Textures</router-link> or <router-link to="/material">Materials</router-link>
 - More (See Sidebar)
 
 ---
