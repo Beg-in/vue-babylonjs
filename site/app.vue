@@ -2,7 +2,13 @@
 <style lang="sass" src="./highlight.sass"></style>
 
 <script>
+import Logo from './assets/github.svg';
+
 export default {
+  components: {
+    Logo,
+  },
+
   data() {
     return {
       sidebar: false,
@@ -24,15 +30,19 @@ export default {
       .sidebar
         nav.height-100(@click="sidebar = false")
           .hidden-sm.hidden-xs
-            router-link(to="/home")
-              h1 Vue-BabylonJS
+            h1
+              router-link(to="/home") Vue-BabylonJS
           ul
+            li
+              .folder-name Introduction
             router-link(tag="li" to="/home")
               a Home
             router-link(tag="li" to="/installation")
               a Installation
+            router-link(tag="li" to="/about")
+              a About
             li
-              strong API
+              .folder-name API
             router-link(tag="li" to="/animation")
               a Animation
             router-link(tag="li" to="/camera")
@@ -59,21 +69,9 @@ export default {
               a Texture
             router-link(tag="li" to="/types")
               a Types
-            li
-              strong More
-            li
-              external(href="https://github.com/Beg-in/vue-babylonjs") Github
-            li
-              external(href="https://github.com/Beg-in/vue-babylonjs/issues/1") Updates / Newsletter
-            li
-              external(href="https://github.com/Beg-in/vue-babylonjs/blob/master/CHANGELOG.md") Changelog
-            li
-              external(href="https://github.com/Beg-in/vue-babylonjs/blob/master/CONTRIBUTING.md") Contributing
-            li
-              external(href="https://beg.in") By Brian Jesse via Begin
-            li
-              external(href="https://twitter.com/Brain_Bacon") Follow me on Twitter
-          p &copy; 2018-present Brian Jesse
+            .frow
+              external.github-logo(href="https://github.com/Beg-in/vue-babylonjs") #[Logo]
+          p &copy; {{new Date().getFullYear()}} Brian Jesse
     .col-md-4-5.height-100(:class="{ 'sidebar-hidden': sidebar }")
       main
         router-view
@@ -134,6 +132,13 @@ nav
   text-decoration: none
   overflow-y: scroll
   -ms-overflow-style: -ms-autohiding-scrollbar
+  h1 a
+    font-size: 35px
+    color: $dark-color
+    text-decoration: none
+    &:hover
+      color: lighten($dark-color, 25%)
+      text-decoration: none
   ul
     margin: 0
     padding: 0
@@ -141,15 +146,34 @@ nav
     padding-left: 15px
     &.router-link-active
       a
-        color: $third-color
+        color: $light-color
         text-decoration: none
-  a
+        background-color: lighten($dark-color, 50%)
+        border-radius: 3px
+  .folder-name
+    padding-top: 15px
+    font-weight: bold
+    border-bottom: 2px solid $main-color
+    line-height: 80%
+    margin-bottom: 5px
+  ul a
     display: block
     color: $dark-color
-      // background: darken($main-color, 10%)
+    padding-left: 10px
+    padding-top: 5px
+    margin-left: 5px
+    color: darken($gray-dark, 10%)
+      // background: lighten($third-color, 10%)
     &:hover
-      color: $main-color
       text-decoration: none
+      background-color: lighten($dark-color, 70%)
+      border-radius: 3px
+  .github-logo
+    margin-top: 30px
+    width: 45px
+    display: block
+  p
+    text-align: center
   ul
     list-style: none
 </style>

@@ -1,13 +1,31 @@
-**Create high quality 3D graphics in the web as easily as writing HTML and CSS.**
+## Vue-BabylonJS helps you create high quality 3D graphics in the web.
+## It's as easy as writing HTML and CSS.
 
-## Getting Started
 
-### Installation and Usage
-<router-link to="/installation">See instructions here</router-link>
+
+---
+
+#### Vue-BabylonJS is a powerful tool. You can create 3D graphics featuring:
+- <router-link to="/physics">Physics</router-link>
+- <router-link to="/light">Lighting Properties</router-link>
+- <router-link to="/camera">Cameras</router-link>
+- <router-link to="/texture">Textures</router-link> or <router-link to="/material">Materials</router-link>
+- More (See Sidebar)
+
+---
+
+
+# **Get Started**
+
+
+## Installation:
+<router-link to="/installation">See instructions page</router-link>
+
+## Usage:
 
 ## Important things to know
 
- - **All components of this library must be a descendant of the Scene component**
+ - **All components of this library must be a descendant of the <router-link to="/scene">Scene Component</router-link>.**
  - Many components expect to be a child of specific components defined by this plugin, check the API documentation of the component to see what its requirements are
 
 ### Types for props (attributes)

@@ -22,8 +22,6 @@ article
 
   h4 Example
 
-  
-
   Controls(:inline="true" route="/light/fullscreen")
     Example2
     h5(slot="filename") directionalLight.vue
@@ -47,8 +45,6 @@ article
    
   br
   br
-
-  
 
   Controls(:inline="true" route="/light/fullscreen")
     Example

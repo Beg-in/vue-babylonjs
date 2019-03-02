@@ -1,0 +1,1 @@
+<template lang="pug" src="./entity.pug"></template>

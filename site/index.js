@@ -34,6 +34,7 @@ import scene from './scene.vue';
 import shader from './shader.vue';
 import texture from './texture.vue';
 import types from './types.vue';
+import about from './about.vue';
 
 register([
   ...Object.entries({
@@ -52,6 +53,7 @@ register([
     shader,
     texture,
     types,
+    about,
   }).map(([name, component]) => ({
     name,
     path: `/${name}`,
