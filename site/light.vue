@@ -1,17 +1,17 @@
 <script>
-import Example from '../examples/light.vue';
 import Controls from './controls.vue';
-import Example2 from '../examples/directionalLight.vue';
-import Example3 from '../examples/hemLight.vue';
-import Example4 from '../examples/spotLight.vue';
+import PointExample from '../examples/light/point.vue';
+import DirectionalExample from '../examples/light/directional.vue';
+import HemisphericExample from '../examples/light/hemispheric.vue';
+import SpotExample from '../examples/light/spot.vue';
 
 export default {
   components: {
-    Example,
     Controls,
-    Example2,
-    Example3,
-    Example4,
+    PointExample,
+    DirectionalExample,
+    HemisphericExample,
+    SpotExample,
   },
 };
 </script>
@@ -20,57 +20,49 @@ export default {
 article
   h2 Light
 
-  h4 Example
-
-  Controls(:inline="true" route="/light/fullscreen")
-    Example2
-    h5(slot="filename") directionalLight.vue
-    pre(slot="pug")
-      include:hl(lang="pug") ../examples/directionalLight.pug
-    pre(slot="html")
-      include:hl:pug(pretty=true) ../examples/directionalLight.pug
   h4 Directional Light Demonstration
-  br
-  br
-
   Controls(:inline="true" route="/light/fullscreen")
-    Example3
-    h5(slot="filename") hemLight.vue
+    DirectionalExample
+    h5(slot="filename") directional.vue
     pre(slot="pug")
-      include:hl(lang="pug") ../examples/hemLight.pug
+      include:hl(lang="pug") ../examples/light/directional.pug
     pre(slot="html")
-      include:hl:pug(pretty=true) ../examples/hemLight.pug
+      include:hl:pug(pretty=true) ../examples/light/directional.pug
+
   h4  Hemispheric Light Demonstration
-  p   The two boxes above is the same boxes from 'Directional Light Demonstration'.
+  p   The two boxes below are the same boxes from 'Directional Light Demonstration'.
   p   Notice that the color changes on all sides of the boxes with hemispheric light.
-  br
-  br
-
   Controls(:inline="true" route="/light/fullscreen")
-    Example
-    h5(slot="filename") light.vue
+    HemisphericExample
+    h5(slot="filename") hemispheric.vue
     pre(slot="pug")
-      include:hl(lang="pug") ../examples/light.pug
+      include:hl(lang="pug") ../examples/light/hemispheric.pug
     pre(slot="html")
-      include:hl:pug(pretty=true) ../examples/light.pug
+      include:hl:pug(pretty=true) ../examples/light/hemispheric.pug
+
   h4 Point Light Demonstration
   p  Imagine there is a lightbulb between two spheres,
   p  then the light points to the right side of the left yellow sphere,
   p  and the light also points to left side of the right green sphere.
-  br
-  br
+  Controls(:inline="true" route="/light/fullscreen")
+    PointExample
+    h5(slot="filename") point.vue
+    pre(slot="pug")
+      include:hl(lang="pug") ../examples/light/point.pug
+    pre(slot="html")
+      include:hl:pug(pretty=true) ../examples/light/point.pug
 
   //- SPOTLIGHT
-  //- Controls(:inline="true" route="/light/fullscreen")
-  //-   Example4
-  //-   h5(slot="filename") spotLight.vue
-  //-   pre(slot="pug")
-  //-     include:hl(lang="pug") ../examples/spotLight.pug
-  //-   pre(slot="html")
-  //-     include:hl:pug(pretty=true) ../examples/spotLight.pug
   //- h4 Spot Light Demonstration
   //- br
   //- br
+  //- Controls(:inline="true" route="/light/fullscreen")
+  //-   SpotExample
+  //-   h5(slot="filename") spot.vue
+  //-   pre(slot="pug")
+  //-     include:hl(lang="pug") ../examples/light/spot.pug
+  //-   pre(slot="html")
+  //-     include:hl:pug(pretty=true) ../examples/light/spot.pug
 
   include:markdown-it(plugins=['markdown-it-prism']) ../src/light/docs.md
 </template>

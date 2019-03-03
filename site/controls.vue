@@ -68,7 +68,7 @@ export default {
 @import ./variables
 
 .controls
-  margin-bottom: 10px
+  margin-bottom: 50px
   max-width: 550px
 
 .controls-container
