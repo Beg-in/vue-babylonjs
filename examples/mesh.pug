@@ -1,0 +1,23 @@
+Scene
+  Camera(type="arcRotate" :radius="15" :beta="Math.PI / 4")
+  HemisphericLight
+  Sphere(:position="[6,0,0]" :scaling="[1,1,1]")
+  Torus(:position="[4, 0, 0]")
+  Box(:v-model="myBox" :position="[2.5, 0, 0]")
+    Material(diffuse="#F00" :metallic="0" :roughness="1")
+  Cylinder(:position="[1, 0, 0]")
+    Material(diffuse="#0F0" :metallic="0" :roughness="1") 
+  //DashedLines
+    Disc(:rotation="[0, Math.PI, 0]")
+  //Ground(:options="{width: 10, height: 10}")
+  IcoSphere(:position="[-1, 0, 0]")
+  //Lathe
+  //LineSystem
+  //Plane
+  //PolygonMesh
+  //Polyhedron
+  //Ribbon(:position="[9, 0, 0]")
+  //TiledGround
+  TorusKnot(:position="[-6, 0, 0]")
+  //Tube(:position="[0, 0, 10]")
+  //ExtrudePolygon(:position="[5, 0, 0]")
