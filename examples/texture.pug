@@ -1,0 +1,13 @@
+Scene
+  Camera(type="arcRotate" :radius="3")
+  HemisphericLight(diffuse="#F00" specular="#0F0" :direction="[-1, 1, 0]")
+    Property(name="groundColor" color="#0F0")
+  Sphere(:position="[-1.5, 0, 0]")
+    Material
+      Texture(src="https://www.babylonjs-playground.com/textures/grass.png")
+  Sphere
+    Material
+      Texture(type="emissive" src="https://www.babylonjs-playground.com/textures/grass.png")
+  Sphere(:position="[1.5, 0, 0]")
+    Material(diffuse="#F00")
+      Texture(type="ambient" src="https://www.babylonjs-playground.com/textures/grass.png")
