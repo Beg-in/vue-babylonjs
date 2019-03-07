@@ -1,4 +1,4 @@
-import { PhysicsImpostor, Vector3 } from '../babylon';
+import { PhysicsImpostor, Vector3 } from '@babylonjs/core';
 import AbstractEntity from '../entity/abstract';
 import { capitalize } from '../util';
 

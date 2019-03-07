@@ -1,4 +1,4 @@
-import { SpotLight } from '../babylon';
+import { SpotLight } from '@babylonjs/core';
 import DirectionalLight from './directional';
 import { isFloat } from '../util';
 

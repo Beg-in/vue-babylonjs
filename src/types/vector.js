@@ -1,4 +1,4 @@
-import { Vector2, Vector3, Vector4 } from '../babylon';
+import { Vector2, Vector3, Vector4 } from '@babylonjs/core';
 import { isFloat, isFloatArray } from '../util';
 
 export const vecValidator = (value, type = Vector2) => {

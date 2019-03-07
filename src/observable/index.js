@@ -1,4 +1,4 @@
-import { Observable } from '../babylon';
+import { Observable } from '@babylonjs/core';
 import { camelize, last } from '../util';
 
 export function registerObservers(scene) {

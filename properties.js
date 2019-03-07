@@ -32,7 +32,7 @@ module.exports = {
                 rules: {
                   $build: Array,
                   scripts: {
-                    exclude: /node_modules\/(?!(begin-|babylonjs))/,
+                    exclude: /node_modules\/(?!(begin-|@babylonjs))/,
                   },
                   markup: {
                     use: {

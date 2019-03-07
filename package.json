@@ -41,7 +41,9 @@
     "test:tap": "BABEL_ENV=test npm run test -- --tap"
   },
   "peerDependencies": {
-    "vue": "^2.2.0"
+    "vue": "^2.2.0",
+    "@babylonjs/core": "^4.0.0-alpha.32",
+    "@babylonjs/loaders": "^4.0.0-alpha.32"
   },
   "devDependencies": {
     "@babel/core": "^7.1.0",
@@ -61,18 +63,18 @@
     "eslint-plugin-vue": "^5.0.0-beta.3",
     "find": "^0.2.9",
     "frow": "^3.0.4",
-    "glslify-loader": "1.0.2",
+    "glslify-loader": "^2.0.0",
     "jstransformer-markdown-it": "^2.1.0",
     "jstransformer-pug": "^0.3.0",
-    "markdown-it-prism": "^1.1.2",
+    "markdown-it-prism": "^2.0.1",
     "oimo": "^1.0.9",
     "prismjs": "^1.15.0",
-    "raw-loader": "0.5.1",
-    "rollup": "^0.66.2",
+    "raw-loader": "^1.0.0",
+    "rollup": "^1.4.1",
     "rollup-plugin-babel": "^4.0.3",
     "rollup-plugin-cleanup": "^3.0.0",
     "rollup-plugin-commonjs": "^9.1.8",
-    "rollup-plugin-node-resolve": "^3.3.0",
+    "rollup-plugin-node-resolve": "^4.0.1",
     "uglify-js": "^3.4.7"
   },
   "ava": {

@@ -1,4 +1,4 @@
-import { MeshBuilder } from '../babylon';
+import { MeshBuilder } from '@babylonjs/core';
 import AbstractMesh from './abstract';
 
 const prepare = fn => ({

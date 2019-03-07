@@ -1,5 +1,5 @@
 import '@babylonjs/loaders';
-import { SceneLoader } from '../babylon';
+import { SceneLoader } from '@babylonjs/core';
 import Entity from '../entity';
 
 export default {

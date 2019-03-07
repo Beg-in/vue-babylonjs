@@ -10,7 +10,7 @@ const plugins = [
   babel({
     runtimeHelpers: true,
     plugins: ['@babel/plugin-external-helpers', '@babel/plugin-transform-runtime'],
-    ignore: ['node_modules/!(babylonjs)'],
+    ignore: ['node_modules/!(@babylonjs)'],
   }),
   commonjs({
     include: 'node_modules/**',
@@ -28,6 +28,10 @@ export default [{
     format: 'es',
     file: 'dist/esm.js',
   },
+  external: [
+    '@babylonjs/core',
+    '@babylonjs/loaders',
+  ],
   plugins,
 }, {
   input: 'src/full.js',
