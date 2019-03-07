@@ -182,6 +182,7 @@ export default {
       this.engine = new Engine(this.$refs.scene, true);
       this.$emit('engine', this.engine);
       this.scene = new Scene(this.engine);
+      // TODO: Handle preset scene
       this.$emit('scene', this.scene);
       this.observers = registerObservers.call(this, this.scene);
       this.setAmbientColor();
@@ -268,6 +269,8 @@ export default {
     this.setScene(this.$refs.scene);
     window.addEventListener('resize', this.resize);
     let children = await Promise.all(Object.values(this._$_children));
+    // TODO: combine with @scene? ERRORS IF NOT HERE?
+    this.$emit('change', this.scene);
     children = children.reduce((out, { name, entity }) => {
       out[name] = entity;
       return out;
