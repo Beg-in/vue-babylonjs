@@ -1,3 +1,4 @@
+import earcut from 'earcut';
 import { MeshBuilder } from '@babylonjs/core';
 import AbstractMesh from './abstract';
 
@@ -5,7 +6,7 @@ const prepare = fn => ({
   mixins: [AbstractMesh],
 
   onScene({ name, scene }) {
-    return fn(name, this.options, scene);
+    return fn(name, this.options, scene, earcut);
   },
 });
 

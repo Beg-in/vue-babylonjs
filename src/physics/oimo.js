@@ -7,10 +7,7 @@ export default {
 
   methods: {
     getPhysicsPlugin() {
-      if (!window.OIMO) {
-        window.OIMO = oimo;
-      }
-      return Plugin;
+      return new Plugin(undefined, oimo);
     },
   },
 };

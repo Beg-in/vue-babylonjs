@@ -7,10 +7,7 @@ export default {
 
   methods: {
     getPhysicsPlugin() {
-      if (!window.CANNON) {
-        window.CANNON = cannon;
-      }
-      return Plugin;
+      return new Plugin(undefined, undefined, cannon);
     },
   },
 };

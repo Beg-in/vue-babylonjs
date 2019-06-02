@@ -121,8 +121,7 @@ export default {
 
   onScene({ scene }) {
     if (!scene.getPhysicsEngine()) {
-      let Plugin = this.getPhysicsPlugin();
-      scene.enablePhysics(this.gravity, new Plugin());
+      scene.enablePhysics(this.gravity, this.getPhysicsPlugin());
     }
   },
 
