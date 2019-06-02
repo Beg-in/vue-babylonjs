@@ -1,4 +1,4 @@
-import { PhysicsImpostor, Vector3 } from '../babylon';
+import { PhysicsImpostor, Vector3 } from '@babylonjs/core';
 import AbstractEntity from '../entity/abstract';
 import { capitalize } from '../util';
 
@@ -121,8 +121,7 @@ export default {
 
   onScene({ scene }) {
     if (!scene.getPhysicsEngine()) {
-      let Plugin = this.getPhysicsPlugin();
-      scene.enablePhysics(this.gravity, new Plugin());
+      scene.enablePhysics(this.gravity, this.getPhysicsPlugin());
     }
   },
 

@@ -1,4 +1,4 @@
-import { PointLight } from '../babylon';
+import { PointLight } from '@babylonjs/core';
 import AbstractLight from './';
 
 export default {

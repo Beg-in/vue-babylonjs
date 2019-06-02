@@ -1,5 +1,5 @@
 import * as oimo from 'oimo';
-import { OimoJSPlugin as Plugin } from '../babylon';
+import { OimoJSPlugin as Plugin } from '@babylonjs/core';
 import AbstractPhysics from './abstract';
 
 export default {
@@ -7,10 +7,7 @@ export default {
 
   methods: {
     getPhysicsPlugin() {
-      if (!window.OIMO) {
-        window.OIMO = oimo;
-      }
-      return Plugin;
+      return new Plugin(undefined, oimo);
     },
   },
 };

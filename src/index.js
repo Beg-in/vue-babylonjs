@@ -1,4 +1,4 @@
-import * as BABYLON from './babylon';
+import * as BABYLON from '@babylonjs/core';
 import * as plugin from './core';
 import * as full from './full';
 

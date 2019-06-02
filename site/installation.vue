@@ -77,12 +77,12 @@ article
       import { plugin, Scene, Box, Cannon } from 'vue-babylonjs';
       Vue.use(plugin, { components: { Scene, Box, Physics: Cannon } });
   p You can also use individual exports as mixins or in specific components:
-  Initialization in script:
+  p Initialization in script:
   pre
     :hl(lang="js")
       import { plugin } from 'vue-babylonjs';
       Vue.use(plugin);
-  Usage in component:
+  p Usage in component:
   pre
     :hl(lang="js")
       import { Entity, Scene, Box } from 'vue-babylonjs';

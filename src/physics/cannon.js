@@ -1,5 +1,5 @@
 import cannon from 'cannon';
-import { CannonJSPlugin as Plugin } from '../babylon';
+import { CannonJSPlugin as Plugin } from '@babylonjs/core';
 import AbstractPhysics from './abstract';
 
 export default {
@@ -7,10 +7,7 @@ export default {
 
   methods: {
     getPhysicsPlugin() {
-      if (!window.CANNON) {
-        window.CANNON = cannon;
-      }
-      return Plugin;
+      return new Plugin(undefined, undefined, cannon);
     },
   },
 };

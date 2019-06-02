@@ -8,7 +8,7 @@ The BabylonJS [guide to using a physics engine](https://doc.babylonjs.com/how_to
 
  - Must be a child of the entity you wish to add physics to
  - The physics engine will be initilized automatically when a Physics component is used in the scene
- - By default uses Cannon.js as the physics engine and can be changed to Omio.js on the Scene component with the `physics` attribute
+ - By default uses Cannon.js as the physics engine and can be changed to Oimo.js on the Scene component with the `physics` attribute
  - Props (attributes) are reactive and can be changed dynamically
 
 #### Usage

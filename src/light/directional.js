@@ -1,4 +1,4 @@
-import { DirectionalLight } from '../babylon';
+import { DirectionalLight } from '@babylonjs/core';
 import AbstractLight from './';
 import { vec3, toVec3 } from '../types/vector';
 
