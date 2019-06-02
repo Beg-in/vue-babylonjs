@@ -1,21 +1,29 @@
-<a name="1.0.0-beta.6"></a>
-# [1.0.0-beta.6](https://github.com/Beg-in/vue-babylonjs/compare/1.0.0-beta.5...1.0.0-beta.6) (2018-09-24)
+# [1.0.0-beta.7](https://github.com/Beg-in/vue-babylonjs/compare/1.0.0-beta.5...1.0.0-beta.7) (2019-06-02)
 
 
 ### Bug Fixes
 
+* **asset:** set root mesh to single mesh if possible ([f6bc9cf](https://github.com/Beg-in/vue-babylonjs/commit/f6bc9cf))
 * **docs:** template highlighting issues ([16f666c](https://github.com/Beg-in/vue-babylonjs/commit/16f666c))
 * **observable:** fix for onentity emit ([51b7745](https://github.com/Beg-in/vue-babylonjs/commit/51b7745))
+* **package:** audit cleanup and peer dependencies ([266e52c](https://github.com/Beg-in/vue-babylonjs/commit/266e52c)), closes [#21](https://github.com/Beg-in/vue-babylonjs/issues/21)
+* **scene:** race condition with detecting a camera for exclusion of the default environment ([207df91](https://github.com/Beg-in/vue-babylonjs/commit/207df91))
 
 
 ### Features
 
+* **asset:** add asset component ([78116b3](https://github.com/Beg-in/vue-babylonjs/commit/78116b3))
 * **observable:** add support with vue custom events ([bd8dac0](https://github.com/Beg-in/vue-babylonjs/commit/bd8dac0))
 * **Observable:** observable events emitted by entity and scene components ([5e016cd](https://github.com/Beg-in/vue-babylonjs/commit/5e016cd)), closes [#5](https://github.com/Beg-in/vue-babylonjs/issues/5)
 
 
+### BREAKING CHANGES
 
-<a name="1.0.0-beta.5"></a>
+* **package:** Babylon.js and loaders are now peer dependencies. Add `@babylonjs/core` and
+`@babylonjs/loaders` when using this package from npm.
+
+
+
 # [1.0.0-beta.5](https://github.com/Beg-in/vue-babylonjs/compare/1.0.0-beta.4...1.0.0-beta.5) (2018-06-13)
 
 
@@ -25,7 +33,6 @@
 
 
 
-<a name="1.0.0-beta.4"></a>
 # [1.0.0-beta.4](https://github.com/Beg-in/vue-babylonjs/compare/1.0.0-beta.3...1.0.0-beta.4) (2018-05-24)
 
 
@@ -35,7 +42,6 @@
 
 
 
-<a name="1.0.0-beta.3"></a>
 # [1.0.0-beta.3](https://github.com/Beg-in/vue-babylonjs/compare/1.0.0-beta.2...1.0.0-beta.3) (2018-04-21)
 
 
@@ -45,7 +51,6 @@
 
 
 
-<a name="1.0.0-beta.2"></a>
 # [1.0.0-beta.2](https://github.com/Beg-in/vue-babylonjs/compare/1.0.0-beta.1...1.0.0-beta.2) (2018-03-30)
 
 
@@ -55,12 +60,10 @@
 
 
 
-<a name="1.0.0-beta.1"></a>
 # [1.0.0-beta.1](https://github.com/Beg-in/vue-babylonjs/compare/0.9.0...1.0.0-beta.1) (2018-03-30)
 
 
 
-<a name="0.9.0"></a>
 # [0.9.0](https://github.com/Beg-in/vue-babylonjs/compare/0.8.0...0.9.0) (2018-03-25)
 
 
@@ -70,7 +73,6 @@
 
 
 
-<a name="0.8.0"></a>
 # [0.8.0](https://github.com/Beg-in/vue-babylonjs/compare/0.7.1...0.8.0) (2018-03-22)
 
 
@@ -80,12 +82,10 @@
 
 
 
-<a name="0.7.1"></a>
 ## [0.7.1](https://github.com/Beg-in/vue-babylonjs/compare/0.7.0...0.7.1) (2018-02-24)
 
 
 
-<a name="0.7.0"></a>
 # [0.7.0](https://github.com/Beg-in/vue-babylonjs/compare/0.6.0...0.7.0) (2018-02-08)
 
 
@@ -96,7 +96,6 @@
 
 
 
-<a name="0.6.0"></a>
 # [0.6.0](https://github.com/Beg-in/vue-babylonjs/compare/0.5.0...0.6.0) (2018-02-05)
 
 
@@ -108,7 +107,6 @@
 
 
 
-<a name="0.5.0"></a>
 # [0.5.0](https://github.com/Beg-in/vue-babylonjs/compare/0.4.0...0.5.0) (2018-01-31)
 
 
@@ -119,7 +117,6 @@
 
 
 
-<a name="0.4.0"></a>
 # [0.4.0](https://github.com/Beg-in/vue-babylonjs/compare/0.3.0...0.4.0) (2018-01-30)
 
 
@@ -130,7 +127,6 @@
 
 
 
-<a name="0.3.0"></a>
 # [0.3.0](https://github.com/Beg-in/vue-babylonjs/compare/0.2.0...0.3.0) (2018-01-30)
 
 
@@ -140,7 +136,6 @@
 
 
 
-<a name="0.2.0"></a>
 # [0.2.0](https://github.com/Beg-in/vue-babylonjs/compare/1c8615b...0.2.0) (2018-01-29)
 
 
