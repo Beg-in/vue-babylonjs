@@ -9,7 +9,7 @@ article
       a.founder-twitter(href="https://twitter.com/Brain_Bacon") @Brain_Bacon
       .founder-title Founder
       .links
-        a(href="https://github.com/Beg-in/vue-babylonjs)") GitHub
+        a(href="https://github.com/Beg-in/vue-babylonjs") GitHub
         a(href="https://github.com/Beg-in/vue-babylonjs/issues/1") Updates / Newsletter
         a(href="https://github.com/Beg-in/vue-babylonjs/blob/master/CHANGELOG.md") Changelog
         a(href="https://github.com/Beg-in/vue-babylonjs/blob/master/CONTRIBUTING.md") Contributing
