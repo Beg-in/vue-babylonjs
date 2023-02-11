@@ -50,7 +50,7 @@ It's even easier if you use [Pug (Jade)](https://pugjs.org) for templating:
 
 ## Getting Started, Installation, and API Documentation
 
-[See the documentation website](https://beg-in.github.io/vue-babylonjs/)
+[See the documentation website](https://vuebabylonjs.com)
 
 ## Updates
 
